@@ -1,0 +1,97 @@
+(kicad_sch (version 20211123) (generator eeschema)
+
+  (uuid dfe0084c-a900-4f47-8966-915ebf3a8e75)
+
+  (paper "A4")
+
+  (lib_symbols
+  )
+
+
+  (sheet (at 58.674 62.23) (size 28.702 30.734) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid) (color 0 0 0 0))
+    (fill (color 0 0 0 0.0000))
+    (uuid 1d52ede3-3367-41bc-8067-3bfc45dccf8e)
+    (property "Sheet name" "Sensor_0_30" (id 0) (at 58.674 61.5184 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheet file" "Sensor_0_30.kicad_sch" (id 1) (at 58.674 93.5486 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+  )
+
+  (sheet (at 57.912 98.298) (size 29.464 31.242) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid) (color 0 0 0 0))
+    (fill (color 0 0 0 0.0000))
+    (uuid 72a33854-7643-412b-b566-1e25e44e14ce)
+    (property "Sheet name" "Sensor_31_60" (id 0) (at 57.912 97.5864 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheet file" "Sensor_31_60.kicad_sch" (id 1) (at 57.912 130.1246 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+  )
+
+  (sheet_instances
+    (path "/" (page "1"))
+    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e" (page "2"))
+    (path "/72a33854-7643-412b-b566-1e25e44e14ce" (page "3"))
+  )
+
+  (symbol_instances
+    (path "/72a33854-7643-412b-b566-1e25e44e14ce/6cd208f1-ece9-4531-9bae-ebe6b9c58c1b"
+      (reference "#PWR?") (unit 1) (value "VCC") (footprint "")
+    )
+    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e/72eb32de-9228-4930-99d6-cd2912b99da1"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e/8bf10ace-008e-4d66-9df5-b75ab5405256"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e/907b4ef3-447d-49ca-b9bb-8b059924f543"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/72a33854-7643-412b-b566-1e25e44e14ce/a4769ba6-2ca5-4dc9-85ea-adb78fd9ba6c"
+      (reference "#PWR?") (unit 1) (value "VCC") (footprint "")
+    )
+    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e/b685031a-bd0a-4052-947c-b33bb1d222bb"
+      (reference "#PWR?") (unit 1) (value "VCC") (footprint "")
+    )
+    (path "/72a33854-7643-412b-b566-1e25e44e14ce/c5e23371-4ca0-4abb-863a-4d9dc6df1015"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/72a33854-7643-412b-b566-1e25e44e14ce/cd2182fb-bdf7-4249-b8f2-2b8eef51c069"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/72a33854-7643-412b-b566-1e25e44e14ce/d532b1d9-5af1-4662-a58f-1f52ed043d55"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e/d6751705-2e16-437c-8bcd-da6a89b8dbc7"
+      (reference "#PWR?") (unit 1) (value "VCC") (footprint "")
+    )
+    (path "/72a33854-7643-412b-b566-1e25e44e14ce/dc0fb339-6126-49d7-86f5-6977d413830f"
+      (reference "#PWR?") (unit 1) (value "VCC") (footprint "")
+    )
+    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e/e6c61ad4-8c00-4427-9b6f-f0ed7cde20f3"
+      (reference "#PWR?") (unit 1) (value "VCC") (footprint "")
+    )
+    (path "/72a33854-7643-412b-b566-1e25e44e14ce/0029d5c7-ed08-463c-91a0-f3bbd3c908f0"
+      (reference "J?") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical")
+    )
+    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e/1fe1b4b3-d082-45eb-9217-78e84b0d6ec8"
+      (reference "J?") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical")
+    )
+    (path "/72a33854-7643-412b-b566-1e25e44e14ce/2faab639-5bb4-43c6-ab87-eb4425374dc0"
+      (reference "J?") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical")
+    )
+    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e/41221517-bcb8-4b79-84be-c74b599c27dc"
+      (reference "J?") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical")
+    )
+    (path "/72a33854-7643-412b-b566-1e25e44e14ce/7e8f6d2d-c8b7-4337-a580-9134c4f6d02b"
+      (reference "J?") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical")
+    )
+    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e/f472eaf4-51e0-4730-9f16-adc7c9a9b5d5"
+      (reference "J?") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical")
+    )
+  )
+)
