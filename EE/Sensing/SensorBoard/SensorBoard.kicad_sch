@@ -1064,7 +1064,7 @@
     (uuid 71ff8c52-c41a-4f55-80d4-34c20ea0aeb2)
     (property "Reference" "J1" (id 0) (at 261.112 37.1942 0))
     (property "Value" "Conn_02x13_Odd_Even" (id 1) (at 261.112 39.7311 0))
-    (property "Footprint" "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical" (id 2) (at 259.842 57.404 0)
+    (property "Footprint" "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical_SMD" (id 2) (at 259.842 57.404 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 259.842 57.404 0)
@@ -1606,7 +1606,7 @@
       (reference "H4") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
     )
     (path "/71ff8c52-c41a-4f55-80d4-34c20ea0aeb2"
-      (reference "J1") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical")
+      (reference "J1") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical_SMD")
     )
     (path "/47f064f1-bd7b-45b9-856e-c0759779ab1e/2790d670-1c79-4cf6-82ba-7ed5af0558fe"
       (reference "J11") (unit 1) (value "Peg") (footprint "Library:TestPattern0")
