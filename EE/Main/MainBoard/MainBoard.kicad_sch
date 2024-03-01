@@ -8,90 +8,178 @@
   )
 
 
-  (sheet (at 58.674 62.23) (size 28.702 30.734) (fields_autoplaced)
+  (sheet (at 15.494 17.018) (size 16.256 17.018) (fields_autoplaced)
     (stroke (width 0.1524) (type solid) (color 0 0 0 0))
     (fill (color 0 0 0 0.0000))
-    (uuid 1d52ede3-3367-41bc-8067-3bfc45dccf8e)
-    (property "Sheet name" "Sensor_0_30" (id 0) (at 58.674 61.5184 0)
+    (uuid 3c0cf0fe-1230-4a73-9d8b-47e10780e7d7)
+    (property "Sheet name" "Sens0" (id 0) (at 15.494 16.3064 0)
       (effects (font (size 1.27 1.27)) (justify left bottom))
     )
-    (property "Sheet file" "Sensor_0_30.kicad_sch" (id 1) (at 58.674 93.5486 0)
+    (property "Sheet file" "sens0.kicad_sch" (id 1) (at 15.494 34.6206 0)
       (effects (font (size 1.27 1.27)) (justify left top))
     )
   )
 
-  (sheet (at 57.912 98.298) (size 29.464 31.242) (fields_autoplaced)
+  (sheet (at 63.754 17.78) (size 15.748 16.764) (fields_autoplaced)
     (stroke (width 0.1524) (type solid) (color 0 0 0 0))
     (fill (color 0 0 0 0.0000))
-    (uuid 72a33854-7643-412b-b566-1e25e44e14ce)
-    (property "Sheet name" "Sensor_31_60" (id 0) (at 57.912 97.5864 0)
+    (uuid 5bdb2ffb-d919-48f1-b7eb-b51e38cefcf2)
+    (property "Sheet name" "sens2" (id 0) (at 63.754 17.0684 0)
       (effects (font (size 1.27 1.27)) (justify left bottom))
     )
-    (property "Sheet file" "Sensor_31_60.kicad_sch" (id 1) (at 57.912 130.1246 0)
+    (property "Sheet file" "sens2.kicad_sch" (id 1) (at 63.754 35.1286 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+  )
+
+  (sheet (at 39.624 17.526) (size 16.51 16.51) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid) (color 0 0 0 0))
+    (fill (color 0 0 0 0.0000))
+    (uuid 6590a310-4e58-4add-835a-2b8c4aecec99)
+    (property "Sheet name" "sens1" (id 0) (at 39.624 16.8144 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheet file" "sens1.kicad_sch" (id 1) (at 39.624 34.6206 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+  )
+
+  (sheet (at 138.684 19.812) (size 17.78 16.764) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid) (color 0 0 0 0))
+    (fill (color 0 0 0 0.0000))
+    (uuid b7fbd3f7-f55c-49a9-83d6-8eb00806e6b7)
+    (property "Sheet name" "sens5" (id 0) (at 138.684 19.1004 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheet file" "sens5.kicad_sch" (id 1) (at 138.684 37.1606 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+  )
+
+  (sheet (at 112.522 19.05) (size 16.764 17.018) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid) (color 0 0 0 0))
+    (fill (color 0 0 0 0.0000))
+    (uuid d52d9788-b9bb-4139-8b7b-d5d791aa42e2)
+    (property "Sheet name" "sens4" (id 0) (at 112.522 18.3384 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheet file" "sens4.kicad_sch" (id 1) (at 112.522 36.6526 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+  )
+
+  (sheet (at 88.138 17.78) (size 17.526 17.78) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid) (color 0 0 0 0))
+    (fill (color 0 0 0 0.0000))
+    (uuid fa3e67a9-2d4d-4f8f-a5a0-a9ebaf1eaf74)
+    (property "Sheet name" "sens3" (id 0) (at 88.138 17.0684 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheet file" "sens3.kicad_sch" (id 1) (at 88.138 36.1446 0)
       (effects (font (size 1.27 1.27)) (justify left top))
     )
   )
 
   (sheet_instances
     (path "/" (page "1"))
-    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e" (page "2"))
-    (path "/72a33854-7643-412b-b566-1e25e44e14ce" (page "3"))
+    (path "/3c0cf0fe-1230-4a73-9d8b-47e10780e7d7" (page "2"))
+    (path "/6590a310-4e58-4add-835a-2b8c4aecec99" (page "3"))
+    (path "/5bdb2ffb-d919-48f1-b7eb-b51e38cefcf2" (page "4"))
+    (path "/fa3e67a9-2d4d-4f8f-a5a0-a9ebaf1eaf74" (page "5"))
+    (path "/d52d9788-b9bb-4139-8b7b-d5d791aa42e2" (page "6"))
+    (path "/b7fbd3f7-f55c-49a9-83d6-8eb00806e6b7" (page "7"))
   )
 
   (symbol_instances
-    (path "/72a33854-7643-412b-b566-1e25e44e14ce/6cd208f1-ece9-4531-9bae-ebe6b9c58c1b"
+    (path "/b7fbd3f7-f55c-49a9-83d6-8eb00806e6b7/045a07b2-b2bb-43e5-8353-6cae5b28e592"
       (reference "#PWR?") (unit 1) (value "VCC") (footprint "")
     )
-    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e/72eb32de-9228-4930-99d6-cd2912b99da1"
-      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e/8bf10ace-008e-4d66-9df5-b75ab5405256"
-      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e/907b4ef3-447d-49ca-b9bb-8b059924f543"
-      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/72a33854-7643-412b-b566-1e25e44e14ce/a4769ba6-2ca5-4dc9-85ea-adb78fd9ba6c"
+    (path "/3c0cf0fe-1230-4a73-9d8b-47e10780e7d7/07a707ea-e0a4-40b5-8a2e-feb8bc8f8a7b"
       (reference "#PWR?") (unit 1) (value "VCC") (footprint "")
     )
-    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e/b685031a-bd0a-4052-947c-b33bb1d222bb"
+    (path "/5bdb2ffb-d919-48f1-b7eb-b51e38cefcf2/5d410cd0-a68d-460f-89c3-f5bb14929462"
       (reference "#PWR?") (unit 1) (value "VCC") (footprint "")
     )
-    (path "/72a33854-7643-412b-b566-1e25e44e14ce/c5e23371-4ca0-4abb-863a-4d9dc6df1015"
+    (path "/d52d9788-b9bb-4139-8b7b-d5d791aa42e2/6603b9c3-a98c-4a4e-9639-94f4d3867fce"
+      (reference "#PWR?") (unit 1) (value "VCC") (footprint "")
+    )
+    (path "/5bdb2ffb-d919-48f1-b7eb-b51e38cefcf2/6e977374-416b-42c5-bb43-62b228fe1692"
       (reference "#PWR?") (unit 1) (value "GND") (footprint "")
     )
-    (path "/72a33854-7643-412b-b566-1e25e44e14ce/cd2182fb-bdf7-4249-b8f2-2b8eef51c069"
+    (path "/6590a310-4e58-4add-835a-2b8c4aecec99/8631c23e-471e-40bb-8686-04b598034c8c"
       (reference "#PWR?") (unit 1) (value "GND") (footprint "")
     )
-    (path "/72a33854-7643-412b-b566-1e25e44e14ce/d532b1d9-5af1-4662-a58f-1f52ed043d55"
+    (path "/6590a310-4e58-4add-835a-2b8c4aecec99/9e59d7f6-21be-4a67-b189-53e3190d6259"
+      (reference "#PWR?") (unit 1) (value "VCC") (footprint "")
+    )
+    (path "/d52d9788-b9bb-4139-8b7b-d5d791aa42e2/a51d6351-132e-4236-97f4-d27fbf9fc274"
       (reference "#PWR?") (unit 1) (value "GND") (footprint "")
     )
-    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e/d6751705-2e16-437c-8bcd-da6a89b8dbc7"
+    (path "/fa3e67a9-2d4d-4f8f-a5a0-a9ebaf1eaf74/ac0f6729-6034-4350-aef3-b6c6fb66d87d"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/fa3e67a9-2d4d-4f8f-a5a0-a9ebaf1eaf74/c240900a-8406-4fa2-be4b-ce986be1b8a1"
       (reference "#PWR?") (unit 1) (value "VCC") (footprint "")
     )
-    (path "/72a33854-7643-412b-b566-1e25e44e14ce/dc0fb339-6126-49d7-86f5-6977d413830f"
-      (reference "#PWR?") (unit 1) (value "VCC") (footprint "")
+    (path "/3c0cf0fe-1230-4a73-9d8b-47e10780e7d7/caefced3-1a07-4fed-8f49-07c8b80184c9"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
     )
-    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e/e6c61ad4-8c00-4427-9b6f-f0ed7cde20f3"
-      (reference "#PWR?") (unit 1) (value "VCC") (footprint "")
+    (path "/b7fbd3f7-f55c-49a9-83d6-8eb00806e6b7/cff1adc3-40ab-43dc-b4ba-5214e9f4cb9a"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
     )
-    (path "/72a33854-7643-412b-b566-1e25e44e14ce/0029d5c7-ed08-463c-91a0-f3bbd3c908f0"
-      (reference "J?") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical")
+    (path "/3c0cf0fe-1230-4a73-9d8b-47e10780e7d7/a6d6d721-18d4-4fe7-946c-394670988df2"
+      (reference "H1") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
     )
-    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e/1fe1b4b3-d082-45eb-9217-78e84b0d6ec8"
-      (reference "J?") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical")
+    (path "/3c0cf0fe-1230-4a73-9d8b-47e10780e7d7/7be6dc23-20bc-40d9-a584-5dafc28e6867"
+      (reference "H2") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
     )
-    (path "/72a33854-7643-412b-b566-1e25e44e14ce/2faab639-5bb4-43c6-ab87-eb4425374dc0"
-      (reference "J?") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical")
+    (path "/6590a310-4e58-4add-835a-2b8c4aecec99/c07d7a75-7be6-410f-bd7a-32bd948b9b4e"
+      (reference "H3") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
     )
-    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e/41221517-bcb8-4b79-84be-c74b599c27dc"
-      (reference "J?") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical")
+    (path "/6590a310-4e58-4add-835a-2b8c4aecec99/62705ed6-f6f7-4142-a06d-e55d961cd66f"
+      (reference "H4") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
     )
-    (path "/72a33854-7643-412b-b566-1e25e44e14ce/7e8f6d2d-c8b7-4337-a580-9134c4f6d02b"
-      (reference "J?") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical")
+    (path "/5bdb2ffb-d919-48f1-b7eb-b51e38cefcf2/70c7a98e-695d-43ff-9637-fa1cb7a63924"
+      (reference "H5") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
     )
-    (path "/1d52ede3-3367-41bc-8067-3bfc45dccf8e/f472eaf4-51e0-4730-9f16-adc7c9a9b5d5"
-      (reference "J?") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical")
+    (path "/5bdb2ffb-d919-48f1-b7eb-b51e38cefcf2/db11b96d-8701-4517-9da9-7cba728aae9e"
+      (reference "H6") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+    )
+    (path "/fa3e67a9-2d4d-4f8f-a5a0-a9ebaf1eaf74/707f5611-edc8-45a5-af20-8509a21aaa81"
+      (reference "H7") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+    )
+    (path "/fa3e67a9-2d4d-4f8f-a5a0-a9ebaf1eaf74/5765c8b5-eb70-4473-9133-1242bcc2ed0a"
+      (reference "H8") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+    )
+    (path "/d52d9788-b9bb-4139-8b7b-d5d791aa42e2/6d7fc577-e437-4c34-b63d-c915bd54b758"
+      (reference "H9") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+    )
+    (path "/d52d9788-b9bb-4139-8b7b-d5d791aa42e2/fe183619-d8c0-4493-84e2-b82e53929f61"
+      (reference "H10") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+    )
+    (path "/b7fbd3f7-f55c-49a9-83d6-8eb00806e6b7/fe0d9cd1-6251-4fed-bcef-2fe8d80361b2"
+      (reference "H11") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+    )
+    (path "/b7fbd3f7-f55c-49a9-83d6-8eb00806e6b7/b7e5c40d-ba91-470e-94f6-3dbafef37db8"
+      (reference "H12") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+    )
+    (path "/3c0cf0fe-1230-4a73-9d8b-47e10780e7d7/d460af88-c726-4879-90c7-2255f4fa6b6a"
+      (reference "J1") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical_SMD")
+    )
+    (path "/6590a310-4e58-4add-835a-2b8c4aecec99/1fcf7274-1eae-4aba-bdf0-cb69ec2b67fc"
+      (reference "J2") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical_SMD")
+    )
+    (path "/5bdb2ffb-d919-48f1-b7eb-b51e38cefcf2/5d47e3fa-1de8-41ac-b57c-96db23116448"
+      (reference "J3") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical_SMD")
+    )
+    (path "/fa3e67a9-2d4d-4f8f-a5a0-a9ebaf1eaf74/0aa44ab1-4a25-49f5-9731-7720fa233abe"
+      (reference "J4") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical_SMD")
+    )
+    (path "/d52d9788-b9bb-4139-8b7b-d5d791aa42e2/6ead5062-0650-4843-975a-7f726c731b8c"
+      (reference "J5") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical_SMD")
+    )
+    (path "/b7fbd3f7-f55c-49a9-83d6-8eb00806e6b7/b2764059-2401-48e8-807a-cba49f27015a"
+      (reference "J6") (unit 1) (value "Conn_02x13_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x13_P1.27mm_Vertical_SMD")
     )
   )
 )
