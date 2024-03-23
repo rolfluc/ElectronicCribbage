@@ -438,6 +438,18 @@
     [
       "b7fbd3f7-f55c-49a9-83d6-8eb00806e6b7",
       "sens5"
+    ],
+    [
+      "0f466a49-3fcd-420a-b05f-fb3d70c66d6a",
+      "MCU"
+    ],
+    [
+      "8b04ffa1-873f-4cda-b1fe-4981fdbc7b42",
+      "Display"
+    ],
+    [
+      "d7ae3dec-973e-4961-81aa-d99c06a6b362",
+      "Power"
     ]
   ],
   "text_variables": {}
