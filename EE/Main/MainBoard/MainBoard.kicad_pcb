@@ -1335,7 +1335,7 @@
     (property "Sheetname" "Power")
     (path "/d7ae3dec-973e-4961-81aa-d99c06a6b362/3793c9dd-b42e-48ef-924a-bf53777fdfa4")
     (attr through_hole)
-    (fp_text reference "SW1" (at 2.999999 0 unlocked) (layer "F.SilkS")
+    (fp_text reference "SW1" (at 2.7 -3.6 unlocked) (layer "F.SilkS")
       (effects (font (size 1 1) (thickness 0.15)))
       (tstamp 42726619-ad16-4099-8fb3-cdce212de118)
     )
