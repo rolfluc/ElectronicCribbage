@@ -60,12 +60,14 @@
     <ClCompile Include="ExpanderController.c" />
     <ClCompile Include="I2C.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="PegHandler.c" />
     <ClCompile Include="SevenSegment.c" />
     <ClCompile Include="system_stm32c0xx.c" />
     <ClCompile Include="TCA9555.c" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="ExpanderController.h" />
     <ClInclude Include="I2C.h" />
+    <ClInclude Include="PegHandler.h" />
     <ClInclude Include="PinDefs.h" />
     <ClInclude Include="SevenSegment.h" />
     <ClInclude Include="TCA9555.h" />

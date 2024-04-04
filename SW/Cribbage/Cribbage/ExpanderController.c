@@ -54,11 +54,12 @@ uint16_t GetBankReadings(uint8_t TCADevice)
 	retVal |= (1 << 2) & (*P1Bank & (1 << 3)); // B02 - P13
 	retVal |= (1 << 3) & (*P1Bank & (1 << 2)); // B03 - P12
 	retVal |= (1 << 4) & (*P1Bank & (1 << 1)); // B04 - P11
-	retVal |= (1 << 5) & (*P1Bank & (1 << 0)); // B10 - P10
-	retVal |= (1 << 6) & (*P0Bank & (1 << 2)); // B11 - P02
-	retVal |= (1 << 7) & (*P0Bank & (1 << 3)); // B12 - P03
-	retVal |= (1 << 8) & (*P0Bank & (1 << 4)); // B13 - P04
-	retVal |= (1 << 9) & (*P0Bank & (1 << 5)); // B14 - P05
+	
+	retVal |= (1 << 8) & (*P1Bank & (1 << 0)); // B10 - P10
+	retVal |= (1 << 9) & (*P0Bank & (1 << 2)); // B11 - P02
+	retVal |= (1 <<10) & (*P0Bank & (1 << 3)); // B12 - P03
+	retVal |= (1 <<11) & (*P0Bank & (1 << 4)); // B13 - P04
+	retVal |= (1 <<12) & (*P0Bank & (1 << 5)); // B14 - P05
 	return retVal;
 }
 
@@ -108,4 +109,14 @@ void InitExpanders()
 void SetUse3v2(uint8_t TCADevice, bool doUse)
 {
 	expanders[TCADevice].use3V2 = doUse;
+}
+
+void TurnB0(uint8_t TCADevice, bool turnOn)
+{
+	writePin(&expanders[TCADevice].tcaDevice, (TCA9555Pins)Rail_B0, turnOn);
+}
+
+void TurnB1(uint8_t TCADevice, bool turnOn)
+{
+	writePin(&expanders[TCADevice].tcaDevice, (TCA9555Pins)Rail_B1, turnOn);
 }

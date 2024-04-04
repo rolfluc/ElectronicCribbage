@@ -24,6 +24,8 @@ int main(void)
 
 	for (;;)
 	{
-		HAL_Delay(500);
+		
+		
+		HAL_Delay(125);
 	}
 }
