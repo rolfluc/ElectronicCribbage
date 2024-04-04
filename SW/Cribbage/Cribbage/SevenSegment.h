@@ -3,21 +3,21 @@
 #include <stdbool.h>
 typedef struct
 {
-	PinDef* A;
-	PinDef* B;
-	PinDef* C;
-	PinDef* D;
-	PinDef* E;
-	PinDef* F;
-	PinDef* G;
-	PinDef* DP;
-	PinDef* Enable;
+	const PinDef* A;
+	const PinDef* B;
+	const PinDef* C;
+	const PinDef* D;
+	const PinDef* E;
+	const PinDef* F;
+	const PinDef* G;
+	const PinDef* DP;
+	const PinDef* Enable;
 	bool IsCommonCathode;
 }Segment;
 
 typedef enum
 {
-	Display_0,
+	Display_0 = 0,
 	Display_1,
 	Display_2,
 	Display_3,
@@ -39,6 +39,7 @@ typedef enum
 	Display_P,
 	Display_S,
 	Display_Y,
+	Display_Nothing,
 }DisplayStates;
 
 void DisplayOnSegment(Segment* sevenSegment, DisplayStates display, bool doShowDP);

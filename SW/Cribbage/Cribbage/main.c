@@ -2,6 +2,7 @@
 #include <stm32_hal_legacy.h>
 #include "I2C.h"
 #include "ExpanderController.h"
+#include "Display.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -19,6 +20,7 @@ int main(void)
 	__GPIOA_CLK_ENABLE();
 	__GPIOB_CLK_ENABLE();
 	InitExpanders();
+	InitDisplayTimer();
 
 	for (;;)
 	{

@@ -36,7 +36,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Cribbage.c">
+    <ClCompile Include="main.c">
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="system_stm32c0xx.c">
@@ -483,5 +483,40 @@
     <None Include="stm32.xml">
       <Filter>VisualGDB settings</Filter>
     </None>
+    <ClCompile Include="TCA9555.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="ExpanderController.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="I2C.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SevenSegment.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Display.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TCA9555.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="ExpanderController.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="I2C.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="PinDefs.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SevenSegment.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Display.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
