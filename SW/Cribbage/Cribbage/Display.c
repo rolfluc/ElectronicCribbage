@@ -25,6 +25,7 @@ static DisplayVals SegmentDisplays[NUMBER_DISPLAYS] = {
 	{ false, Display_Nothing, Display_Nothing, &Segments[2], &Segments[3] },
 };
 
+static TIM_HandleTypeDef htim1;
 static uint8_t SegmentTarget = 0;
 
 static inline void DisplayTimerInterrupt()
@@ -40,9 +41,26 @@ static inline void DisplayTimerInterrupt()
 	}
 }
 
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	// TODO clear timer irq?
+	DisplayTimerInterrupt();
+}
+
 void InitDisplayTimer()
 {
-	//TODO setup a persistence timer here, to just constantly oscilate through.
+	HAL_NVIC_ClearPendingIRQ(TIM3_IRQn);
+	HAL_NVIC_EnableIRQ(TIM3_IRQn);
+	
+	htim1.Channel = HAL_TIM_ACTIVE_CHANNEL_1;
+	htim1.Instance = TIM3;
+	htim1.Init.Prescaler = 4; // TODO
+	htim1.Init.CounterMode = TIM_COUNTERMODE_UP; // TODO
+	htim1.Init.Period = 4; // TODO
+	htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV4; // TODO
+	htim1.Init.RepetitionCounter = 1; // TODO
+	htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE; // TODO
+	HAL_TIM_Base_Start_IT(&htim1);
 }
 
 void SetDisplayNumeric(Displays display, uint8_t val, bool doDisplay)

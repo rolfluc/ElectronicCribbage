@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define DEFAULT_TCA_9555_ADDR 0x20
+#define DEFAULT_TCA_9555_ADDR 0x40
 // Datasheet : https://www.ti.com/lit/ds/symlink/tca9555.pdf?HQS=dis-mous-null-mousermode-dsf-pf-null-wwe&ts=1711990743015&ref_url=https%253A%252F%252Fwww.mouser.com%252F
 
 typedef enum

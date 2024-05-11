@@ -640,6 +640,8 @@
     (uuid dbf21f59-c33b-4827-b72d-44a45f16ca6d)
   )
 
+  (no_connect (at 231.902 105.664) (uuid 37ff411a-03dd-4ada-8270-8b8790960483))
+  (no_connect (at 231.902 108.204) (uuid 37ff411a-03dd-4ada-8270-8b8790960483))
   (no_connect (at 196.342 110.744) (uuid d62d630d-e594-4cac-9d67-f4b359beb609))
 
   (wire (pts (xy 160.782 160.02) (xy 160.782 161.798))
