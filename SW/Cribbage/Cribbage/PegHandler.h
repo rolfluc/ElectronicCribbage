@@ -2,4 +2,4 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-void ReadAllPegs();
+void AcquireBankInfo();

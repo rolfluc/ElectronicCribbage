@@ -2,6 +2,7 @@
 #include <stm32_hal_legacy.h>
 #include "I2C.h"
 #include "ExpanderController.h"
+#include "PegHandler.h"
 #include "Display.h"
 
 #ifdef __cplusplus
@@ -21,11 +22,13 @@ int main(void)
 	__GPIOB_CLK_ENABLE();
 	InitExpanders();
 	InitDisplayTimer();
+	InitOutputVoltages();
 
 	for (;;)
 	{
-		
-		
 		HAL_Delay(125);
+		StartBankReadings();
+		
+		
 	}
 }
