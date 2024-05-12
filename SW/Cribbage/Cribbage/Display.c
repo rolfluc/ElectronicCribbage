@@ -47,9 +47,7 @@ static DisplayVals RedDisplay = {
 };
 
 static DisplayVals GreenDisplay = { 
-	false,
-	&GreenLeft,
-	&GreenRight	
+	false, &GreenLeft, &GreenRight	
 };
 
 static TIM_HandleTypeDef htim1;
@@ -75,11 +73,11 @@ static inline void DisplayRight()
 	TurnOffSegment(GreenDisplay.left->segment);
 	if (RedDisplay.doDisplay)
 	{
-		DisplayOnSegment(RedDisplay.left->segment, RedDisplay.left->state, false);
+		DisplayOnSegment(RedDisplay.right->segment, RedDisplay.right->state, false);
 	}
 	if (GreenDisplay.doDisplay)
 	{
-		DisplayOnSegment(GreenDisplay.left->segment, GreenDisplay.left->state, false);
+		DisplayOnSegment(GreenDisplay.right->segment, GreenDisplay.right->state, false);
 	}
 }
 
@@ -117,7 +115,16 @@ void SetDisplayNumeric(Displays display, uint8_t val, bool doDisplay)
 	{
 		val = 99;
 	}
-	SegmentDisplays[display].doDisplay = doDisplay;
-	SegmentDisplays[display].left = (DisplayStates)val / 10 ;
-	SegmentDisplays[display].right = (DisplayStates)val % 10 ;
+	DisplayVals* target;
+	if (display == DisplayRed)
+	{
+		target = &RedDisplay;
+	}
+	else
+	{
+		target = &GreenDisplay;
+	}
+	target->doDisplay = doDisplay;
+	target->left->state = (DisplayStates)val / 10;
+	target->right->state = (DisplayStates)val % 10;
 }
