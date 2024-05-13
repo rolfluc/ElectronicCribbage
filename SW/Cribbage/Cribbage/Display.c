@@ -125,6 +125,11 @@ void SetDisplayNumeric(Displays display, uint8_t val, bool doDisplay)
 		target = &GreenDisplay;
 	}
 	target->doDisplay = doDisplay;
-	target->left->state = (DisplayStates)val / 10;
-	target->right->state = (DisplayStates)val % 10;
+	target->left->state = (DisplayStates)(val / 10);
+	target->right->state = (DisplayStates)(val % 10);
+}
+
+void SetCharacterDisplay(Displays display, char left, char right, bool doDisplay)
+{
+	if 
 }

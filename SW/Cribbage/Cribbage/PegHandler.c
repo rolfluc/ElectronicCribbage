@@ -1,17 +1,30 @@
 #include "PegHandler.h"
 #include "ExpanderController.h"
+#include "Display.h"
 
 #define BUFFER_LEN NUMBER_EXPANDERS * 2 
 #define TOTAL_LENGTH 60
 
-bool redLooped = false;
-uint64_t RedBuffer = 0;
-uint64_t LastRedBuffer = 0;
-uint8_t redPoints = 0;
-bool greenLooped = false;
-uint64_t GreenBuffer = 0;
-uint64_t LastGreenBuffer = 0;
-uint8_t greenPoints = 0;
+typedef enum 
+{
+	WaitingForInitCondition = 0,
+	Initialized             = 1,
+	Running                 = 2,
+	EndGame                 = 3,
+}PegStateMachine;
+
+static const uint8_t InitMask = 0x03;
+static const uint8_t InitOffset = 62;
+
+static bool redLooped = false;
+static uint64_t RedBuffer = 0;
+static uint64_t LastRedBuffer = 0;
+static uint8_t redPoints = 0;
+static bool greenLooped = false;
+static uint64_t GreenBuffer = 0;
+static uint64_t LastGreenBuffer = 0;
+static uint8_t greenPoints = 0;
+static PegStateMachine currentState = WaitingForInitCondition;
 
 static bool didLoop(uint64_t oldBuffer, uint64_t newBuffer)
 {
@@ -50,7 +63,7 @@ static void InterpretPegs(uint64_t lastBuffer, uint64_t newBuffer, uint8_t* delt
 	return;
 }
 
-void AcquireBankInfo()
+void UpdateBankInfo()
 {
 	uint64_t leftBank = 0;
 	uint64_t rightBank = 0;
@@ -62,11 +75,58 @@ void AcquireBankInfo()
 		leftBank |= left << (i * 5);
 		rightBank |= right << (i * 5);
 	}
-	
-	//InterpretPegs
-	uint8_t delta = 0;
-	InterpretPegs(RedBuffer, leftBank, &delta, redPoints);
-	
-	InterpretPegs(GreenBuffer, rightBank, &delta, greenPoints);
-	
+	LastGreenBuffer = GreenBuffer;
+	LastRedBuffer = RedBuffer;
+	GreenBuffer = leftBank;
+	RedBuffer = rightBank;
+}
+
+void HandlePegStateMachine()
+{
+	switch (currentState)
+	{
+	case WaitingForInitCondition:
+		{
+			bool greenGood = false;
+			bool redGood = false;
+			// Waiting for init condition, should be the following:
+			// Both red and green banks, should have their respective pegs adjacent to each other, 
+			// in -2, and -1 positions.
+			if (GreenBuffer & ((uint64_t)InitMask << InitOffset))
+			{
+				greenGood  = true;
+				
+			}
+			if (RedBuffer & ((uint64_t)InitMask << InitOffset))
+			{
+				redGood  = true;
+				
+			}
+			if (redGood && greenGood)
+			{
+				currentState = Initialized;
+			}
+		}
+		break;
+	case Initialized:
+		{
+			// TODO what does this mean.
+		}
+		break;
+	case Running:
+		{
+			
+		}
+		break;
+	case EndGame:
+		{
+			
+		}
+		break;
+	default:
+		{
+			
+		}
+		break;
+	}		 
 }

@@ -27,8 +27,11 @@ int main(void)
 	for (;;)
 	{
 		HAL_Delay(125);
+		// Start reading the banks.
 		StartBankReadings();
-		
-		
+		// Interpret the tca banks, and copy the results into the respective local buffers.
+		UpdateBankInfo();
+		// Now, run the state machine 
+		HandlePegStateMachine();
 	}
 }
