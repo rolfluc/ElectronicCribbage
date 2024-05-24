@@ -2,4 +2,5 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-void ReadAllPegs();
+void UpdateBankInfo();
+void HandlePegStateMachine();

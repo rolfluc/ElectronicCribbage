@@ -44,3 +44,25 @@ typedef enum
 
 void DisplayOnSegment(Segment* sevenSegment, DisplayStates display, bool doShowDP);
 void TurnOffSegment(Segment* sevenSegment);
+
+static bool checkValidChar(char chr)
+{
+	switch (chr)
+	{
+	case 'A':
+	case 'b':
+	case 'C':
+	case 'd':
+	case 'E':
+	case 'F':
+	case 'H':
+	case 'L':
+	case 'O':
+	case 'P':
+	case 'S':
+	case 'Y':
+		return true;
+	default:
+		return false;
+	}
+}

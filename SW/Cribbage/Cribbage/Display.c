@@ -4,13 +4,17 @@
 #define NUMBER_SEGMENTS 4
 #define NUMBER_DISPLAYS NUMBER_SEGMENTS/2
 
+typedef struct
+{
+	DisplayStates state;
+	Segment* segment;
+}SegmentConfig;
+
 typedef struct 
 {
 	bool doDisplay;
-	DisplayStates left;
-	DisplayStates right;
-	Segment* leftSegment;
-	Segment* rightSegment;
+	SegmentConfig* left;
+	SegmentConfig* right;
 }DisplayVals;
 
 static Segment Segments[NUMBER_SEGMENTS] = { 
@@ -19,26 +23,68 @@ static Segment Segments[NUMBER_SEGMENTS] = {
 	{&A_EN, &B_EN, &C_EN, &D_EN, &E_EN, &F_EN, &G_EN, NULL, &D1_G_EN, true},
 	{&A_EN, &B_EN, &C_EN, &D_EN, &E_EN, &F_EN, &G_EN, NULL, &D2_G_EN, true},
 };
+static SegmentConfig RedLeft = { 
+	Display_Nothing,
+	&Segments[0]
+};
+static SegmentConfig RedRight = { 
+	Display_Nothing,
+	&Segments[1]
+};
 
-static DisplayVals SegmentDisplays[NUMBER_DISPLAYS] = { 
-	{ false, Display_Nothing, Display_Nothing, &Segments[0], &Segments[1] },
-	{ false, Display_Nothing, Display_Nothing, &Segments[2], &Segments[3] },
+static SegmentConfig GreenLeft = { 
+	Display_Nothing,
+	&Segments[2]
+};
+
+static SegmentConfig GreenRight = { 
+	Display_Nothing,
+	&Segments[3]
+};
+
+static DisplayVals RedDisplay = { 
+	false, &RedLeft, &RedRight	
+};
+
+static DisplayVals GreenDisplay = { 
+	false, &GreenLeft, &GreenRight	
 };
 
 static TIM_HandleTypeDef htim1;
-static uint8_t SegmentTarget = 0;
+static bool displayLeft = false;
+
+static inline void DisplayLeft()
+{
+	TurnOffSegment(RedDisplay.right->segment);	
+	TurnOffSegment(GreenDisplay.right->segment);
+	if (RedDisplay.doDisplay)
+	{
+		DisplayOnSegment(RedDisplay.left->segment, RedDisplay.left->state, false);
+	}
+	if (GreenDisplay.doDisplay)
+	{
+		DisplayOnSegment(GreenDisplay.left->segment, GreenDisplay.left->state, false);
+	}
+}
+
+static inline void DisplayRight()
+{
+	TurnOffSegment(RedDisplay.left->segment);
+	TurnOffSegment(GreenDisplay.left->segment);
+	if (RedDisplay.doDisplay)
+	{
+		DisplayOnSegment(RedDisplay.right->segment, RedDisplay.right->state, false);
+	}
+	if (GreenDisplay.doDisplay)
+	{
+		DisplayOnSegment(GreenDisplay.right->segment, GreenDisplay.right->state, false);
+	}
+}
 
 static inline void DisplayTimerInterrupt()
 {
-	// Turn off the old Segment
-	TurnOffSegment(&Segments[SegmentTarget]);
-	SegmentTarget = (SegmentTarget + 1) % NUMBER_SEGMENTS;
-	DisplayVals* disp = SegmentTarget < 2 ? &SegmentDisplays[0] : &SegmentDisplays[1];
-	// Move to the next
-	if (disp->doDisplay)
-	{
-		DisplayOnSegment(&Segments[SegmentTarget], SegmentTarget % 2 == 0 ? disp->left : disp->right, false);	
-	}
+	displayLeft ? DisplayLeft() : DisplayRight();
+	displayLeft = !displayLeft;
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
@@ -69,7 +115,21 @@ void SetDisplayNumeric(Displays display, uint8_t val, bool doDisplay)
 	{
 		val = 99;
 	}
-	SegmentDisplays[display].doDisplay = doDisplay;
-	SegmentDisplays[display].left = (DisplayStates)val / 10 ;
-	SegmentDisplays[display].right = (DisplayStates)val % 10 ;
+	DisplayVals* target;
+	if (display == DisplayRed)
+	{
+		target = &RedDisplay;
+	}
+	else
+	{
+		target = &GreenDisplay;
+	}
+	target->doDisplay = doDisplay;
+	target->left->state = (DisplayStates)(val / 10);
+	target->right->state = (DisplayStates)(val % 10);
+}
+
+void SetCharacterDisplay(Displays display, char left, char right, bool doDisplay)
+{
+	if 
 }

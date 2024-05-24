@@ -4,7 +4,8 @@
 #define NUMBER_EXPANDERS 6
 void InitExpanders();
 uint16_t GetBankReadings(uint8_t TCADevice);
-void StartBankReading(uint8_t TCADevice);
+void StartBankReadings();
 void SetUse3v2(uint8_t TCADevice, bool doUse);
-void TurnB0(uint8_t TCADevice, bool turnOn);
-void TurnB1(uint8_t TCADevice, bool turnOn);
+void InitOutputVoltages();
+void SetB0s(bool turnOn);
+void SetB1s(bool turnOn);

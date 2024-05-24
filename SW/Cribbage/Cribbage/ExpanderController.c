@@ -66,24 +66,27 @@ uint16_t GetBankReadings(uint8_t TCADevice)
 //
 // Sets up the chip for reading,
 //
-void StartBankReading(uint8_t TCADevice)
+void StartBankReadings()
 {
 	TCAError err;
-	TCA9555Pins targetpin = expanders[TCADevice].use3V2 ? (TCA9555Pins)Rail_3v2 : (TCA9555Pins)Rail_2v7;
-	err = writePin(&expanders[TCADevice].tcaDevice, targetpin, true);
-	err = writePin(&expanders[TCADevice].tcaDevice, (TCA9555Pins)Rail_B0, true);
-	// TODO sleep. Need EE measurements here to determine how long.
+	SetB0s(true);
+	// TODO sleep.
 	HAL_Delay(1);
-	err = readBank(&expanders[TCADevice].tcaDevice, Bank_0, &expanders[TCADevice].P0Bank);
-	err = writePin(&expanders[TCADevice].tcaDevice, (TCA9555Pins)Rail_B0, false);
-	// TODO sleep. Need EE measurements here to determine how long.
+	for (uint8_t i = 0; i < NUMBER_EXPANDERS; i++)
+	{
+		err = readBank(&expanders[i].tcaDevice, Bank_0, &expanders[i].P0Bank);
+	}
+	SetB0s(false);
+	// TODO sleep.
 	HAL_Delay(1);
-	err = writePin(&expanders[TCADevice].tcaDevice, (TCA9555Pins)Rail_B1, true);
-	// TODO sleep. Need EE measurements here to determine how long.
+	SetB1s(true);
+	// TODO sleep.
 	HAL_Delay(1);
-	err = readBank(&expanders[TCADevice].tcaDevice, Bank_1, &expanders[TCADevice].P1Bank);
-	err = writePin(&expanders[TCADevice].tcaDevice, (TCA9555Pins)Rail_B1, false);
-	err = writePin(&expanders[TCADevice].tcaDevice, targetpin, false);
+	for (uint8_t i = 0; i < NUMBER_EXPANDERS; i++)
+	{
+		err = readBank(&expanders[i].tcaDevice, Bank_1, &expanders[i].P1Bank);
+	}
+	SetB1s(false);
 }
 
 void InitExpanders()
@@ -109,14 +112,44 @@ void InitExpanders()
 void SetUse3v2(uint8_t TCADevice, bool doUse)
 {
 	expanders[TCADevice].use3V2 = doUse;
+	TCA9555Pins pin = doUse ? (TCA9555Pins)Rail_2v7 : (TCA9555Pins)Rail_3v2; 
+	// clear old first
+	writePin(&expanders[TCADevice].tcaDevice, pin, false);
+	pin = doUse ? (TCA9555Pins)Rail_3v2 : (TCA9555Pins)Rail_2v7; 
+	writePin(&expanders[TCADevice].tcaDevice, pin, true);
 }
 
-void TurnB0(uint8_t TCADevice, bool turnOn)
+static void TurnB0(uint8_t TCADevice, bool turnOn)
 {
 	writePin(&expanders[TCADevice].tcaDevice, (TCA9555Pins)Rail_B0, turnOn);
 }
 
-void TurnB1(uint8_t TCADevice, bool turnOn)
+static void TurnB1(uint8_t TCADevice, bool turnOn)
 {
 	writePin(&expanders[TCADevice].tcaDevice, (TCA9555Pins)Rail_B1, turnOn);
+}
+
+// Initialize to 2v5
+void InitOutputVoltages()
+{
+	for (uint8_t i = 0; i < NUMBER_EXPANDERS; i++)
+	{
+		SetUse3v2(i, false);
+	}
+}
+
+void SetB0s(bool turnOn)
+{
+	for (uint8_t i = 0; i < NUMBER_EXPANDERS; i++)
+	{
+		TurnB0(i, turnOn);
+	}
+}
+
+void SetB1s(bool turnOn)
+{
+	for (uint8_t i = 0; i < NUMBER_EXPANDERS; i++)
+	{
+		TurnB1(i, turnOn);
+	}
 }
