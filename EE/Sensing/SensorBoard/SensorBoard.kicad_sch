@@ -996,7 +996,7 @@
     (property "Value" "SN74LVC827APWR" (id 1) (at 163.8174 76.1801 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Package_SO:TSSOP-24_4.4x6.5mm_P0.5mm" (id 2) (at 178.308 56.896 0)
+    (property "Footprint" "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm" (id 2) (at 178.308 56.896 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (id 3) (at 178.308 56.896 0)
@@ -1547,7 +1547,7 @@
     (property "Value" "SN74LVC827APWR" (id 1) (at 166.1034 27.6661 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Package_SO:TSSOP-24_4.4x6.5mm_P0.5mm" (id 2) (at 180.594 8.382 0)
+    (property "Footprint" "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm" (id 2) (at 180.594 8.382 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (id 3) (at 180.594 8.382 0)
@@ -2193,10 +2193,10 @@
       (reference "R50") (unit 1) (value "10k") (footprint "Resistor_SMD:R_0402_1005Metric")
     )
     (path "/044c1699-8e9d-45c5-a423-8e1c4f37231d"
-      (reference "U1") (unit 1) (value "SN74LVC827APWR") (footprint "Package_SO:TSSOP-24_4.4x6.5mm_P0.5mm")
+      (reference "U1") (unit 1) (value "SN74LVC827APWR") (footprint "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm")
     )
     (path "/a98e967b-5579-4f2c-a046-1fd406329b6c"
-      (reference "U2") (unit 1) (value "SN74LVC827APWR") (footprint "Package_SO:TSSOP-24_4.4x6.5mm_P0.5mm")
+      (reference "U2") (unit 1) (value "SN74LVC827APWR") (footprint "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm")
     )
     (path "/78d7b32d-68de-413c-bd60-8d542d1f923b"
       (reference "U3") (unit 1) (value "TCA9555PWR") (footprint "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm")

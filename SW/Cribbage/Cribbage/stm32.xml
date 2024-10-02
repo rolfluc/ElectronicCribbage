@@ -2,12 +2,12 @@
 <EmbeddedProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ToolchainID>com.visualgdb.arm-eabi</ToolchainID>
   <ToolchainVersion>
-    <GCC>12.2.1</GCC>
-    <GDB>12.2</GDB>
-    <Revision>2</Revision>
+    <GCC>13.3.1</GCC>
+    <GDB>15.1</GDB>
+    <Revision>3</Revision>
   </ToolchainVersion>
   <BspID>com.sysprogs.arm.stm32</BspID>
-  <BspVersion>2023.07</BspVersion>
+  <BspVersion>2024.07</BspVersion>
   <McuID>STM32C011F4</McuID>
   <MCUDefinitionFile>STM32C0xxxx/DeviceDefinitions/stm32c011xx.xml</MCUDefinitionFile>
   <MCUProperties>
@@ -34,6 +34,7 @@
   <ReferencedFrameworks>
     <string>com.sysprogs.arm.stm32.hal</string>
     <string>com.sysprogs.arm.stm32.ll</string>
+    <string>com.sysprogs.arm.stm32.STM32C0_ll</string>
   </ReferencedFrameworks>
   <FrameworkProperties>
     <Entries>

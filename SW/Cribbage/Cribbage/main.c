@@ -20,18 +20,18 @@ int main(void)
 
 	__GPIOA_CLK_ENABLE();
 	__GPIOB_CLK_ENABLE();
-	InitExpanders();
+	//InitExpanders();
 	InitDisplayTimer();
-	InitOutputVoltages();
+	//InitOutputVoltages();
 
 	for (;;)
 	{
 		HAL_Delay(125);
 		// Start reading the banks.
-		StartBankReadings();
+		//StartBankReadings();
 		// Interpret the tca banks, and copy the results into the respective local buffers.
-		UpdateBankInfo();
+		//UpdateBankInfo();
 		// Now, run the state machine 
-		HandlePegStateMachine();
+		//HandlePegStateMachine();
 	}
 }

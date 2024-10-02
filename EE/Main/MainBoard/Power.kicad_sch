@@ -951,7 +951,7 @@
     (uuid f2ad9187-efb3-4fb4-87c0-c5e3800af9fd)
   )
 
-  (text "1000V/20,000 = 50mA" (at 25.908 106.68 0)
+  (text "1000V/10,000 = 100mA" (at 25.908 106.68 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 26212667-a14e-4144-bf1e-d4bfe6d8cf66)
   )
@@ -1309,7 +1309,7 @@
     (property "Reference" "R14" (id 0) (at 41.656 95.758 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "20k" (id 1) (at 40.386 96.774 90)
+    (property "Value" "10k" (id 1) (at 40.386 96.774 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (id 2) (at 38.608 94.996 90)

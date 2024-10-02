@@ -444,6 +444,11 @@
   )
 
 
+  (text "TODO no longer the EWA - likely  LDD-A406NI" (at 61.468 64.516 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid bc344d2d-9e78-4310-9c11-1ce1be99a460)
+  )
+
   (label "D" (at 102.108 85.09 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 07701f54-c04c-4ea1-92a8-65b22f335805)

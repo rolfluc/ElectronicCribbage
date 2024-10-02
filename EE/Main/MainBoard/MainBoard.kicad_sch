@@ -627,40 +627,40 @@
       (reference "D1") (unit 1) (value "LED") (footprint "LED_SMD:LED_0603_1608Metric")
     )
     (path "/3c0cf0fe-1230-4a73-9d8b-47e10780e7d7/a6d6d721-18d4-4fe7-946c-394670988df2"
-      (reference "H1") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+      (reference "H1") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.7mm")
     )
     (path "/3c0cf0fe-1230-4a73-9d8b-47e10780e7d7/7be6dc23-20bc-40d9-a584-5dafc28e6867"
-      (reference "H2") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+      (reference "H2") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.7mm")
     )
     (path "/6590a310-4e58-4add-835a-2b8c4aecec99/c07d7a75-7be6-410f-bd7a-32bd948b9b4e"
-      (reference "H3") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+      (reference "H3") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.7mm")
     )
     (path "/6590a310-4e58-4add-835a-2b8c4aecec99/62705ed6-f6f7-4142-a06d-e55d961cd66f"
-      (reference "H4") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+      (reference "H4") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.7mm")
     )
     (path "/5bdb2ffb-d919-48f1-b7eb-b51e38cefcf2/70c7a98e-695d-43ff-9637-fa1cb7a63924"
-      (reference "H5") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+      (reference "H5") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.7mm")
     )
     (path "/5bdb2ffb-d919-48f1-b7eb-b51e38cefcf2/db11b96d-8701-4517-9da9-7cba728aae9e"
-      (reference "H6") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+      (reference "H6") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.7mm")
     )
     (path "/fa3e67a9-2d4d-4f8f-a5a0-a9ebaf1eaf74/707f5611-edc8-45a5-af20-8509a21aaa81"
-      (reference "H7") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+      (reference "H7") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.7mm")
     )
     (path "/fa3e67a9-2d4d-4f8f-a5a0-a9ebaf1eaf74/5765c8b5-eb70-4473-9133-1242bcc2ed0a"
-      (reference "H8") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+      (reference "H8") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.7mm")
     )
     (path "/d52d9788-b9bb-4139-8b7b-d5d791aa42e2/6d7fc577-e437-4c34-b63d-c915bd54b758"
-      (reference "H9") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+      (reference "H9") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.7mm")
     )
     (path "/d52d9788-b9bb-4139-8b7b-d5d791aa42e2/fe183619-d8c0-4493-84e2-b82e53929f61"
-      (reference "H10") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+      (reference "H10") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.7mm")
     )
     (path "/b7fbd3f7-f55c-49a9-83d6-8eb00806e6b7/fe0d9cd1-6251-4fed-bcef-2fe8d80361b2"
-      (reference "H11") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+      (reference "H11") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.7mm")
     )
     (path "/b7fbd3f7-f55c-49a9-83d6-8eb00806e6b7/b7e5c40d-ba91-470e-94f6-3dbafef37db8"
-      (reference "H12") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.5mm")
+      (reference "H12") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_2.7mm")
     )
     (path "/3c0cf0fe-1230-4a73-9d8b-47e10780e7d7/f809c2a5-de1d-469d-89e4-a0c654f42183"
       (reference "J1") (unit 1) (value "Conn_01x04_Male") (footprint "Connector_PinSocket_2.54mm:PinSocket_1x04_P2.54mm_Vertical")
@@ -744,7 +744,7 @@
       (reference "R13") (unit 1) (value "560") (footprint "Resistor_SMD:R_0402_1005Metric")
     )
     (path "/d7ae3dec-973e-4961-81aa-d99c06a6b362/7fb7e6b7-9ce0-4f89-9b18-d4cddc3a063a"
-      (reference "R14") (unit 1) (value "20k") (footprint "Resistor_SMD:R_0402_1005Metric")
+      (reference "R14") (unit 1) (value "10k") (footprint "Resistor_SMD:R_0402_1005Metric")
     )
     (path "/d7ae3dec-973e-4961-81aa-d99c06a6b362/ab3cf3c6-c7dd-48a7-a793-8bdafc618ca5"
       (reference "R15") (unit 1) (value "2k") (footprint "Resistor_SMD:R_0402_1005Metric")
