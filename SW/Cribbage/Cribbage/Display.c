@@ -23,10 +23,10 @@ typedef struct
 }DisplayVals;
 
 static Segment Segments[NUMBER_SEGMENTS] = { 
-	{&A_EN, &B_EN, &C_EN, &D_EN, &E_EN, &F_EN, &G_EN, NULL, &D1_R_EN, true},
-	{&A_EN, &B_EN, &C_EN, &D_EN, &E_EN, &F_EN, &G_EN, NULL, &D2_R_EN, true},
-	{&A_EN, &B_EN, &C_EN, &D_EN, &E_EN, &F_EN, &G_EN, NULL, &D1_G_EN, true},
-	{&A_EN, &B_EN, &C_EN, &D_EN, &E_EN, &F_EN, &G_EN, NULL, &D2_G_EN, true},
+	{&A_EN, &B_EN, &C_EN, &D_EN, &E_EN, &F_EN, &G_EN, NULL, &D1_R_EN, false},
+	{&A_EN, &B_EN, &C_EN, &D_EN, &E_EN, &F_EN, &G_EN, NULL, &D2_R_EN, false},
+	{&A_EN, &B_EN, &C_EN, &D_EN, &E_EN, &F_EN, &G_EN, NULL, &D1_G_EN, false},
+	{&A_EN, &B_EN, &C_EN, &D_EN, &E_EN, &F_EN, &G_EN, NULL, &D2_G_EN, false},
 };
 static SegmentConfig RedLeft = { 
 	Display_Nothing,

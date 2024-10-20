@@ -51,7 +51,7 @@ void DisplayOnSegment(Segment* sevenSegment, DisplayStates display, bool doShowD
 			HAL_GPIO_WritePin(sevenSegment->F->pinPort, sevenSegment->F->pinNumber, driveLow);
 			HAL_GPIO_WritePin(sevenSegment->G->pinPort, sevenSegment->G->pinNumber, driveHigh);
 			//HAL_GPIO_WritePin(sevenSegment->DP->pinPort, sevenSegment->DP->pinNumber, doShowDP ? driveHigh : driveLow);
-			break;
+			break;                                 
 		}
 	case Display_3:
 		{
@@ -261,11 +261,11 @@ void DisplayOnSegment(Segment* sevenSegment, DisplayStates display, bool doShowD
 	default:
 		break;
 	}
-	HAL_GPIO_WritePin(sevenSegment->Enable->pinPort, sevenSegment->Enable->pinNumber, driveHigh);
+	HAL_GPIO_WritePin(sevenSegment->Enable->pinPort, sevenSegment->Enable->pinNumber, GPIO_PIN_SET);
 }
 
 void TurnOffSegment(Segment* sevenSegment)
 {
 	GPIO_PinState driveLow = sevenSegment->IsCommonCathode ? GPIO_PIN_RESET : GPIO_PIN_SET;
-	HAL_GPIO_WritePin(sevenSegment->Enable->pinPort, sevenSegment->Enable->pinNumber, driveLow);
+	HAL_GPIO_WritePin(sevenSegment->Enable->pinPort, sevenSegment->Enable->pinNumber, GPIO_PIN_RESET);
 }

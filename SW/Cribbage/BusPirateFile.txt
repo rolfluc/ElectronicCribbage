@@ -1,0 +1,83 @@
+# This document is intended to outline how to use a bus pirate to communicate with the sensor board Directly.
+# Once operational, it can act as a precursor to writing actual software
+m
+4
+y
+W
+
+n
+P
+
+
+# Base Address is 0x20
+# 0x00 - Input Port 0
+# 0x01 - Input Port 1
+# 0x02 - Output Port 0
+# 0x03 - Output Port 1
+# 0x04/5 DNC - Polarity Inversion
+# 0x06 - Config Port 0
+# 0x07 - Config Port 1
+
+#P12 - B1 Select
+#P16 - B0 Select
+
+#P00 - In0 
+#P01 - In1
+#P02 - In2
+#P03 - In3
+#P04 - In4
+#P05 - In5
+#P06 - In6
+#P07 - In7
+#P10 - In9
+#P11 - In8
+
+
+# Board 000
+# Configure 2 output ports
+[0x40 0x07 0xBB]
+
+# Change from Top to Bottom:
+[0x40 0x03 0x04]
+
+# Change from Bottom to Top:
+[0x40 0x03 0x40]
+
+Reads Port 0
+[0x40 0x00 [0x41 r]
+
+Reads Port 1
+[0x40 0x01 [0x41 r]
+
+
+# Board 001
+# Configure 2 output ports
+[0x42 0x07 0xBB]
+
+# Change from Top to Bottom:
+[0x42 0x03 0x04]
+
+# Change from Bottom to Top:
+[0x42 0x03 0x40]
+
+Reads Port 0
+[0x42 0x00 [0x43 r]
+
+Reads Port 1
+[0x42 0x01 [0x43 r]
+
+# Board 005 - Bad address pins?
+# Configure 2 output ports
+[0x4C 0x07 0xBB]
+
+# Change from Top to Bottom:
+[0x4C 0x03 0x04]
+
+# Change from Bottom to Top:
+[0x4C 0x03 0x40]
+
+Reads Port 0
+[0x4C 0x00 [0x43 r]
+
+Reads Port 1
+[0x4C 0x01 [0x43 r]
