@@ -3398,16 +3398,6 @@
 		)
 		(uuid "b41793fb-21b6-4f9f-a2f2-3cc687e0076a")
 	)
-	(text "TODO Need to boost back up to 3.9V"
-		(exclude_from_sim no)
-		(at 233.934 82.55 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "b60c3605-29c3-4f47-b7ee-b51dd5a8ec91")
-	)
 	(text "Regulators"
 		(exclude_from_sim no)
 		(at 229.616 32.004 0)
@@ -3418,16 +3408,6 @@
 			(justify left bottom)
 		)
 		(uuid "c52e785b-2299-4fd6-aaa4-44b19bdcf525")
-	)
-	(text "TODO math for resistors"
-		(exclude_from_sim no)
-		(at 245.872 149.098 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "f0c0b75c-ef9a-477a-a665-f9b4ca2b470d")
 	)
 	(label "VBAT"
 		(at 66.04 84.582 0)
@@ -3462,8 +3442,19 @@
 		)
 		(uuid "35a19c8c-e3ba-4e94-aa68-72ccc9e4f133")
 	)
-	(label "V_DISPLAY"
-		(at 269.24 18.542 180)
+	(label "V_PRE_REG"
+		(at 138.43 81.28 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3ba84e3f-68b9-48b6-bbc2-4c8d3f35650d")
+	)
+	(label "ADC_"
+		(at 270.51 24.13 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3471,7 +3462,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "6c34f12c-814e-4e6a-8577-604129eb2b18")
+		(uuid "701c39d1-2935-4883-88d7-99e7300c4cd8")
 	)
 	(label "VBAT"
 		(at 91.948 84.836 180)
@@ -3517,6 +3508,17 @@
 		)
 		(uuid "9940073b-b9e6-4bd3-896e-28f072f14573")
 	)
+	(label "ADC_"
+		(at 138.43 81.28 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "cef15c21-1400-4704-acc0-ee5957b6c7db")
+	)
 	(label "VBAT"
 		(at 151.13 128.27 270)
 		(fields_autoplaced yes)
@@ -3528,9 +3530,9 @@
 		)
 		(uuid "f4916b92-04e2-49b6-87f5-34645d6cf3f2")
 	)
-	(hierarchical_label "V_DISPLAY"
+	(hierarchical_label "VBAT_ADC"
 		(shape input)
-		(at 269.24 18.542 0)
+		(at 270.51 24.13 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3538,7 +3540,7 @@
 			)
 			(justify left)
 		)
-		(uuid "0dfbbf64-bcb8-4159-9496-16b7f37a2480")
+		(uuid "997f487f-4ab6-4473-bb24-63f97b0b9204")
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -3985,7 +3987,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "35e81d38-8bc0-42b1-83d1-c002e605d907")
-		(property "Reference" "TP+"
+		(property "Reference" "TP+1"
 			(at 142.748 122.2205 90)
 			(effects
 				(font
@@ -4034,7 +4036,7 @@
 		(instances
 			(project ""
 				(path "/dfe0084c-a900-4f47-8966-915ebf3a8e75/d7ae3dec-973e-4961-81aa-d99c06a6b362"
-					(reference "TP+")
+					(reference "TP+1")
 					(unit 1)
 				)
 			)
@@ -4261,7 +4263,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "38650aaf-fe56-4bfb-9814-df8a21a1adf1")
-		(property "Reference" "TPVd"
+		(property "Reference" "TPVd1"
 			(at 274.574 106.934 0)
 			(effects
 				(font
@@ -4312,7 +4314,7 @@
 		(instances
 			(project "MainBoard"
 				(path "/dfe0084c-a900-4f47-8966-915ebf3a8e75/d7ae3dec-973e-4961-81aa-d99c06a6b362"
-					(reference "TPVd")
+					(reference "TPVd1")
 					(unit 1)
 				)
 			)
@@ -4592,7 +4594,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "582c81c0-e311-4dbf-bae2-5782c6bb8fce")
-		(property "Reference" "TPVCC"
+		(property "Reference" "TPVCC1"
 			(at 249.174 37.084 0)
 			(effects
 				(font
@@ -4643,7 +4645,7 @@
 		(instances
 			(project "MainBoard"
 				(path "/dfe0084c-a900-4f47-8966-915ebf3a8e75/d7ae3dec-973e-4961-81aa-d99c06a6b362"
-					(reference "TPVCC")
+					(reference "TPVCC1")
 					(unit 1)
 				)
 			)
@@ -6585,7 +6587,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bf1e53ab-0ec3-42eb-8a27-a04fad80a0c2")
-		(property "Reference" "TP-"
+		(property "Reference" "TP-1"
 			(at 162.179 115.6278 90)
 			(effects
 				(font
@@ -6636,7 +6638,7 @@
 		(instances
 			(project ""
 				(path "/dfe0084c-a900-4f47-8966-915ebf3a8e75/d7ae3dec-973e-4961-81aa-d99c06a6b362"
-					(reference "TP-")
+					(reference "TP-1")
 					(unit 1)
 				)
 			)
@@ -6812,7 +6814,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d6eea63f-d592-4cd8-8497-3da2f3302fbb")
-		(property "Reference" "TPVBUS"
+		(property "Reference" "TPVBUS1"
 			(at 41.529 59.7478 90)
 			(effects
 				(font
@@ -6863,7 +6865,7 @@
 		(instances
 			(project "MainBoard"
 				(path "/dfe0084c-a900-4f47-8966-915ebf3a8e75/d7ae3dec-973e-4961-81aa-d99c06a6b362"
-					(reference "TPVBUS")
+					(reference "TPVBUS1")
 					(unit 1)
 				)
 			)
@@ -6949,7 +6951,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "dd56c234-d1a6-435c-a303-c4adf80fe18e")
-		(property "Reference" "TPVBAT"
+		(property "Reference" "TPVBAT1"
 			(at 77.089 59.7478 90)
 			(effects
 				(font
@@ -7000,7 +7002,7 @@
 		(instances
 			(project "MainBoard"
 				(path "/dfe0084c-a900-4f47-8966-915ebf3a8e75/d7ae3dec-973e-4961-81aa-d99c06a6b362"
-					(reference "TPVBAT")
+					(reference "TPVBAT1")
 					(unit 1)
 				)
 			)

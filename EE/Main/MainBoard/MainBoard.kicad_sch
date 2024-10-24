@@ -7,33 +7,113 @@
 	(lib_symbols)
 	(wire
 		(pts
-			(xy 97.028 132.842) (xy 94.488 132.842)
+			(xy 102.87 116.84) (xy 102.87 163.83)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "3e6c3237-d903-4de7-b487-27306ba266a0")
+		(uuid "09faaa88-384f-42cc-9615-02a944e94e3f")
 	)
 	(wire
 		(pts
-			(xy 95.25 118.618) (xy 97.028 118.618)
+			(xy 95.25 80.01) (xy 125.73 80.01)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "4bc782b2-e4bc-4a0c-bbe7-0e7048897ad2")
+		(uuid "305b0411-c698-41ba-b927-7050eae19ff8")
 	)
 	(wire
 		(pts
-			(xy 97.028 118.618) (xy 97.028 132.842)
+			(xy 95.25 82.55) (xy 125.73 82.55)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "be11080b-dbbd-4cf7-8aff-4b704cdb7c25")
+		(uuid "31885175-2af2-4d02-aff9-34b23ee0a545")
+	)
+	(wire
+		(pts
+			(xy 95.25 116.84) (xy 102.87 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4ed0fdd9-5ad8-420d-81b0-3991252e6892")
+	)
+	(wire
+		(pts
+			(xy 95.25 87.63) (xy 125.73 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "868bc40b-f8ee-4f96-bceb-b8022ee19195")
+	)
+	(wire
+		(pts
+			(xy 95.25 133.35) (xy 100.33 133.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b7908d2c-3390-4883-800a-3bbf883a5435")
+	)
+	(wire
+		(pts
+			(xy 95.25 85.09) (xy 125.73 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c57fd1ed-720c-44f6-b047-7c376ff2b3e1")
+	)
+	(wire
+		(pts
+			(xy 95.25 119.38) (xy 100.33 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cae8efb9-3a9f-4735-80f7-0a6f1e8cf290")
+	)
+	(wire
+		(pts
+			(xy 100.33 119.38) (xy 100.33 133.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dc3eb552-6ac6-4daa-bbb5-fa542fec307c")
+	)
+	(wire
+		(pts
+			(xy 95.25 77.47) (xy 125.73 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dec17da8-a6d8-4689-a323-0f1a828fcddc")
+	)
+	(wire
+		(pts
+			(xy 102.87 163.83) (xy 93.98 163.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e953d855-3a30-461a-8902-58cc38b75216")
 	)
 	(label "SDA"
 		(at 30.988 66.548 0)
@@ -239,15 +319,75 @@
 			)
 			(uuid "25b019eb-eb44-4e61-a3e7-cab39e3559b9")
 		)
-		(pin "DISPLAY_DIN" input
-			(at 95.25 118.618 0)
+		(pin "VBAT_ADC" input
+			(at 95.25 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "3ec015b5-602f-4c34-a7bd-543fd385cd45")
+			(uuid "635c8f45-79a5-463c-a0b2-58de67e5e306")
+		)
+		(pin "Start_11" input
+			(at 95.25 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "0a58ea9e-a611-453b-a82d-574913d9cf80")
+		)
+		(pin "Start_10" input
+			(at 95.25 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "81a08b56-5dd9-44bb-bbfb-77640fc78daa")
+		)
+		(pin "Start_00" input
+			(at 95.25 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "148d2e79-9142-4698-9504-7c0fb4289212")
+		)
+		(pin "Start_01" input
+			(at 95.25 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "6e33a411-f112-4812-9beb-49a7a7d3f480")
+		)
+		(pin "End" input
+			(at 95.25 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "3cba205a-01e5-4ba2-bdf7-da07a3dd2edf")
+		)
+		(pin "DISPLAY_DOUT" input
+			(at 95.25 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "3c453910-0460-432e-9568-a90a3c554f67")
 		)
 		(instances
 			(project "MainBoard"
@@ -311,6 +451,94 @@
 			(project "MainBoard"
 				(path "/dfe0084c-a900-4f47-8966-915ebf3a8e75"
 					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 125.73 76.2)
+		(size 16.51 22.86)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "489489d0-e3c7-4d33-9ff6-eeec1bbd1979")
+		(property "Sheetname" "PinSense"
+			(at 125.73 75.4884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "PinSense.kicad_sch"
+			(at 125.73 99.6446 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "Start_00" input
+			(at 125.73 77.47 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "46195919-e61a-44ad-8535-da6e5f22dbc1")
+		)
+		(pin "Start_01" input
+			(at 125.73 80.01 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "cf504d6c-871d-4e93-9eab-007551056a1c")
+		)
+		(pin "Start_10" input
+			(at 125.73 82.55 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "48e6630f-e76c-404a-81c5-c96567f49d7a")
+		)
+		(pin "Start_11" input
+			(at 125.73 85.09 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "943f2723-a280-4ddd-9f2e-50f967adfa4d")
+		)
+		(pin "End" input
+			(at 125.73 87.63 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "c9a988a9-6aeb-4647-8203-926ee6005494")
+		)
+		(instances
+			(project "MainBoard"
+				(path "/dfe0084c-a900-4f47-8966-915ebf3a8e75"
+					(page "11")
 				)
 			)
 		)
@@ -432,8 +660,8 @@
 		)
 	)
 	(sheet
-		(at 71.882 129.286)
-		(size 22.606 26.924)
+		(at 73.152 129.286)
+		(size 22.098 26.924)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -444,7 +672,7 @@
 		)
 		(uuid "8b04ffa1-873f-4cda-b1fe-4981fdbc7b42")
 		(property "Sheetname" "Display"
-			(at 71.882 128.5744 0)
+			(at 73.152 128.5744 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -453,7 +681,7 @@
 			)
 		)
 		(property "Sheetfile" "Display.kicad_sch"
-			(at 71.882 156.7946 0)
+			(at 73.152 156.7946 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -461,18 +689,8 @@
 				(justify left top)
 			)
 		)
-		(pin "V_DISPLAY" input
-			(at 94.488 152.654 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-			(uuid "1f94290e-7cdb-4a2a-a00d-859cb79b7def")
-		)
 		(pin "DISPLAY_DIN" input
-			(at 94.488 132.842 0)
+			(at 95.25 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -634,6 +852,16 @@
 				)
 				(justify left top)
 			)
+		)
+		(pin "VBAT_ADC" input
+			(at 93.98 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "9921e590-f671-48f9-a716-8896a8e6c9c5")
 		)
 		(instances
 			(project "MainBoard"

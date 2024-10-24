@@ -457,12 +457,12 @@
 		)
 	)
 	(no_connect
-		(at 160.274 102.87)
-		(uuid "c002b0f0-e3eb-4096-913f-2a103aa5e623")
+		(at 142.24 109.22)
+		(uuid "e70c7ece-db49-4728-9a57-a2b3d67b8d37")
 	)
 	(text "TODO RGB LED Footprint\n"
 		(exclude_from_sim no)
-		(at 148.082 88.646 0)
+		(at 130.048 92.456 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -470,6 +470,17 @@
 			(justify left bottom)
 		)
 		(uuid "ec4d661e-90f8-48c6-8ba5-9cb994a23876")
+	)
+	(label "DISPLAY_DIN"
+		(at 142.24 106.68 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "187a5dc0-ef90-41dd-9f93-07e97f46f904")
 	)
 	(label "DISPLAY_DIN"
 		(at 25.654 23.114 0)
@@ -483,6 +494,17 @@
 		(uuid "2d207e8d-a4a7-4fe2-8cf3-ae30f9ea3634")
 	)
 	(label "V_DISPLAY"
+		(at 142.24 104.14 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "78f47faa-3e9c-4b2b-8fd1-cbe21ae8c15d")
+	)
+	(label "V_DISPLAY"
 		(at 21.59 36.83 270)
 		(fields_autoplaced yes)
 		(effects
@@ -492,28 +514,6 @@
 			(justify right bottom)
 		)
 		(uuid "9120d52f-8d36-48fb-8e37-9f11f7798411")
-	)
-	(label "V_DISPLAY"
-		(at 160.274 97.79 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f595bac1-7765-4a54-a7e1-b88084d8fdd5")
-	)
-	(label "DISPLAY_DIN"
-		(at 160.274 100.33 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f829aa56-b782-4cc2-b532-024c3cd9d201")
 	)
 	(hierarchical_label "DISPLAY_DIN"
 		(shape input)
@@ -595,16 +595,16 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 160.274 105.41 0)
+		(at 142.24 101.6 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "643fcc61-9789-44c8-83e9-f742a0c02b87")
-		(property "Reference" "#PWR0125"
-			(at 160.274 111.76 0)
+		(uuid "2da15875-41de-409f-b64d-9f07cc764484")
+		(property "Reference" "#PWR028"
+			(at 142.24 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -613,7 +613,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 160.274 109.8534 0)
+			(at 142.24 97.4669 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -621,7 +621,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 160.274 105.41 0)
+			(at 142.24 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -630,7 +630,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 160.274 105.41 0)
+			(at 142.24 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -639,7 +639,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 160.274 105.41 0)
+			(at 142.24 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -648,12 +648,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "13fdbdf1-d83e-42a2-a2b9-b900e58bdbb2")
+			(uuid "43d1db0f-61d9-47f1-bb76-88a5e95e27e3")
 		)
 		(instances
-			(project ""
+			(project "MainBoard"
 				(path "/dfe0084c-a900-4f47-8966-915ebf3a8e75/8b04ffa1-873f-4cda-b1fe-4981fdbc7b42"
-					(reference "#PWR0125")
+					(reference "#PWR028")
 					(unit 1)
 				)
 			)
@@ -661,7 +661,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x04_Male")
-		(at 155.194 100.33 0)
+		(at 137.16 104.14 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -669,7 +669,7 @@
 		(dnp no)
 		(uuid "ac014ebb-5598-4337-8a25-f62a1f39d769")
 		(property "Reference" "J9"
-			(at 155.829 94.014 0)
+			(at 137.795 97.824 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -677,15 +677,15 @@
 			)
 		)
 		(property "Value" "Conn_01x04_Male"
-			(at 152.146 100.33 90)
+			(at 134.112 104.14 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 155.194 100.33 0)
+		(property "Footprint" "Library:RGB_7Segment"
+			(at 137.16 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -694,7 +694,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 155.194 100.33 0)
+			(at 137.16 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -703,7 +703,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 155.194 100.33 0)
+			(at 137.16 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
