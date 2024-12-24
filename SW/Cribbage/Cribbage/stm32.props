@@ -9,24 +9,26 @@
 <!-- In order to build this project manually (outside VisualGDB), please provide TOOLCHAIN_ROOT, BSP_ROOT, EFP_BASE and TESTFW_BASE variables via Environment or Make command line -->
 	<ItemDefinitionGroup>
 		<ClCompile>
-			<PreprocessorDefinitions>ARM_MATH_CM0PLUS;flash_layout;STM32C011F4;STM32C011xx;USE_HAL_DRIVER;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
-			<AdditionalIncludeDirectories>%(ClCompile.AdditionalIncludeDirectories);$(ProjectDir);$(BSP_ROOT)/STM32C0xxxx/STM32C0xx_HAL_Driver/Inc;$(BSP_ROOT)/STM32C0xxxx/STM32C0xx_HAL_Driver/Inc/Legacy;$(BSP_ROOT)/STM32C0xxxx/CMSIS_HAL/Core/Include;$(BSP_ROOT)/STM32C0xxxx/CMSIS_HAL/Device/ST/STM32C0xx/Include;$(BSP_ROOT)/STM32C0xxxx/CMSIS_HAL/Include;$(BSP_ROOT)/STM32C0xxxx/CMSIS_HAL/RTOS2/Include</AdditionalIncludeDirectories>
+			<PreprocessorDefinitions>ARM_MATH_CM4;flash_layout;STM32G431C6;STM32G431xx;USE_HAL_DRIVER;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
+			<AdditionalIncludeDirectories>%(ClCompile.AdditionalIncludeDirectories);$(ProjectDir);$(BSP_ROOT)/STM32G4xxxx/STM32G4xx_HAL_Driver/Inc;$(BSP_ROOT)/STM32G4xxxx/STM32G4xx_HAL_Driver/Inc/Legacy;$(BSP_ROOT)/STM32G4xxxx/CMSIS_HAL/Core/Include;$(BSP_ROOT)/STM32G4xxxx/CMSIS_HAL/Device/ST/STM32G4xx/Include;$(BSP_ROOT)/STM32G4xxxx/CMSIS_HAL/Include;$(BSP_ROOT)/STM32G4xxxx/CMSIS_HAL/RTOS2/Include;$(BSP_ROOT)/STM32C0xxxx/STM32C0xx_HAL_Driver/Inc;$(BSP_ROOT)/STM32C0xxxx/STM32C0xx_HAL_Driver/Inc/Legacy;$(BSP_ROOT)/STM32C0xxxx/CMSIS_HAL/Device/ST/STM32C0xx/Include;$(BSP_ROOT)/STM32C0xxxx/CMSIS_HAL/Core/Include;$(BSP_ROOT)/STM32C0xxxx/CMSIS_HAL/Include</AdditionalIncludeDirectories>
 		</ClCompile>
 	</ItemDefinitionGroup>
 	<ItemDefinitionGroup>
 		<Link>
-			<LinkerScript Condition="'%(Link.LinkerScript)' == ''">$(BSP_ROOT)/STM32C0xxxx/LinkerScripts/STM32C011F4_flash.lds</LinkerScript>
+			<LinkerScript Condition="'%(Link.LinkerScript)' == ''">$(BSP_ROOT)/STM32G4xxxx/LinkerScripts/STM32G431C6_flash.lds</LinkerScript>
 			<AdditionalOptions>--specs=nano.specs --specs=nosys.specs -Wl,--no-warn-rwx-segments %(Link.AdditionalOptions)</AdditionalOptions>
 		</Link>
 	</ItemDefinitionGroup>
 	<PropertyGroup>
-		<DefaultLinkerScript>$(BSP_ROOT)/STM32C0xxxx/LinkerScripts/STM32C011F4_flash.lds</DefaultLinkerScript>
+		<DefaultLinkerScript>$(BSP_ROOT)/STM32G4xxxx/LinkerScripts/STM32G431C6_flash.lds</DefaultLinkerScript>
 	</PropertyGroup>
 
 	<ItemDefinitionGroup>
 		<ToolchainSettingsContainer>
-			<ARMCPU  Condition="'%(ToolchainSettingsContainer.ARMCPU)' == ''">cortex-m0plus</ARMCPU>
+			<ARMCPU  Condition="'%(ToolchainSettingsContainer.ARMCPU)' == ''">cortex-m4</ARMCPU>
 			<InstructionSet  Condition="'%(ToolchainSettingsContainer.InstructionSet)' == ''">THUMB</InstructionSet>
+			<ARMFPU  Condition="'%(ToolchainSettingsContainer.ARMFPU)' == ''">fpv4-sp-d16</ARMFPU>
+			<FloatABI  Condition="'%(ToolchainSettingsContainer.FloatABI)' == ''">hard</FloatABI>
 		</ToolchainSettingsContainer>
 	</ItemDefinitionGroup>
 </Project>

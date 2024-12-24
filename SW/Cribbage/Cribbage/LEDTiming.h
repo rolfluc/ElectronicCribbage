@@ -1,0 +1,9 @@
+#pragma once
+
+// The frequency that the timer 
+#define TIMER_FREQ_HZ 64000000
+#define BIT_DURATION_NS 1200
+#define BIT_DURATION_HZ 833333 // 1/0.0000012
+#define PERIOD_COUNTS (TIMER_FREQ_HZ / BIT_DURATION_HZ)
+#define BIT_LOW_COUNTS (PERIOD_COUNTS * 0.25)
+#define BIT_HIGH_COUNTS (PERIOD_COUNTS * 0.75)

@@ -15,7 +15,7 @@ static void InitializeI2CPins()
 	init.Speed = i2cPinSpeed;
 	init.Mode = i2cPinMode;
 	init.Pull = i2cPinPull;
-	init.Alternate = GPIO_AF6_I2C1; // TODO determine AF
+	init.Alternate = GPIO_AF2_I2C3; // TODO determine AF
 	init.Pin = I2C_SDA.pinNumber;
 	HAL_GPIO_Init(I2C_SDA.pinPort, &init);
 	init.Pin = I2C_SCL.pinNumber;

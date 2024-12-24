@@ -1,6 +1,5 @@
 #include "PegHandler.h"
 #include "ExpanderController.h"
-#include "Display.h"
 
 #define BUFFER_LEN NUMBER_EXPANDERS * 2 
 #define TOTAL_LENGTH 60

@@ -1,5 +1,5 @@
 #include "ExpanderController.h"
-#include <stm32c0xx_hal.h>
+#include <stm32g4xx_hal.h>
 #include "I2C.h"
 
 typedef struct 
@@ -127,15 +127,6 @@ static void TurnB0(uint8_t TCADevice, bool turnOn)
 static void TurnB1(uint8_t TCADevice, bool turnOn)
 {
 	writePin(&expanders[TCADevice].tcaDevice, (TCA9555Pins)Rail_B1, turnOn);
-}
-
-// Initialize to 2v5
-void InitOutputVoltages()
-{
-	for (uint8_t i = 0; i < NUMBER_EXPANDERS; i++)
-	{
-		SetUse3v2(i, false);
-	}
 }
 
 void SetB0s(bool turnOn)

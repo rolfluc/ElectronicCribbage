@@ -14,19 +14,9 @@
     <MemoryWindowPreferences />
     <c />
     <a>
-      <d>
-        <b>com.sysprogs.AllGlobals</b>
-        <a />
-      </d>
-      <d>
-        <b>com.sysprogs.SpecificVariables</b>
-        <a />
-      </d>
+      <b>AllGlobals</b>
+      <a>false</a>
     </a>
-    <e>
-      <a>SpecificVariables</a>
-      <b>false</b>
-    </e>
     <Suggestions />
     <HardwareRegisters />
   </DebugPreferences>
