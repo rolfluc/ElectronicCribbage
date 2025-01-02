@@ -460,17 +460,6 @@
 		(at 142.24 109.22)
 		(uuid "e70c7ece-db49-4728-9a57-a2b3d67b8d37")
 	)
-	(text "TODO RGB LED Footprint\n"
-		(exclude_from_sim no)
-		(at 130.048 92.456 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ec4d661e-90f8-48c6-8ba5-9cb994a23876")
-	)
 	(label "DISPLAY_DIN"
 		(at 142.24 106.68 0)
 		(fields_autoplaced yes)

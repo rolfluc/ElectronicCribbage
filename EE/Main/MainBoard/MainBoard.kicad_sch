@@ -37,6 +37,26 @@
 	)
 	(wire
 		(pts
+			(xy 93.98 168.91) (xy 107.95 168.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "35ca3467-1cbb-4dd5-825d-669fb3f8cb13")
+	)
+	(wire
+		(pts
+			(xy 107.95 168.91) (xy 107.95 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "463038b1-3404-46ec-bc01-08be6e0afcdd")
+	)
+	(wire
+		(pts
 			(xy 95.25 116.84) (xy 102.87 116.84)
 		)
 		(stroke
@@ -47,6 +67,36 @@
 	)
 	(wire
 		(pts
+			(xy 93.98 166.37) (xy 105.41 166.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "676ecde8-4916-40fb-91d0-5342222e9ad1")
+	)
+	(wire
+		(pts
+			(xy 105.41 114.3) (xy 95.25 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6eafe94c-35de-4a8b-b9b3-fe6360c8f079")
+	)
+	(wire
+		(pts
+			(xy 93.98 171.45) (xy 110.49 171.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7a2764d3-78af-46f5-931b-86633ed56419")
+	)
+	(wire
+		(pts
 			(xy 95.25 87.63) (xy 125.73 87.63)
 		)
 		(stroke
@@ -54,6 +104,46 @@
 			(type default)
 		)
 		(uuid "868bc40b-f8ee-4f96-bceb-b8022ee19195")
+	)
+	(wire
+		(pts
+			(xy 107.95 111.76) (xy 95.25 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "86be1f40-84c5-4e9b-a148-d9301f43f293")
+	)
+	(wire
+		(pts
+			(xy 110.49 171.45) (xy 110.49 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8975a3b9-a4ab-4d42-b9de-8367ea27a652")
+	)
+	(wire
+		(pts
+			(xy 110.49 109.22) (xy 95.25 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "92e6cee4-9c96-4dfc-a27c-5a504b8e3ed3")
+	)
+	(wire
+		(pts
+			(xy 105.41 166.37) (xy 105.41 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b04bd744-0ad3-442d-8e61-c4254a1d40e8")
 	)
 	(wire
 		(pts
@@ -388,6 +478,36 @@
 				(justify right)
 			)
 			(uuid "3c453910-0460-432e-9568-a90a3c554f67")
+		)
+		(pin "DISP_EN" input
+			(at 95.25 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "9470b85f-75ae-4f81-a1a6-881fcdefa690")
+		)
+		(pin "BAT_GATE" input
+			(at 95.25 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "75a241e8-009b-4353-8b93-e4a16b91e74e")
+		)
+		(pin "BUTTON_EN" input
+			(at 95.25 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "86219262-a1f4-43b3-a9ed-b7481e521b87")
 		)
 		(instances
 			(project "MainBoard"
@@ -862,6 +982,36 @@
 				(justify right)
 			)
 			(uuid "9921e590-f671-48f9-a716-8896a8e6c9c5")
+		)
+		(pin "BUTTON_EN" input
+			(at 93.98 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "e125cb58-1f29-4dc2-9bad-0283dedb1bc2")
+		)
+		(pin "DISP_EN" input
+			(at 93.98 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "895f72f1-465b-4511-a19b-74696c4637ee")
+		)
+		(pin "BAT_GATE" input
+			(at 93.98 168.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "f33fc5d5-a79f-42dc-90bf-847b30dd4652")
 		)
 		(instances
 			(project "MainBoard"
