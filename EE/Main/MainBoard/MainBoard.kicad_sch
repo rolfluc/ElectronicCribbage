@@ -4,10 +4,93 @@
 	(generator_version "8.0")
 	(uuid "dfe0084c-a900-4f47-8966-915ebf3a8e75")
 	(paper "A4")
-	(lib_symbols)
+	(lib_symbols
+		(symbol "Mechanical:MountingHole"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "H"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MountingHole"
+				(at 0 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Mounting Hole without connection"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "mounting hole"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "MountingHole*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "MountingHole_0_1"
+				(circle
+					(center 0 0)
+					(radius 1.27)
+					(stroke
+						(width 1.27)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+		)
+	)
 	(wire
 		(pts
-			(xy 102.87 116.84) (xy 102.87 163.83)
+			(xy 102.87 115.57) (xy 102.87 163.83)
 		)
 		(stroke
 			(width 0)
@@ -47,7 +130,7 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 168.91) (xy 107.95 111.76)
+			(xy 107.95 168.91) (xy 107.95 110.49)
 		)
 		(stroke
 			(width 0)
@@ -57,7 +140,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 116.84) (xy 102.87 116.84)
+			(xy 95.25 115.57) (xy 102.87 115.57)
 		)
 		(stroke
 			(width 0)
@@ -67,23 +150,13 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 166.37) (xy 105.41 166.37)
+			(xy 99.06 120.65) (xy 99.06 132.08)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "676ecde8-4916-40fb-91d0-5342222e9ad1")
-	)
-	(wire
-		(pts
-			(xy 105.41 114.3) (xy 95.25 114.3)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6eafe94c-35de-4a8b-b9b3-fe6360c8f079")
+		(uuid "5f4092e7-044d-44ac-b7ea-816275656d51")
 	)
 	(wire
 		(pts
@@ -107,7 +180,7 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 111.76) (xy 95.25 111.76)
+			(xy 107.95 110.49) (xy 95.25 110.49)
 		)
 		(stroke
 			(width 0)
@@ -117,7 +190,7 @@
 	)
 	(wire
 		(pts
-			(xy 110.49 171.45) (xy 110.49 109.22)
+			(xy 110.49 171.45) (xy 110.49 107.95)
 		)
 		(stroke
 			(width 0)
@@ -127,7 +200,7 @@
 	)
 	(wire
 		(pts
-			(xy 110.49 109.22) (xy 95.25 109.22)
+			(xy 110.49 107.95) (xy 95.25 107.95)
 		)
 		(stroke
 			(width 0)
@@ -137,17 +210,17 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 166.37) (xy 105.41 114.3)
+			(xy 95.25 120.65) (xy 99.06 120.65)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "b04bd744-0ad3-442d-8e61-c4254a1d40e8")
+		(uuid "ac468842-6204-4039-9925-ff938f046e75")
 	)
 	(wire
 		(pts
-			(xy 95.25 133.35) (xy 100.33 133.35)
+			(xy 95.25 137.16) (xy 101.6 137.16)
 		)
 		(stroke
 			(width 0)
@@ -167,7 +240,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 119.38) (xy 100.33 119.38)
+			(xy 95.25 118.11) (xy 101.6 118.11)
 		)
 		(stroke
 			(width 0)
@@ -177,7 +250,7 @@
 	)
 	(wire
 		(pts
-			(xy 100.33 119.38) (xy 100.33 133.35)
+			(xy 101.6 118.11) (xy 101.6 137.16)
 		)
 		(stroke
 			(width 0)
@@ -204,6 +277,16 @@
 			(type default)
 		)
 		(uuid "e953d855-3a30-461a-8902-58cc38b75216")
+	)
+	(wire
+		(pts
+			(xy 99.06 132.08) (xy 95.25 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "edcbbb40-05bf-4f73-95bc-03382a4a6346")
 	)
 	(label "SDA"
 		(at 30.988 66.548 0)
@@ -359,6 +442,198 @@
 		)
 		(uuid "fd6cbe6a-06b8-4d7f-8c7c-11e90b377fcd")
 	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 207.01 115.57 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0da6b10a-33aa-4f4c-b663-2ea28031e061")
+		(property "Reference" "H14"
+			(at 209.55 114.7353 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 209.55 117.2722 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_2.7mm"
+			(at 207.01 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 207.01 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 207.01 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "MainBoard"
+				(path "/dfe0084c-a900-4f47-8966-915ebf3a8e75"
+					(reference "H14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 208.28 74.93 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "afee344f-1dc8-45ee-a3b0-9fead0e68a1d")
+		(property "Reference" "H13"
+			(at 210.82 74.0953 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 210.82 76.6322 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_2.7mm"
+			(at 208.28 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 208.28 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 208.28 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "MainBoard"
+				(path "/dfe0084c-a900-4f47-8966-915ebf3a8e75"
+					(reference "H13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 208.28 95.25 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d72fd09e-314c-46ec-97ca-59a192577901")
+		(property "Reference" "H15"
+			(at 210.82 94.4153 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 210.82 96.9522 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_2.7mm"
+			(at 208.28 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 208.28 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 208.28 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "MainBoard"
+				(path "/dfe0084c-a900-4f47-8966-915ebf3a8e75"
+					(reference "H15")
+					(unit 1)
+				)
+			)
+		)
+	)
 	(sheet
 		(at 69.596 73.914)
 		(size 25.654 48.26)
@@ -410,7 +685,7 @@
 			(uuid "25b019eb-eb44-4e61-a3e7-cab39e3559b9")
 		)
 		(pin "VBAT_ADC" input
-			(at 95.25 116.84 0)
+			(at 95.25 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -470,7 +745,7 @@
 			(uuid "3cba205a-01e5-4ba2-bdf7-da07a3dd2edf")
 		)
 		(pin "DISPLAY_DOUT" input
-			(at 95.25 119.38 0)
+			(at 95.25 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -479,18 +754,8 @@
 			)
 			(uuid "3c453910-0460-432e-9568-a90a3c554f67")
 		)
-		(pin "DISP_EN" input
-			(at 95.25 114.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-			(uuid "9470b85f-75ae-4f81-a1a6-881fcdefa690")
-		)
 		(pin "BAT_GATE" input
-			(at 95.25 111.76 0)
+			(at 95.25 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -500,7 +765,7 @@
 			(uuid "75a241e8-009b-4353-8b93-e4a16b91e74e")
 		)
 		(pin "BUTTON_EN" input
-			(at 95.25 109.22 0)
+			(at 95.25 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -508,6 +773,16 @@
 				(justify right)
 			)
 			(uuid "86219262-a1f4-43b3-a9ed-b7481e521b87")
+		)
+		(pin "DISPLAY_COUT" input
+			(at 95.25 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "4ac26839-09a6-44cd-9112-4992068b8d3b")
 		)
 		(instances
 			(project "MainBoard"
@@ -810,7 +1085,7 @@
 			)
 		)
 		(pin "DISPLAY_DIN" input
-			(at 95.25 133.35 0)
+			(at 95.25 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -818,6 +1093,16 @@
 				(justify right)
 			)
 			(uuid "c25fbcb6-6d07-4b54-9dd7-274cc16e8239")
+		)
+		(pin "DISPLAY_CIN" input
+			(at 95.25 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "ddbeaf5b-e091-4ff0-aee7-f0bdbecccdc9")
 		)
 		(instances
 			(project "MainBoard"
@@ -992,16 +1277,6 @@
 				(justify right)
 			)
 			(uuid "e125cb58-1f29-4dc2-9bad-0283dedb1bc2")
-		)
-		(pin "DISP_EN" input
-			(at 93.98 166.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-			(uuid "895f72f1-465b-4511-a19b-74696c4637ee")
 		)
 		(pin "BAT_GATE" input
 			(at 93.98 168.91 0)
