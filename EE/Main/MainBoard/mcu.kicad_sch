@@ -2797,6 +2797,16 @@
 		)
 		(uuid "f5ab23e3-f578-4eae-b446-7666fa60552f")
 	)
+	(text "TODO double check pinouts here for I2C/SPI"
+		(exclude_from_sim no)
+		(at 162.052 106.172 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "1fb4f216-9875-4ce3-b3ad-99d29dc8588b")
+	)
 	(text "These should be non populated caps.\nThese pads will be sued to tune timing\non the SCL/SDA lines for I2C, just in case\nthe long traces become problematic."
 		(exclude_from_sim no)
 		(at 230.886 81.026 0)
@@ -2806,6 +2816,16 @@
 			)
 		)
 		(uuid "7913245f-b3e8-4b18-921b-4761e92777e4")
+	)
+	(text "TODO double check all nets"
+		(exclude_from_sim no)
+		(at 160.274 110.236 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "9a2b53fc-98ff-4845-9702-abad754240fb")
 	)
 	(label "End"
 		(at 22.86 29.21 0)

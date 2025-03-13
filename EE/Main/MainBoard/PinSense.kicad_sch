@@ -625,16 +625,6 @@
 		(at 133.858 114.3)
 		(uuid "e9145816-c4fb-4036-b91e-3b81a070fca9")
 	)
-	(text "TODO Silkscreen for pin 1\nTODO silkscreen for expected direction"
-		(exclude_from_sim no)
-		(at 119.634 44.45 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "600e9cf9-26b7-4dd7-aded-df0258d60b85")
-	)
 	(label "End"
 		(at 229.87 116.84 0)
 		(fields_autoplaced yes)
