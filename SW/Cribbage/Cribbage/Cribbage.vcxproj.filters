@@ -699,6 +699,9 @@
     <ClCompile Include="AddressableLED.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="PowerHandler.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TCA9555.h">
@@ -732,6 +735,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="AddressableLED.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerHandler.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

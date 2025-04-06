@@ -31,7 +31,44 @@ static bool didLoop(uint64_t oldBuffer, uint64_t newBuffer)
 	// TODO how to do this.
 }
 
-// Returns true if found a loop. False Otherwise.
+// Count Trailing Zeros
+static inline uint8_t CTZ(uint64_t val)
+{
+	uint8_t retVal = 63;
+	while ((val & (1 >> retVal)) == 0)
+	{
+		retVal--;
+	}
+	
+	return retVal;
+}
+
+// Count leading zeros.
+static inline uint8_t CLZ(uint64_t val)
+{
+	uint8_t retVal = 0;
+	while ((val & (1 >> retVal)) == 0)
+	{
+		retVal++;
+	}
+	
+	return retVal;
+}
+
+typedef struct 
+{
+	uint8_t first;
+	uint8_t second;
+}PegPositions;
+
+static inline PegPositions getPegPositions(uint64_t buffer)
+{
+	PegPositions pos = { 0, 0 };
+	pos.first = CLZ(buffer);
+	pos.second = CTZ(buffer);
+	return pos;
+}
+
 static void InterpretPegs(uint64_t lastBuffer, uint64_t newBuffer, uint8_t* delta, uint8_t lastTotalPoint)
 {
 	// If either are zero, undefined operations. Exit quickly. No Pegs No Display.
@@ -40,26 +77,14 @@ static void InterpretPegs(uint64_t lastBuffer, uint64_t newBuffer, uint8_t* delt
 		return;
 	}
 	
-	uint8_t previous_lastBitLocation = __CTZ(lastBuffer); // Count Trailing zeros, basically, count backwards from the MSB, to the LSB, and return when the first 1 bit is found.
-	uint8_t previous_firstBitLocation = __CLZ(lastBuffer); // Count Leading Zeros, basically, count forwards from the LSB, to the MSB< and return when the first 1 bit is found.
-	bool previousHadOnePeg = (previous_firstBitLocation == previous_lastBitLocation);
-	uint8_t new_lastBitLocation = __CTZ(lastBuffer);
-	uint8_t new_firstBitLocation = __CLZ(lastBuffer);
-	bool NewHasOnePeg = (new_lastBitLocation == new_firstBitLocation);
-	// If the first and last bits are the same, then there is only one peg on the board at that time.
+	PegPositions lastLocations = getPegPositions(lastBuffer);
+	PegPositions newLocations = getPegPositions(newBuffer); 
+	// Thought process. 
+}
+
+static void GetOnBoardPegInfo()
+{
 	
-	
-	// If the new buffer has 2 pegs, and the previous has 1 peg, then a new peg was inserted.
-	// TODO does this even matter? Maybe this is a signal to display the delta instead of total points.
-	if (NewHasOnePeg)
-	{
-		// Without the new having a peg, just return.
-		return;
-	}
-	
-	// If two pegs are on the board, count the delta:
-	*delta = new_lastBitLocation - new_firstBitLocation;
-	return;
 }
 
 void UpdateBankInfo()

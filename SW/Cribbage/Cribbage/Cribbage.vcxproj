@@ -14,7 +14,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{A4322DB8-1370-491E-A0C2-E7A415762BE7}</ProjectGuid>
     <BSP_ID>com.sysprogs.arm.stm32</BSP_ID>
-    <BSP_VERSION>2024.07</BSP_VERSION>
+    <BSP_VERSION>2025.01</BSP_VERSION>
     <InPlaceBSPSubdir />
     <RelativeBSPPath />
   </PropertyGroup>
@@ -32,12 +32,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
     <GNUConfigurationType>Debug</GNUConfigurationType>
     <ToolchainID>com.visualgdb.arm-eabi</ToolchainID>
-    <ToolchainVersion>13.3.1/15.1/r3</ToolchainVersion>
+    <ToolchainVersion>14.2.1/15.2/r2</ToolchainVersion>
     <MCUPropertyListFile>$(ProjectDir)stm32.props</MCUPropertyListFile>
+    <AutoIncludePaths>true</AutoIncludePaths>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
     <ToolchainID>com.visualgdb.arm-eabi</ToolchainID>
-    <ToolchainVersion>13.3.1/15.1/r3</ToolchainVersion>
+    <ToolchainVersion>14.2.1/15.2/r2</ToolchainVersion>
     <MCUPropertyListFile>$(ProjectDir)stm32.props</MCUPropertyListFile>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
@@ -62,6 +63,7 @@
     <ClCompile Include="I2C.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="PegHandler.c" />
+    <ClCompile Include="PowerHandler.c" />
     <ClCompile Include="PWM.c" />
     <ClCompile Include="Segment.c" />
     <ClCompile Include="system_stm32g4xx.c" />
@@ -74,6 +76,7 @@
     <ClInclude Include="LEDTiming.h" />
     <ClInclude Include="PegHandler.h" />
     <ClInclude Include="PinDefs.h" />
+    <ClInclude Include="PowerHandler.h" />
     <ClInclude Include="PWM.h" />
     <ClInclude Include="Segment.h" />
     <ClInclude Include="TCA9555.h" />

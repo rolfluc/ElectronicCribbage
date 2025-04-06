@@ -3,6 +3,7 @@
 #include "I2C.h"
 #include "ExpanderController.h"
 #include "PegHandler.h"
+#include "PowerHandler.h"
 
 void Error_Handler()
 {
@@ -60,6 +61,10 @@ void SystemClock_Config(void)
 int main(void)
 {
 	HAL_Init();
+	__HAL_RCC_GPIOA_CLK_ENABLE();
+	__HAL_RCC_GPIOB_CLK_ENABLE();
+	
+	InitializePowerPin();
 
 	//InitExpanders();
 	//InitOutputVoltages();
