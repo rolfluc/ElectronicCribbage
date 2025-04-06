@@ -70,17 +70,14 @@ void StartBankReadings()
 {
 	TCAError err;
 	SetB0s(true);
-	// TODO sleep.
 	HAL_Delay(1);
 	for (uint8_t i = 0; i < NUMBER_EXPANDERS; i++)
 	{
 		err = readBank(&expanders[i].tcaDevice, Bank_0, &expanders[i].P0Bank);
 	}
 	SetB0s(false);
-	// TODO sleep.
 	HAL_Delay(1);
 	SetB1s(true);
-	// TODO sleep.
 	HAL_Delay(1);
 	for (uint8_t i = 0; i < NUMBER_EXPANDERS; i++)
 	{

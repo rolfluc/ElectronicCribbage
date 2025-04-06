@@ -702,6 +702,12 @@
     <ClCompile Include="SPI.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="HB.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="ADC.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TCA9555.h">
@@ -735,6 +741,12 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="SPI.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="HB.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="ADC.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

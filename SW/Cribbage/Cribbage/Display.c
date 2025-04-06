@@ -1,25 +1,29 @@
 #include "Display.h"
-#include "Segment.h"
 
-void DisplayDeltaText(Color c)
+#define SEGMENT_BUFFER_SIZE 5
+static Color currentColor = { 0 };
+static uint8_t segmentBufferCount = 0;
+static SegmentVal SegmentBuffer[SEGMENT_BUFFER_SIZE];
+
+void DisplayDeltaText(Color c, uint8_t value)
 {
 	const SegmentVal v0 = Display_C;
 	const SegmentVal v1 = Display_H;
-	SetDisplay(v0, c, v1, c);
+	currentColor = c;
 }
 
-void DisplayRemainingText(Color c)
+void DisplayRemainingText(Color c, uint8_t value)
 {
 	const SegmentVal v0 = Display_r;
 	const SegmentVal v1 = Display_E;
-	SetDisplay(v0, c, v1, c);
+	currentColor = c;
 }
 
-void DisplayTotalText(Color c)
+void DisplayTotalText(Color c, uint8_t value)
 {
 	const SegmentVal v0 = Display_P;
 	const SegmentVal v1 = Display_t;
-	SetDisplay(v0, c, v1, c);
+	currentColor = c;
 }
 
 void DisplayLowVoltage()
@@ -27,29 +31,16 @@ void DisplayLowVoltage()
 	const Color c0 = {0x00, 0x00, 0x00};
 	const SegmentVal v0 = Display_L;
 	const SegmentVal v1 = Display_b;
-	SetDisplay(v0, c0, v1, c0);
+	currentColor = ColorRed;
 }
 
-void DisplayWin1(Color c)
+void DisplayWin(Color c)
 {
 	const SegmentVal v0 = Display_d;
 	const SegmentVal v1 = Display_O;
-	SetDisplay(v0, c, v1, c);
+	currentColor = c;
 }
 
-void DisplayWin2(Color c)
-{
-	const SegmentVal v0 = Display_O;
-	const SegmentVal v1 = Display_n;
-	SetDisplay(v0, c, v1, c);
-}
-
-void DisplayWin3(Color c)
-{
-	const SegmentVal v0 = Display_n;
-	const SegmentVal v1 = Display_E;
-	SetDisplay(v0, c, v1, c);
-}
 
 void DisplayValue(Color c, uint8_t value)
 {
@@ -57,5 +48,15 @@ void DisplayValue(Color c, uint8_t value)
 	value = value > 99 ? 99 : value;
 	SegmentVal v0 = value / 10;
 	SegmentVal v1 = value % 10;
-	SetDisplay(v0, c, v1, c);
+	currentColor = c;
+}
+
+void DisplayValues(Color c, SegmentVal* vals, uint8_t length)
+{
+	
+}
+
+void RunDisplayStateMachine()
+{
+	
 }

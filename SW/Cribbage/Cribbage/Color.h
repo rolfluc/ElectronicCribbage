@@ -15,3 +15,6 @@ typedef struct
 	uint8_t w;
 #endif
 }Color;
+
+static const Color ColorRed = { .R = 0x7f, .G = 0, .B = 0 };
+static const Color ColorGreen = { .R = 0, .G = 0x7f, .B = 0 };

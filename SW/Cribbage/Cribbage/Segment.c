@@ -307,6 +307,17 @@ static inline void FillBuffer(SegmentVal v, Color col, PaddedColor* a, PaddedCol
 			ColorToBuffer(col, g);
 			break;
 		}
+	case Display_underscore:
+		{
+			SetDark(a);
+			SetDark(b);
+			SetDark(c);
+			ColorToBuffer(col, d);
+			SetDark(e);
+			SetDark(f);
+			SetDark(g);
+			break;
+		}	
 	case Display_Nothing:
 		{
 			SetDark(a);

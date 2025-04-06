@@ -2,6 +2,7 @@
 #include "ExpanderController.h"
 #include "stm32g4xx_hal.h"
 #include "PinDefs.h"
+#include "Display.h"
 
 #define BUFFER_LEN NUMBER_EXPANDERS * 2 
 #define TOTAL_LENGTH 60
@@ -178,5 +179,6 @@ void HandlePegStateMachine()
 			
 		}
 		break;
-	}		 
+	}
+	RunDisplayStateMachine();
 }

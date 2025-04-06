@@ -66,16 +66,17 @@ int main(void)
 	__HAL_RCC_GPIOB_CLK_ENABLE();
 	InitializePowerPin();
 	InitHB();
-	//InitExpanders();
+	InitExpanders();
 	for (;;)
 	{
 		ToggleHB();
-		HAL_Delay(100);
+		
+		HAL_Delay(95);
 		// Start reading the banks.
-		//StartBankReadings();
+		StartBankReadings();
 		// Interpret the tca banks, and copy the results into the respective local buffers.
-		//UpdateBankInfo();
+		UpdateBankInfo();
 		// Now, run the state machine 
-		//HandlePegStateMachine();
+		HandlePegStateMachine();
 	}
 }

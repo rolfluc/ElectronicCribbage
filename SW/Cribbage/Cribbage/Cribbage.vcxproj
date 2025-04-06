@@ -57,9 +57,11 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="ADC.c" />
     <ClCompile Include="AddressableLED.c" />
     <ClCompile Include="Display.c" />
     <ClCompile Include="ExpanderController.c" />
+    <ClCompile Include="HB.c" />
     <ClCompile Include="I2C.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="PegHandler.c" />
@@ -68,10 +70,12 @@
     <ClCompile Include="SPI.c" />
     <ClCompile Include="system_stm32g4xx.c" />
     <ClCompile Include="TCA9555.c" />
+    <ClInclude Include="ADC.h" />
     <ClInclude Include="AddressableLED.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="ExpanderController.h" />
+    <ClInclude Include="HB.h" />
     <ClInclude Include="I2C.h" />
     <ClInclude Include="PegHandler.h" />
     <ClInclude Include="PinDefs.h" />

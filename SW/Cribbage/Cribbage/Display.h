@@ -1,11 +1,12 @@
 #pragma once
 #include "stdint.h"
 #include "Color.h"
-void DisplayDeltaText(Color c);
-void DisplayRemainingText(Color c);
-void DisplayTotalText(Color c);
+#include "Segment.h"
+void DisplayDeltaText(Color c, uint8_t value);
+void DisplayRemainingText(Color c, uint8_t value);
+void DisplayTotalText(Color c, uint8_t value);
 void DisplayValue(Color c, uint8_t value);
+void DisplayValues(Color c, SegmentVal* vals, uint8_t length);
 void DisplayLowVoltage();
-void DisplayWin1(Color c);
-void DisplayWin2(Color c);
-void DisplayWin3(Color c);
+void DisplayWin(Color c);
+void RunDisplayStateMachine();

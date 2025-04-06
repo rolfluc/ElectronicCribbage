@@ -27,6 +27,7 @@ typedef enum
 	Display_S,
 	Display_Y,
 	Display_t,
+	Display_underscore,
 	Display_Nothing,
 }SegmentVal;
 
