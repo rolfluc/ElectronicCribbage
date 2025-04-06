@@ -1,5 +1,7 @@
 #include "PegHandler.h"
 #include "ExpanderController.h"
+#include "stm32g4xx_hal.h"
+#include "PinDefs.h"
 
 #define BUFFER_LEN NUMBER_EXPANDERS * 2 
 #define TOTAL_LENGTH 60
@@ -9,27 +11,31 @@ typedef enum
 	WaitingForInitCondition = 0,
 	Initialized             = 1,
 	Running                 = 2,
-	EndGame                 = 3,
+	Looped					= 3,
+	EndGame                 = 4,
 }PegStateMachine;
 
+typedef struct
+{
+	uint64_t data;
+	bool Start0;
+	bool Start1;
+	bool End;
+}PegData;
+
+static const uint8_t maxCribbageHand = 29;
 static const uint8_t InitMask = 0x03;
 static const uint8_t InitOffset = 62;
 
 static bool redLooped = false;
-static uint64_t RedBuffer = 0;
-static uint64_t LastRedBuffer = 0;
+static PegData RedBuffer = { 0 };
+static PegData LastRedBuffer = { 0 };
 static uint8_t redPoints = 0;
 static bool greenLooped = false;
-static uint64_t GreenBuffer = 0;
-static uint64_t LastGreenBuffer = 0;
+static PegData GreenBuffer = { 0 };
+static PegData LastGreenBuffer = { 0 };
 static uint8_t greenPoints = 0;
 static PegStateMachine currentState = WaitingForInitCondition;
-
-static bool didLoop(uint64_t oldBuffer, uint64_t newBuffer)
-{
-	bool didLoop = false;
-	// TODO how to do this.
-}
 
 // Count Trailing Zeros
 static inline uint8_t CTZ(uint64_t val)
@@ -61,6 +67,7 @@ typedef struct
 	uint8_t second;
 }PegPositions;
 
+
 static inline PegPositions getPegPositions(uint64_t buffer)
 {
 	PegPositions pos = { 0, 0 };
@@ -69,22 +76,43 @@ static inline PegPositions getPegPositions(uint64_t buffer)
 	return pos;
 }
 
-static void InterpretPegs(uint64_t lastBuffer, uint64_t newBuffer, uint8_t* delta, uint8_t lastTotalPoint)
+static void InterpretPegs(PegData lastBuffer, PegData newBuffer, uint8_t* delta, uint8_t lastTotalPoint)
 {
-	// If either are zero, undefined operations. Exit quickly. No Pegs No Display.
-	if (lastBuffer == 0 || newBuffer == 0)
-	{
-		return;
-	}
-	
-	PegPositions lastLocations = getPegPositions(lastBuffer);
-	PegPositions newLocations = getPegPositions(newBuffer); 
+	// TODO lots of testing here.
+	// TODO write a stub of code to test this in place of unit testing.
+	PegPositions lastLocations = getPegPositions(lastBuffer.data);
+	PegPositions newLocations = getPegPositions(newBuffer.data); 
 	// Thought process. 
+	// First check if last had both in init
+	if (lastBuffer.Start0 == true && lastBuffer.Start1 == true) 
+	{
+		// If some amount of points were scored, the delta is the exact position -1
+		if (newBuffer.data != 0)
+		{
+			*delta = newLocations.first - 1;
+		}
+	}
+	// TODO wrap around needs definition. Can max hadn in cribbage be used here to estimate if someone did?
 }
 
-static void GetOnBoardPegInfo()
+void InitPegs()
 {
+	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
+	GPIO_InitStruct.Pin = Start_00.pinNumber;
+	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+
+	HAL_GPIO_Init(Start_00.pinPort, &GPIO_InitStruct);
 	
+	GPIO_InitStruct.Pin = Start_01.pinNumber;
+	HAL_GPIO_Init(Start_01.pinPort, &GPIO_InitStruct);
+	
+	GPIO_InitStruct.Pin = Start_10.pinNumber;
+	HAL_GPIO_Init(Start_10.pinPort, &GPIO_InitStruct);
+	
+	GPIO_InitStruct.Pin = Start_11.pinNumber;
+	HAL_GPIO_Init(Start_11.pinPort, &GPIO_InitStruct);
 }
 
 void UpdateBankInfo()
@@ -101,8 +129,15 @@ void UpdateBankInfo()
 	}
 	LastGreenBuffer = GreenBuffer;
 	LastRedBuffer = RedBuffer;
-	GreenBuffer = leftBank;
-	RedBuffer = rightBank;
+	GreenBuffer.data = leftBank;
+	GreenBuffer.Start0 = HAL_GPIO_ReadPin(Start_00.pinPort, Start_00.pinNumber) == GPIO_PIN_SET;
+	GreenBuffer.Start1 = HAL_GPIO_ReadPin(Start_01.pinPort, Start_01.pinNumber) == GPIO_PIN_SET;
+	GreenBuffer.End = HAL_GPIO_ReadPin(FinalPin.pinPort, FinalPin.pinNumber) == GPIO_PIN_SET;
+	
+	RedBuffer.data = rightBank;
+	RedBuffer.Start0 = HAL_GPIO_ReadPin(Start_10.pinPort, Start_10.pinNumber) == GPIO_PIN_SET;
+	RedBuffer.Start1 = HAL_GPIO_ReadPin(Start_11.pinPort, Start_11.pinNumber) == GPIO_PIN_SET;
+	RedBuffer.End = HAL_GPIO_ReadPin(FinalPin.pinPort, FinalPin.pinNumber) == GPIO_PIN_SET;
 }
 
 void HandlePegStateMachine()
@@ -111,30 +146,17 @@ void HandlePegStateMachine()
 	{
 	case WaitingForInitCondition:
 		{
-			bool greenGood = false;
-			bool redGood = false;
-			// Waiting for init condition, should be the following:
-			// Both red and green banks, should have their respective pegs adjacent to each other, 
-			// in -2, and -1 positions.
-			if (GreenBuffer & ((uint64_t)InitMask << InitOffset))
-			{
-				greenGood  = true;
-				
-			}
-			if (RedBuffer & ((uint64_t)InitMask << InitOffset))
-			{
-				redGood  = true;
-				
-			}
-			if (redGood && greenGood)
+			if (RedBuffer.Start0 == true && RedBuffer.Start1 == true &&
+				GreenBuffer.Start0 == true && GreenBuffer.Start1 == true)
 			{
 				currentState = Initialized;
 			}
+			// TODO display differently.
 		}
 		break;
 	case Initialized:
 		{
-			// TODO what does this mean.
+			
 		}
 		break;
 	case Running:
@@ -142,6 +164,10 @@ void HandlePegStateMachine()
 			
 		}
 		break;
+	case Looped:
+		{
+			
+		}
 	case EndGame:
 		{
 			
