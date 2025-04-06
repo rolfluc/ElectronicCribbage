@@ -64,13 +64,10 @@ int main(void)
 	__HAL_RCC_GPIOA_CLK_ENABLE();
 	__HAL_RCC_GPIOB_CLK_ENABLE();
 	InitializePowerPin();
-
 	//InitExpanders();
-	//InitOutputVoltages();
-
 	for (;;)
 	{
-		HAL_Delay(125);
+		HAL_Delay(100);
 		// Start reading the banks.
 		//StartBankReadings();
 		// Interpret the tca banks, and copy the results into the respective local buffers.

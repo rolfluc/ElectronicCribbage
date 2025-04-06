@@ -73,7 +73,6 @@
     <ClInclude Include="Display.h" />
     <ClInclude Include="ExpanderController.h" />
     <ClInclude Include="I2C.h" />
-    <ClInclude Include="LEDTiming.h" />
     <ClInclude Include="PegHandler.h" />
     <ClInclude Include="PinDefs.h" />
     <ClInclude Include="PowerHandler.h" />

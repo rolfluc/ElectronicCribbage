@@ -725,9 +725,6 @@
     <ClInclude Include="Color.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="LEDTiming.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
     <ClInclude Include="Segment.h">
       <Filter>Header files</Filter>
     </ClInclude>
