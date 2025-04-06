@@ -1,49 +1,45 @@
 #include "Segment.h"
 #include "AddressableLED.h"
-//#include "SPI.h"
-#include "PWM.h"
+#include "SPI.h"
+//#include "Timer.h"
 #include <memory.h>
 // Total Data size, 2 x 7 segments, 3 colors per segment, 4 bits of data per bit of color
 // 24 bits of color, 24 * 4 (bits of SPI data) / 8 = 12 bytes
-#define NUMBER_SEGMENTS 7 * 2
-#define BYTES_PER_SEGMENT 12
-
 // 7 Segment Data ordering is:
-// D1->E1->F1->A1->B1->G1->C1->E2->F2->A2->B2->C2->G2->D2
+// F1->G1->A1->B1->F2->A2->G2->B2->C2->D2->E2->C1->D1->E1->
+
+typedef struct
+{
+	PaddedColor F1;
+	PaddedColor G1;
+	PaddedColor A1;
+	PaddedColor B1;
+	PaddedColor F2;
+	PaddedColor A2;
+	PaddedColor G2;
+	PaddedColor B2;
+	PaddedColor C2;
+	PaddedColor D2;
+	PaddedColor E2;
+	PaddedColor C1;
+	PaddedColor D1;
+	PaddedColor E1;
+}Segments;
+	
 
 typedef struct 
 {
-	PaddedColor D;
-	PaddedColor E;
-	PaddedColor F;
-	PaddedColor A;
-	PaddedColor B;
-	PaddedColor G;
-	PaddedColor C;
-}Segment0;
-
-typedef struct 
-{
-	PaddedColor E;
-	PaddedColor F;
-	PaddedColor A;
-	PaddedColor B;
-	PaddedColor C;
-	PaddedColor G;
-	PaddedColor D;
-}Segment1;
-
-typedef struct 
-{
-	Segment0 seg0;
-	Segment1 seg1;
+	uint32_t StartOfFrame; 
+	Segments seg;
+	uint32_t EndOfFrame;
 }Display;
 
 Display displayBuffer;
 
 static inline void ColorToBuffer(Color c, PaddedColor* pc)
 {
-	FillColor(pc, c);
+	const uint8_t dimValue = 0x07;
+	FillColor(pc, c, dimValue);
 }
 
 static inline void SetDark(PaddedColor* c)
@@ -327,12 +323,12 @@ static inline void FillBuffer(SegmentVal v, Color col, PaddedColor* a, PaddedCol
 
 void SetDisplay(SegmentVal v0, Color c0, SegmentVal v1, Color c1)
 {
-	// Kind of gross way to do this. But hey. It works.
-	FillBuffer(v0, c0, &displayBuffer.seg0.A, &displayBuffer.seg0.B, &displayBuffer.seg0.C, &displayBuffer.seg0.D, &displayBuffer.seg0.E, &displayBuffer.seg0.F, &displayBuffer.seg0.G);
-	FillBuffer(v1, c1, &displayBuffer.seg1.A, &displayBuffer.seg1.B, &displayBuffer.seg1.C, &displayBuffer.seg1.D, &displayBuffer.seg1.E, &displayBuffer.seg1.F, &displayBuffer.seg1.G);
+	displayBuffer.StartOfFrame = 0x00000000;
+	displayBuffer.EndOfFrame = 0xFFFFFFFF;
+	FillBuffer(v0, c0, &displayBuffer.seg.A1, &displayBuffer.seg.B1, &displayBuffer.seg.C1, &displayBuffer.seg.D1, &displayBuffer.seg.E1, &displayBuffer.seg.F1, &displayBuffer.seg.G1);
+	FillBuffer(v1, c1, &displayBuffer.seg.A2, &displayBuffer.seg.B2, &displayBuffer.seg.C2, &displayBuffer.seg.D2, &displayBuffer.seg.E2, &displayBuffer.seg.F2, &displayBuffer.seg.G2);
 	
-	//SendPWMDMA((uint8_t*)&displayBuffer, sizeof(Display) / sizeof(uint16_t));
-	//SendTimerDMA((uint8_t*)&displayBuffer, sizeof(Display));
+	SendDisplay((uint8_t*) &displayBuffer, sizeof(displayBuffer));
 }
 
 SegmentVal GetSegmentForInt(uint8_t singleDecimal)

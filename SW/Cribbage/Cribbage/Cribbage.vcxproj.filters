@@ -693,13 +693,13 @@
     <ClCompile Include="Segment.c">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="PWM.c">
-      <Filter>Source files</Filter>
-    </ClCompile>
     <ClCompile Include="AddressableLED.c">
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="PowerHandler.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="SPI.c">
       <Filter>Source files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -728,13 +728,13 @@
     <ClInclude Include="Segment.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="PWM.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
     <ClInclude Include="AddressableLED.h">
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="PowerHandler.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="SPI.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

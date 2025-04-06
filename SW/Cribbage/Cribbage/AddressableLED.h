@@ -2,21 +2,33 @@
 #include <stdint.h>
 #include "Color.h"
 
-// Need 1 half word, per color bit.
-// 1 LED Color is 24 half words, so 48 bytes.
-#define BUFFER_SIZE 8
+// Dialight 587 Structure:
+
+#define CMD_NORMAL 0x07
+#define CMD_SLEEP 0x05
+
+typedef union
+{
+	struct
+	{
+		uint8_t Dimming : 5;	
+		uint8_t flags : 3;
+	};
+	uint8_t raw;
+}Command;
+
 typedef struct 
 {
-	uint16_t buffer[BUFFER_SIZE];
-	//uint8_t buffer[BUFFER_SIZE];
+	uint8_t buffer;
 }colorBuffer;
 
 typedef struct 
 {
-	colorBuffer R;
-	colorBuffer G;
+	Command cmd;
 	colorBuffer B;
+	colorBuffer G;
+	colorBuffer R;
 }PaddedColor;
 
 // Places the respective color at the prescribed location. Assumes the buffer has been allocated.
-void FillColor(PaddedColor* buffer, Color color);
+void FillColor(PaddedColor* buffer, Color color, uint8_t dimValue);

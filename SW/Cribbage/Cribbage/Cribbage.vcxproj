@@ -64,8 +64,8 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="PegHandler.c" />
     <ClCompile Include="PowerHandler.c" />
-    <ClCompile Include="PWM.c" />
     <ClCompile Include="Segment.c" />
+    <ClCompile Include="SPI.c" />
     <ClCompile Include="system_stm32g4xx.c" />
     <ClCompile Include="TCA9555.c" />
     <ClInclude Include="AddressableLED.h" />
@@ -76,8 +76,8 @@
     <ClInclude Include="PegHandler.h" />
     <ClInclude Include="PinDefs.h" />
     <ClInclude Include="PowerHandler.h" />
-    <ClInclude Include="PWM.h" />
     <ClInclude Include="Segment.h" />
+    <ClInclude Include="SPI.h" />
     <ClInclude Include="TCA9555.h" />
     <None Include="stm32.props" />
     <None Include="Cribbage-Debug.vgdbsettings" />

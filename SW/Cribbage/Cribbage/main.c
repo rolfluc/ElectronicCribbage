@@ -4,6 +4,7 @@
 #include "ExpanderController.h"
 #include "PegHandler.h"
 #include "PowerHandler.h"
+#include "HB.h"
 
 void Error_Handler()
 {
@@ -64,9 +65,11 @@ int main(void)
 	__HAL_RCC_GPIOA_CLK_ENABLE();
 	__HAL_RCC_GPIOB_CLK_ENABLE();
 	InitializePowerPin();
+	InitHB();
 	//InitExpanders();
 	for (;;)
 	{
+		ToggleHB();
 		HAL_Delay(100);
 		// Start reading the banks.
 		//StartBankReadings();
