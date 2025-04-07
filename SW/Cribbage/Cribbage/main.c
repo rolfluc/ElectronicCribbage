@@ -5,6 +5,7 @@
 #include "PegHandler.h"
 #include "PowerHandler.h"
 #include "HB.h"
+#include "ADC.h"
 
 void Error_Handler()
 {
@@ -67,9 +68,13 @@ int main(void)
 	InitializePowerPin();
 	InitHB();
 	InitExpanders();
+	InitADC();
+	uint16_t voltageCount = GetADCCount();
+	
 	for (;;)
 	{
 		ToggleHB();
+		
 		
 		HAL_Delay(95);
 		// Start reading the banks.

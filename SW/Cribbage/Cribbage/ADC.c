@@ -36,8 +36,8 @@ uint16_t GetADCCount()
 	uint16_t retVal = 0;
 	ADC_ChannelConfTypeDef sConfig = { 0 };
 	sConfig.Channel = ADC_CHANNEL_0;
-	// sConfig.Rank = ADC_RANK_CHANNEL_NUMBER;
-	// sConfig.SamplingTime = ADC_SAMPLETIME_41CYCLES_5;
+	sConfig.Rank = ADC_REGULAR_RANK_1; // TODO
+	sConfig.SamplingTime = ADC_SAMPLETIME_47CYCLES_5;
 	if (HAL_ADC_ConfigChannel(&adcHandle, &sConfig) != HAL_OK)
 	{
 		//Error_Handler();
