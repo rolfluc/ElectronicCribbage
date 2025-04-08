@@ -38,6 +38,11 @@ static PegData LastGreenBuffer = { 0 };
 static uint8_t greenPoints = 0;
 static PegStateMachine currentState = WaitingForInitCondition;
 
+static inline bool DidLoop(uint8_t firstPos, uint8_t secondPos)
+{
+	return (secondPos - firstPos) > maxCribbageHand;
+}
+
 // Count Trailing Zeros
 static inline uint8_t CTZ(uint64_t val)
 {
@@ -87,13 +92,12 @@ static void InterpretPegs(PegData lastBuffer, PegData newBuffer, uint8_t* delta,
 	// First check if last had both in init
 	if (lastBuffer.Start0 == true && lastBuffer.Start1 == true) 
 	{
-		// If some amount of points were scored, the delta is the exact position -1
+		// If some amount of points were scored, the delta is the exact position
 		if (newBuffer.data != 0)
 		{
-			*delta = newLocations.first - 1;
+			*delta = newLocations.first;
 		}
 	}
-	// TODO wrap around needs definition. Can max hadn in cribbage be used here to estimate if someone did?
 }
 
 void InitPegs()
@@ -143,42 +147,66 @@ void UpdateBankInfo()
 
 void HandlePegStateMachine()
 {
+	static SegmentVal displayvals[4] = { };
+	static uint8_t displayLength = 0;
+	static Color c;
 	switch (currentState)
 	{
-	case WaitingForInitCondition:
+		// Waiting for init, is waiting for the pegs to be in the starting holes.
+		case WaitingForInitCondition:
 		{
+			c = ColorBlue;
+			displayvals[0] = Display_1;
+			displayvals[1] = Display_n;
+			displayvals[2] = Display_1;
+			displayLength = 3;
 			if (RedBuffer.Start0 == true && RedBuffer.Start1 == true &&
 				GreenBuffer.Start0 == true && GreenBuffer.Start1 == true)
 			{
 				currentState = Initialized;
 			}
-			// TODO display differently.
+			break;
+		}
+		// Initialized, is when the pegs are in the holes, but none have been detected into any of the expander boards.
+		case Initialized:
+		{
+			c = ColorBlue;
+			displayvals[0] = Display_r;
+			displayvals[1] = Display_d;
+			displayvals[2] = Display_Y;
+			displayLength = 3;
+			// TODO handle.
 		}
 		break;
-	case Initialized:
+		// Running, is running but not looped yet. i.e. first pass of the 60 points. i.e. 1->60 pts
+		case Running:
 		{
-			
+			// TODO lots of TODO 
+			// TODO alternate between delta between pins, and total points?
 		}
 		break;
-	case Running:
+		// Looped, is 61->120 pts
+		case Looped:
 		{
-			
+			// TODO lots of TODO
+			// TODO alternate between delta between pins, and total points?
+		}
+		// End-game, is when a peg is in the final hole. 
+		case EndGame:
+		{
+			// TODO who won color
+			displayvals[0] = Display_1;
+			displayvals[1] = Display_2;
+			displayvals[2] = Display_1;
+			displayLength = 3;
 		}
 		break;
-	case Looped:
-		{
-			
-		}
-	case EndGame:
-		{
-			
-		}
-		break;
-	default:
+		default:
 		{
 			
 		}
 		break;
 	}
+	DisplayValues(c, displayvals, displayLength);
 	RunDisplayStateMachine();
 }
