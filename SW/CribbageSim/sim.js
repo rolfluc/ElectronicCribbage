@@ -63,17 +63,17 @@ for (let x = 0; x < numberExteriorCircles; x++) {
 
 
 // Draw circle function
-function drawCircle(circleX,circleY) {
+function drawCircle(circleX,circleY,color) {
   ctx.beginPath();
   ctx.arc(circleX, circleY, circleRadius, 0, Math.PI * 2);
-  ctx.fillStyle = 'black';
+  ctx.fillStyle = color;
   ctx.fill();
   ctx.closePath();
 }
 
 ctx.clearRect(0, 0, canvas.width, canvas.height);
 for (let x = 0; x < numberExteriorCircles; x++) {
-  drawCircle(exteriorPositions[x][0],exteriorPositions[x][1]);
+  drawCircle(exteriorPositions[x][0],exteriorPositions[x][1],exteriorColors[x]);
 }
 
 // Add click listener
@@ -82,14 +82,14 @@ canvas.addEventListener('click', function(event) {
   const clickX = event.clientX - rect.left;
   const clickY = event.clientY - rect.top;
 
-  const dx = clickX - circle.x;
-  const dy = clickY - circle.y;
-
-/*
-  if (Math.sqrt(dx * dx + dy * dy) <= circleRadius) {
-    circle.color = circle.color === 'black' ? 'red' : 'black';
-    drawCircle(100,100);
+  for (let x = 0; x < numberExteriorCircles; x++) {
+    const dx = clickX - exteriorPositions[x][0];
+    const dy = clickY - exteriorPositions[x][1];  
+    if (Math.sqrt(dx * dx + dy * dy) <= circleRadius) {
+      exteriorColors[x] = exteriorColors[x] === 'black' ? 'red' : 'black';
+      drawCircle(exteriorPositions[x][0],exteriorPositions[x][1],exteriorColors[x]);
+      break;
+    }
   }
-  */
 });
 
