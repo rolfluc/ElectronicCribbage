@@ -3,7 +3,6 @@ const ctx = canvas.getContext('2d');
 const circleRadius = 10;
 const numberExteriorCircles = 60;
 remainderRed = 2;
-remainderGreen = 2;
 
 function generateHexPositions(leftCornerX,leftCornerY) { 
   const numberPointsPerLine = 10;
@@ -86,7 +85,15 @@ canvas.addEventListener('click', function(event) {
     const dx = clickX - exteriorPositions[x][0];
     const dy = clickY - exteriorPositions[x][1];  
     if (Math.sqrt(dx * dx + dy * dy) <= circleRadius) {
-      exteriorColors[x] = exteriorColors[x] === 'black' ? 'red' : 'black';
+      if (exteriorColors[x] === 'black') {
+        if (remainderRed > 0) {
+          exteriorColors[x] = 'red';
+          remainderRed = remainderRed - 1;  
+        }
+      } else {
+        exteriorColors[x] = 'black';
+        remainderRed = remainderRed + 1;
+      }
       drawCircle(exteriorPositions[x][0],exteriorPositions[x][1],exteriorColors[x]);
       break;
     }
