@@ -4,6 +4,7 @@ ctx.font = "50px Arial";
 
 const circleRadius = 10;
 const numberExteriorCircles = 60;
+const maxHand = 29;
 const circlePosX = 100;
 const circlePosY = 300;
 remainderRed = 2;
@@ -143,13 +144,18 @@ canvas.addEventListener('click', function(event) {
 
   if (remainderRed == 0) {
     const currentVal = readPositions();
-    const first = findFirstBit(currentVal);
+    let first = findFirstBit(currentVal);
     const last = findLastBit(currentVal);
+    let difference = last-first;
+    if (difference > maxHand) {
+      first = first + numberExteriorCircles;
+      difference = first - last;
+    }
 
-    ctx.fillText(`${last-first}`,circlePosX+100,circlePosY);
+    ctx.fillText(`${difference}`,circlePosX+100,circlePosY);
   } else {
     ctx.clearRect(circlePosX+100, circlePosY-50, 300,100);
   }
-  
+
 });
 
