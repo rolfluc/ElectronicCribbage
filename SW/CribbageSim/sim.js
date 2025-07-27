@@ -1,7 +1,11 @@
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
+ctx.font = "50px Arial";
+
 const circleRadius = 10;
 const numberExteriorCircles = 60;
+const circlePosX = 100;
+const circlePosY = 300;
 remainderRed = 2;
 
 function generateHexPositions(leftCornerX,leftCornerY) { 
@@ -53,13 +57,51 @@ function generateHexPositions(leftCornerX,leftCornerY) {
   return output;
 }
 
-let exteriorPositions = generateHexPositions(100,300);
+let exteriorPositions = generateHexPositions(circlePosX,circlePosY);
 let exteriorColors = [];
 for (let x = 0; x < numberExteriorCircles; x++) {
   exteriorColors[x] = 'black';
 }
 
+function getSinglePosition(x) {
+  const pixel = (ctx.getImageData(exteriorPositions[x][0], exteriorPositions[x][1], 1, 1)).data;
+  return pixel;
+}
 
+function isPixelBlack(x) {
+  const pixel = getSinglePosition(x);
+  return (pixel[0] < 5 && pixel[1] < 5 && pixel[2] < 5);
+}
+
+function readPositions() {
+  let val = "";
+  for (let x = 0; x < numberExteriorCircles; x++) {
+    if (isPixelBlack(x)) {
+      val = val + "0";
+    } else {
+      val = val + "1";
+    }
+  }
+  return val;
+}
+
+function findFirstBit(value) {
+  for (let lastVal = 0; lastVal < 64; lastVal++) { 
+    if (value[lastVal] === "1") {
+      return lastVal;
+    }
+  }
+  return 0;
+}
+
+function findLastBit(value) {
+  for (let lastVal = 64; lastVal > 0; lastVal--) {
+    if (value[lastVal] === "1") {
+      return lastVal;
+    }
+  }
+  return 0;
+}
 
 // Draw circle function
 function drawCircle(circleX,circleY,color) {
@@ -98,5 +140,16 @@ canvas.addEventListener('click', function(event) {
       break;
     }
   }
+
+  if (remainderRed == 0) {
+    const currentVal = readPositions();
+    const first = findFirstBit(currentVal);
+    const last = findLastBit(currentVal);
+
+    ctx.fillText(`${last-first}`,circlePosX+100,circlePosY);
+  } else {
+    ctx.clearRect(circlePosX+100, circlePosY-50, 300,100);
+  }
+  
 });
 
