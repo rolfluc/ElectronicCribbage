@@ -12,11 +12,22 @@
     <VisualWatchPreferences />
     <MaskInterruptsWhileStepping>false</MaskInterruptsWhileStepping>
     <MemoryWindowPreferences />
-    <c />
-    <a>
-      <b>AllGlobals</b>
-      <a>false</a>
-    </a>
+    <LiveVariables />
+    <LoadGlobalsWithoutConfirmation>false</LoadGlobalsWithoutConfirmation>
+    <NestedLiveVariables>
+      <NestedVariableSettingsCollection>
+        <ID>com.sysprogs.AllGlobals</ID>
+        <Variables />
+      </NestedVariableSettingsCollection>
+      <NestedVariableSettingsCollection>
+        <ID>com.sysprogs.SpecificVariables</ID>
+        <Variables />
+      </NestedVariableSettingsCollection>
+    </NestedLiveVariables>
+    <LiveVariablePreferences>
+      <ViewMode>SpecificVariables</ViewMode>
+      <FavoritesOnly>false</FavoritesOnly>
+    </LiveVariablePreferences>
     <Suggestions />
     <HardwareRegisters />
   </DebugPreferences>

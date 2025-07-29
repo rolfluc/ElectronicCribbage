@@ -3,18 +3,34 @@
 #include "PinDefs.h"
 #include <stdbool.h>
 
-
-
-static inline void TurnPower(bool off)
+static inline void TurnOffPower()
 {
-	HAL_GPIO_WritePin(PowerOff.pinPort, PowerOff.pinNumber, off ? GPIO_PIN_RESET : GPIO_PIN_SET);
+	// TODO need to turn on 7 segment 88 White, to consume the most current to drain capacitors faster.
+	HAL_GPIO_WritePin(PowerOff.pinPort, PowerOff.pinNumber, GPIO_PIN_RESET);
+}
+static inline void KeepPowerOn()
+{
+	HAL_GPIO_WritePin(PowerOff.pinPort, PowerOff.pinNumber, GPIO_PIN_SET);
 }
 
-static inline void HandleButtonPress()
+static const uint32_t TOO_EARLY_TOO_SHUTDOWN = 10000;
+static const uint32_t SHUTOFF_HOLD_TIME = 2000;
+static uint32_t timeStart_ms = 0;
+static GPIO_PinState lastState = GPIO_PIN_SET;
+void HandleButtonPress()
 {
-	static uint32_t timeStart_ms = 0;
-	static GPIO_PinState lastState = GPIO_PIN_SET;
-	// TODO write me.
+	uint32_t currentTime = HAL_GetTick();
+	// When we go from pressed, to depressed, and its been held for 2s, then turn itself off.
+	GPIO_PinState currentState = HAL_GPIO_ReadPin(ButtonSense.pinPort, ButtonSense.pinNumber);
+	if (lastState == GPIO_PIN_SET && currentState == GPIO_PIN_RESET && currentTime > timeStart_ms + SHUTOFF_HOLD_TIME && timeStart_ms > TOO_EARLY_TOO_SHUTDOWN)
+	{
+		TurnOffPower();
+	}
+	if (lastState != currentState)
+	{
+		timeStart_ms = currentTime;
+	}
+	lastState = currentState;
 }
 
 void EXTI4_IRQHandler(void)
@@ -34,20 +50,20 @@ void InitializePowerPin()
 	HAL_GPIO_Init(PowerOff.pinPort, &GPIO_InitStruct);
 	
 	// Need to immediately fire this on while the button is stabalizing.
-	TurnPower(false);
+	KeepPowerOn();
 }
 
 void InitPowerSense()
 {
 	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
 	GPIO_InitStruct.Pin = ButtonSense.pinNumber;
-	GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+	GPIO_InitStruct.Pull = GPIO_PULLDOWN;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(ButtonSense.pinPort, &GPIO_InitStruct);
 	
-	HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
-	HAL_NVIC_EnableIRQ(EXTI4_IRQn);
+	//HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
+	//HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 }
 
 void DetermineSufficientVoltage(uint16_t counts)
@@ -66,6 +82,6 @@ void DetermineSufficientVoltage(uint16_t counts)
 	if (counts < CUTOFF_COUNT)
 	{
 		// TODO probably show low voltage then cutout.
-		TurnPower(false);
+		TurnOffPower();
 	}
 }
