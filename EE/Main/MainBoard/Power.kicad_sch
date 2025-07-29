@@ -3855,6 +3855,36 @@
 		)
 		(uuid "ff8d7d46-d6ef-4a44-9fc1-d074868fd17d")
 	)
+	(text "TODO this appears broken"
+		(exclude_from_sim no)
+		(at 170.434 61.468 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "5ad8b9a4-f913-4dd1-b194-2846f842f98a")
+	)
+	(text "TODO does R15 need to migrate to 1M?"
+		(exclude_from_sim no)
+		(at 86.106 71.882 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "777a933f-7ab2-4595-9af4-0fdbeb28cb7a")
+	)
+	(text "TODO is R13 Necessary to stay off?"
+		(exclude_from_sim no)
+		(at 86.106 74.676 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "a39447f6-eebd-41f7-a01e-ef2f57263e0a")
+	)
 	(text "Thought process:\nVBAT has only R6 as a drain source. \nOnce the button is pressed, the Fet turns on\nenabling power to go through\nVBAT_OUT goes to power the 3v3 buck rail. \nOnce 3v3 is enabled, the pull up will maintain\nthrough R15, and the MCU can turn itself off by \npulling the gate low"
 		(exclude_from_sim no)
 		(at 156.21 102.616 0)
@@ -3864,6 +3894,16 @@
 			)
 		)
 		(uuid "bbf0554d-873c-4c4f-a69c-be1c235f1089")
+	)
+	(text "TODO this appears broken"
+		(exclude_from_sim no)
+		(at 247.65 119.38 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "ceea4379-667d-4c3a-ab9c-6d15c55168b0")
 	)
 	(label "N_GATE"
 		(at 266.7 19.05 180)
@@ -6078,7 +6118,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10k_NP"
+		(property "Value" "100k"
 			(at 110.998 92.6521 0)
 			(effects
 				(font
