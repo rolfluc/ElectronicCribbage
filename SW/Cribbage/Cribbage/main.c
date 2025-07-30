@@ -6,6 +6,7 @@
 #include "PowerHandler.h"
 #include "HB.h"
 #include "ADC.h"
+#include "SPI.h"
 
 void Error_Handler()
 {
@@ -64,6 +65,7 @@ int main(void)
 	InitializePowerPin();
 	InitHB();
 	InitPowerSense();
+	InitSPI();
 	//InitExpanders();
 	//InitADC();
 	//uint16_t voltageCount = GetADCCount();
@@ -71,7 +73,6 @@ int main(void)
 	for (;;)
 	{
 		ToggleHB();
-		HandleButtonPress();
 		
 		HAL_Delay(100);
 		// Start reading the banks.
