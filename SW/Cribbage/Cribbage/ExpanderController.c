@@ -7,15 +7,12 @@ typedef struct
 	TCA9555 tcaDevice;
 	uint8_t P0Bank;
 	uint8_t P1Bank;
-	bool use3V2;
 }Expanders;
 
 Expanders expanders[NUMBER_EXPANDERS];
 
 typedef enum 
 {
-	Rail_3v2 = TCAPin_16,
-	Rail_2v7 = TCAPin_06,
 	Rail_B0 = TCAPin_07,
 	Rail_B1 = TCAPin_17,
 }ExpanderPins;
@@ -26,14 +23,12 @@ static void InitTCADevice()
 	{
 		//P02,3,4,5 and P10,1,2,3,4,5 are inputs, P06,7 and P16,7 are outputs.
 		//First step, ensure configurations are set correctly.
-		// x,x,b11,b12,b13,b14,2v7,b0_en
-		configPort(&expanders[i].tcaDevice, Bank_0, 0b00111111);
-		// b10,b04,b03,b02,b01,b00,3v2,b1_en
-		configPort(&expanders[i].tcaDevice, Bank_1, 0b00111111);
+		// x,x,b11,b12,b13,b14,b0_en
+		configPort(&expanders[i].tcaDevice, Bank_0, 0b00111101);
+		// b10,b04,b03,b02,b01,b00,b1_en
+		configPort(&expanders[i].tcaDevice, Bank_1, 0b00111101);
 		
-		//Next, disable the 3v2, 2v7, b0, and b1 rails.
-		writePin(&expanders[i].tcaDevice, (TCA9555Pins)Rail_3v2, false);
-		writePin(&expanders[i].tcaDevice, (TCA9555Pins)Rail_2v7, false);
+		//Next, disable the b0, and b1 rails.
 		writePin(&expanders[i].tcaDevice, (TCA9555Pins)Rail_B0, false);
 		writePin(&expanders[i].tcaDevice, (TCA9555Pins)Rail_B1, false);
 	}
@@ -41,7 +36,7 @@ static void InitTCADevice()
 
 //
 // GetBankReadings interprets the results of a prior read.
-// to map to contiguous. e.g. P10 is B10, the 5th bit, not the 9th.
+// Left bank into lower 5 bits of the LSB, right bank in the lower 5 bits. of the MSB
 //
 uint16_t GetBankReadings(uint8_t TCADevice)
 {
@@ -57,9 +52,9 @@ uint16_t GetBankReadings(uint8_t TCADevice)
 	
 	retVal |= (1 << 8) & (*P1Bank & (1 << 0)); // B10 - P10
 	retVal |= (1 << 9) & (*P0Bank & (1 << 2)); // B11 - P02
-	retVal |= (1 <<10) & (*P0Bank & (1 << 3)); // B12 - P03
-	retVal |= (1 <<11) & (*P0Bank & (1 << 4)); // B13 - P04
-	retVal |= (1 <<12) & (*P0Bank & (1 << 5)); // B14 - P05
+	retVal |= (1 << 10) & (*P0Bank & (1 << 3)); // B12 - P03
+	retVal |= (1 << 11) & (*P0Bank & (1 << 4)); // B13 - P04
+	retVal |= (1 << 12) & (*P0Bank & (1 << 5)); // B14 - P05
 	return retVal;
 }
 
@@ -104,16 +99,6 @@ void InitExpanders()
 		expanders[i].tcaDevice.shadowRegisters[ConfigPort1] = 0xff;
 	}
 	InitTCADevice();
-}
-
-void SetUse3v2(uint8_t TCADevice, bool doUse)
-{
-	expanders[TCADevice].use3V2 = doUse;
-	TCA9555Pins pin = doUse ? (TCA9555Pins)Rail_2v7 : (TCA9555Pins)Rail_3v2; 
-	// clear old first
-	writePin(&expanders[TCADevice].tcaDevice, pin, false);
-	pin = doUse ? (TCA9555Pins)Rail_3v2 : (TCA9555Pins)Rail_2v7; 
-	writePin(&expanders[TCADevice].tcaDevice, pin, true);
 }
 
 static void TurnB0(uint8_t TCADevice, bool turnOn)

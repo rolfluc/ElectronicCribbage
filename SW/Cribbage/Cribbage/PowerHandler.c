@@ -4,23 +4,23 @@
 #include <stdbool.h>
 #include "Display.h"
 
-static inline void KeepPowerOn()
-{
-	HAL_GPIO_WritePin(PowerOff.pinPort, PowerOff.pinNumber, GPIO_PIN_SET);
-}
-
-static const uint32_t TOO_EARLY_TOO_SHUTDOWN = 2000;
-static const uint32_t SHUTOFF_HOLD_TIME = 2000;
+static const uint32_t SHOW_BATTERY_TIMEOUT = 250;
+static const uint32_t RESET_GAME_TIME_MS = 5000;
 static uint32_t timeStart_ms = 0;
 static GPIO_PinState lastState = GPIO_PIN_SET;
 void HandleButtonPress()
 {
 	uint32_t currentTime = HAL_GetTick();
 	GPIO_PinState currentState = HAL_GPIO_ReadPin(ButtonSense.pinPort, ButtonSense.pinNumber);
-	if (lastState == GPIO_PIN_SET && currentState == GPIO_PIN_RESET && currentTime > timeStart_ms + SHUTOFF_HOLD_TIME && timeStart_ms > TOO_EARLY_TOO_SHUTDOWN)
+	if (lastState == GPIO_PIN_SET && currentState == GPIO_PIN_RESET)
 	{
-		__ASM("BKPT 255");
-		// TODO 
+		// Show battery timeout
+		if (currentTime > timeStart_ms + SHOW_BATTERY_TIMEOUT && currentTime < timeStart_ms + SHOW_BATTERY_TIMEOUT) {
+			__ASM("BKPT 255");
+		// Reset game timeout
+		} else if (currentTime > timeStart_ms + RESET_GAME_TIME_MS) {
+			__ASM("BKPT 255");
+		}
 	}
 	if (lastState != currentState)
 	{
@@ -37,6 +37,7 @@ void EXTI4_IRQHandler(void)
 
 void InitializePowerPin()
 {
+	// No longer used. Set as an input to let bygones be bygones.
 	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
 	GPIO_InitStruct.Pin = PowerOff.pinNumber;
 	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;

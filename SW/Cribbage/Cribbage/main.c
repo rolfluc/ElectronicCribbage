@@ -62,13 +62,11 @@ int main(void)
 	SystemClock_Config();
 	__HAL_RCC_GPIOA_CLK_ENABLE();
 	__HAL_RCC_GPIOB_CLK_ENABLE();
-	InitializePowerPin();
 	InitHB();
 	InitPowerSense();
 	InitSPI();
-	//InitExpanders();
+	InitExpanders();
 	//InitADC();
-	//uint16_t voltageCount = GetADCCount();
 	
 	for (;;)
 	{
@@ -76,10 +74,10 @@ int main(void)
 		
 		HAL_Delay(100);
 		// Start reading the banks.
-		//StartBankReadings();
+		StartBankReadings();
 		// Interpret the tca banks, and copy the results into the respective local buffers.
-		//UpdateBankInfo();
+		UpdateBankInfo();
 		// Now, run the state machine 
-		//HandlePegStateMachine();
+		HandlePegStateMachine();
 	}
 }

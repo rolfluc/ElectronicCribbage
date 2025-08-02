@@ -332,6 +332,142 @@ static inline void FillBuffer(SegmentVal v, Color col, PaddedColor* a, PaddedCol
 	}
 }
 
+SegmentVal GetSegmentForChar(char val) {
+	switch(val):
+	{
+	case '0':
+		return Display_0;
+	case '1':
+		return Display_1;
+	case '2':
+		return Display_2;
+	case '3':
+		return Display_3;
+	case '4':
+		return Display_4;
+	case 'S': // intentional fallthrough
+	case 's': // intentional fallthrough
+	case '5':
+		return Display_5;
+	case '6':
+		return Display_6;
+	case '7':
+		return Display_7;
+	case '8':
+		return Display_8;
+	case '9':
+		return Display_9;
+	case 'A':
+	case 'a': // intentional fallthrough
+		return Display_A;
+	case 'B': // intentional fallthrough
+	case 'b':
+		return Display_b;
+	case 'C': // intentional fallthrough
+	case 'c':
+	 	return Display_C;
+	case 'D': // intentional fallthrough
+	case 'd':
+		return Display_d;
+	case 'E': // intentional fallthrough
+	case 'e':
+		return Display_E;
+	case 'F': // intentional fallthrough
+	case 'f': 
+		return Display_F;
+	case 'H': // intentional fallthrough
+	case 'h':
+		return Display_H;
+	case 'L': // intentional fallthrough
+	case 'l':
+		return Display_L;
+	case 'N': // intentional fallthrough
+	case 'n':
+		return Display_n;
+	case 'O': // intentional fallthrough
+	case 'o':
+		return Display_o;
+	case 'P': // intentional fallthrough
+	case 'p':
+		return Display_P;
+	case 'R': // intentional fallthrough
+	case 'r':
+		return Display_r;
+	case 'Y': // intentional fallthrough
+	case 'y':
+		return Display_Y;
+	case 'T': // intentional fallthrough
+	case 't':
+		return Display_t;
+	case '_':
+		return Display_underscore;
+	case '-': // Intentional fallthrough.  Unknown characters become dashes
+	default:
+		return Display_dash;
+	}
+}
+
+char GetCharFromSegmentVal(SegmentVal val)
+{
+	switch(val):
+	{
+	case Display_0:
+		return '0';
+	case Display_1:
+		return '1';
+	case Display_2:
+		return '2';
+	case Display_3:
+		return '3';
+	case Display_4:
+		return '4';
+	case Display_5:
+		return '5';
+	case Display_6:
+		return '6';
+	case Display_7:
+		return '7';
+	case Display_8:
+		return '8';
+	case Display_9:
+		return '9';
+	case Display_A:
+		return 'a';
+	case Display_b:
+		return 'b';
+	case Display_C:
+	 	return 'c';
+	case Display_d:
+		return 'd';
+	case Display_E:
+		return 'E';
+	case Display_F:
+		return 'F';
+	case Display_H:
+		return 'H';
+	case Display_L:
+		return 'L';
+	case Display_n:
+		return 'n';
+	case Display_o:
+		return 'o';
+	case Display_P:
+		return 'P';
+	case Display_r:
+		return 'r';
+	case Display_Y:
+		return 'y';
+	case Display_t:
+		return 't';
+	case Display_underscore:
+		return '_';
+	case Display_dash:
+		return '-';
+	default:
+		return '-';
+	}
+}
+
 void SetDisplay(SegmentVal v0, Color c0, SegmentVal v1, Color c1)
 {
 	displayBuffer.StartOfFrame = 0x00000000;
@@ -340,13 +476,4 @@ void SetDisplay(SegmentVal v0, Color c0, SegmentVal v1, Color c1)
 	FillBuffer(v1, c1, &displayBuffer.seg.A2, &displayBuffer.seg.B2, &displayBuffer.seg.C2, &displayBuffer.seg.D2, &displayBuffer.seg.E2, &displayBuffer.seg.F2, &displayBuffer.seg.G2);
 	
 	SendDisplay((uint8_t*) &displayBuffer, sizeof(displayBuffer));
-}
-
-SegmentVal GetSegmentForInt(uint8_t singleDecimal)
-{
-	if (singleDecimal > 9)
-	{
-		return Display_9;
-	}
-	return (SegmentVal)singleDecimal;
 }

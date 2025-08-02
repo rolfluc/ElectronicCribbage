@@ -126,6 +126,8 @@ void UpdateBankInfo()
 	uint64_t rightBank = 0;
 	for (uint8_t i = 0; i < NUMBER_EXPANDERS; i++)
 	{
+		// Takes the <xxxLLLLLxxxRRRRR>, drops them into their own left/right,
+		// then shifts into the right position.
 		uint16_t bankInfo = GetBankReadings(i);
 		uint8_t left = bankInfo & 0x00ff;
 		uint8_t right = bankInfo >> 8;
@@ -145,21 +147,18 @@ void UpdateBankInfo()
 	RedBuffer.End = HAL_GPIO_ReadPin(FinalPin.pinPort, FinalPin.pinNumber) == GPIO_PIN_SET;
 }
 
+static Color c = ColorUndefined;
+
 void HandlePegStateMachine()
 {
-	static SegmentVal displayvals[4] = { };
-	static uint8_t displayLength = 0;
-	static Color c;
+	
 	switch (currentState)
 	{
 		// Waiting for init, is waiting for the pegs to be in the starting holes.
 		case WaitingForInitCondition:
 		{
 			c = ColorBlue;
-			displayvals[0] = Display_1;
-			displayvals[1] = Display_n;
-			displayvals[2] = Display_1;
-			displayLength = 3;
+			// TODO Display
 			if (RedBuffer.Start0 == true && RedBuffer.Start1 == true &&
 				GreenBuffer.Start0 == true && GreenBuffer.Start1 == true)
 			{
@@ -171,13 +170,9 @@ void HandlePegStateMachine()
 		case Initialized:
 		{
 			c = ColorBlue;
-			displayvals[0] = Display_r;
-			displayvals[1] = Display_d;
-			displayvals[2] = Display_Y;
-			displayLength = 3;
-			// TODO handle.
+			break;
 		}
-		break;
+			
 		// Running, is running but not looped yet. i.e. first pass of the 60 points. i.e. 1->60 pts
 		case Running:
 		{
@@ -190,23 +185,18 @@ void HandlePegStateMachine()
 		{
 			// TODO lots of TODO
 			// TODO alternate between delta between pins, and total points?
+			break;
 		}
 		// End-game, is when a peg is in the final hole. 
 		case EndGame:
 		{
 			// TODO who won color
-			displayvals[0] = Display_1;
-			displayvals[1] = Display_2;
-			displayvals[2] = Display_1;
 			displayLength = 3;
 		}
-		break;
 		default:
 		{
-			
+			break;	
 		}
-		break;
 	}
-	DisplayValues(c, displayvals, displayLength);
 	RunDisplayStateMachine();
 }

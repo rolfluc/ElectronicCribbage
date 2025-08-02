@@ -2,7 +2,7 @@
 #include "Color.h"
 typedef enum
 {
-	Display_0       = 0,
+	Display_0 = 0,
 	Display_1,
 	Display_2,
 	Display_3,
@@ -21,15 +21,16 @@ typedef enum
 	Display_H,
 	Display_L,
 	Display_n,
-	Display_O,
+	Display_o,
 	Display_P,
 	Display_r,
-	Display_S,
 	Display_Y,
 	Display_t,
 	Display_underscore,
+	Display_dash,
 	Display_Nothing,
 }SegmentVal;
 
 void SetDisplay(SegmentVal v0, Color c0, SegmentVal v1, Color c1);
-SegmentVal GetSegmentForInt(uint8_t singleDecimal);
+SegmentVal GetSegmentForChar(char val);
+char GetCharFromSegmentVal(SegmentVal val);
