@@ -12,8 +12,7 @@ typedef enum
 	WaitingForInitCondition = 0,
 	Initialized             = 1,
 	Running                 = 2,
-	Looped					= 3,
-	EndGame                 = 4,
+	EndGame                 = 3,
 }PegStateMachine;
 
 typedef struct
@@ -25,8 +24,6 @@ typedef struct
 }PegData;
 
 static const uint8_t maxCribbageHand = 29;
-static const uint8_t InitMask = 0x03;
-static const uint8_t InitOffset = 62;
 
 static bool redLooped = false;
 static PegData RedBuffer = { 0 };
@@ -46,7 +43,7 @@ static inline bool DidLoop(uint8_t firstPos, uint8_t secondPos)
 // Count Trailing Zeros
 static inline uint8_t CTZ(uint64_t val)
 {
-	uint8_t retVal = 63;
+	uint8_t retVal = TOTAL_LENGTH;
 	while ((val & (1 >> retVal)) == 0)
 	{
 		retVal--;
@@ -80,24 +77,6 @@ static inline PegPositions getPegPositions(uint64_t buffer)
 	pos.first = CLZ(buffer);
 	pos.second = CTZ(buffer);
 	return pos;
-}
-
-static void InterpretPegs(PegData lastBuffer, PegData newBuffer, uint8_t* delta, uint8_t lastTotalPoint)
-{
-	// TODO lots of testing here.
-	// TODO write a stub of code to test this in place of unit testing.
-	PegPositions lastLocations = getPegPositions(lastBuffer.data);
-	PegPositions newLocations = getPegPositions(newBuffer.data); 
-	// Thought process. 
-	// First check if last had both in init
-	if (lastBuffer.Start0 == true && lastBuffer.Start1 == true) 
-	{
-		// If some amount of points were scored, the delta is the exact position
-		if (newBuffer.data != 0)
-		{
-			*delta = newLocations.first;
-		}
-	}
 }
 
 void InitPegs()
@@ -139,62 +118,95 @@ void UpdateBankInfo()
 	GreenBuffer.data = leftBank;
 	GreenBuffer.Start0 = HAL_GPIO_ReadPin(Start_00.pinPort, Start_00.pinNumber) == GPIO_PIN_SET;
 	GreenBuffer.Start1 = HAL_GPIO_ReadPin(Start_01.pinPort, Start_01.pinNumber) == GPIO_PIN_SET;
+	// TODO check this logic.  Rainbow "Game Over" scenario. Green vs red cannot be explicitly determined 
+	// for win scenario.
 	GreenBuffer.End = HAL_GPIO_ReadPin(FinalPin.pinPort, FinalPin.pinNumber) == GPIO_PIN_SET;
 	
 	RedBuffer.data = rightBank;
 	RedBuffer.Start0 = HAL_GPIO_ReadPin(Start_10.pinPort, Start_10.pinNumber) == GPIO_PIN_SET;
 	RedBuffer.Start1 = HAL_GPIO_ReadPin(Start_11.pinPort, Start_11.pinNumber) == GPIO_PIN_SET;
-	RedBuffer.End = HAL_GPIO_ReadPin(FinalPin.pinPort, FinalPin.pinNumber) == GPIO_PIN_SET;
+	// RedBuffer.End = HAL_GPIO_ReadPin(FinalPin.pinPort, FinalPin.pinNumber) == GPIO_PIN_SET;
 }
 
+static const char* InitText = "1n1t";
+static const char* WinText = "F1n1sh";
 static Color c = ColorUndefined;
 
 void HandlePegStateMachine()
 {
-	
 	switch (currentState)
 	{
 		// Waiting for init, is waiting for the pegs to be in the starting holes.
 		case WaitingForInitCondition:
 		{
 			c = ColorBlue;
-			// TODO Display
+			SetSystemText(c,(char*)InitText, sizeof(InitText));
 			if (RedBuffer.Start0 == true && RedBuffer.Start1 == true &&
 				GreenBuffer.Start0 == true && GreenBuffer.Start1 == true)
 			{
 				currentState = Initialized;
+				// State transitioned, rerun. 
+				HandlePegStateMachine(); // Warning Recursion.
 			}
 			break;
 		}
 		// Initialized, is when the pegs are in the holes, but none have been detected into any of the expander boards.
 		case Initialized:
 		{
-			c = ColorBlue;
+			if (GreenBuffer.data > 0 || RedBuffer.data > 0) {
+				currentState = Running;
+				// State transitioned, rerun. 
+				HandlePegStateMachine(); // Warning Recursion.
+			}
 			break;
 		}
 			
 		// Running, is running but not looped yet. i.e. first pass of the 60 points. i.e. 1->60 pts
 		case Running:
 		{
-			// TODO lots of TODO 
-			// TODO alternate between delta between pins, and total points?
+			uint8_t greenDelta = 0;
+			uint8_t redDelta = 0;
+			// Two conditions here. Comparing two pegs in field, or peg in field against start peg.
+			if (RedBuffer.Start0 == false && RedBuffer.Start1 == false) {
+
+			} else if ((RedBuffer.Start0 == true || RedBuffer.Start1 == true) && RedBuffer.data > 0) {
+				redDelta = CTZ(RedBuffer.DataSize);
+				// TODO for testing. Do more.
+			} else if (GreenBuffer.End == true) {
+				currentState = EndGame;
+				// Migrated, rerun. Warning recursive.
+				HandlePegStateMachine();
+			}
+			if (RedBuffer.Start0 == false && RedBuffer.Start1 == false) {
+				uint8_t trailing = CTZ(RedBuffer.data);
+				uint8_t leading = CLZ(RedBuffer.data);
+				// If these two equal length - 1, means only 1 peg inserted. Set to invalid value
+				if (trailing + leading == TOTAL_LENGTH - 1) {
+					redDelta = 0xff;
+				} else {
+					// Example measurement. If trailing zeros is 10, we have a peg at 11.
+					// If leading zeros is 30, we have a peg at 29. In this scenario, we want to subtract
+					// we want to subtract trailing zeros from leading zeros to get the valid result.
+					redDelta = leading - trailing;
+					if (redDelta > maxCribbageHand) {
+
+					}
+				}
+			} else if ((GreenBuffer.Start0 == true || GreenBuffer.Start1 == true) && GreenBuffer.data > 0) {
+				greenDelta = CTZ(RedBuffer.DataSize);
+				// TODO migrate above code to function to use for green. Likely accept generic input.
+			}
 		}
 		break;
-		// Looped, is 61->120 pts
-		case Looped:
-		{
-			// TODO lots of TODO
-			// TODO alternate between delta between pins, and total points?
-			break;
-		}
 		// End-game, is when a peg is in the final hole. 
 		case EndGame:
 		{
-			// TODO who won color
-			displayLength = 3;
+			c = ColorWhite;
+			SetSystemText(c,(char*)InitText, sizeof(InitText));
 		}
 		default:
 		{
+			// Undefined behavior.
 			break;	
 		}
 	}

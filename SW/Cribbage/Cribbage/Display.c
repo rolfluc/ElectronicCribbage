@@ -30,7 +30,9 @@ void SetUserText(Color c, char* dat, uint8_t len) {
 
 void SetSystemText(Color c, char* dat, uint8_t len) {
 	systemColor = c;
-	ConvertStringToBuffer(c,&SystemBuffer[0], dat, len);
+	// TODO compare if the same. If the same do nothing.
+	// TODO if compared results are different, reset to zero bufferPtr
+	sysLen = ConvertStringToBuffer(c,&SystemBuffer[0], dat, len);
 }
 
 // Thought process on this state machine. First, if user is active, run through user data

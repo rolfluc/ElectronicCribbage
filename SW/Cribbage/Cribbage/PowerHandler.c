@@ -17,6 +17,7 @@ void HandleButtonPress()
 		// Show battery timeout
 		if (currentTime > timeStart_ms + SHOW_BATTERY_TIMEOUT && currentTime < timeStart_ms + SHOW_BATTERY_TIMEOUT) {
 			__ASM("BKPT 255");
+			// TODO trigger an ADC readout in this ISR, which triggers ADC ISR, then displays the voltage via user Display.
 		// Reset game timeout
 		} else if (currentTime > timeStart_ms + RESET_GAME_TIME_MS) {
 			__ASM("BKPT 255");
