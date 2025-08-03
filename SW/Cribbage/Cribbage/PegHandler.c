@@ -128,9 +128,9 @@ void UpdateBankInfo()
 	// RedBuffer.End = HAL_GPIO_ReadPin(FinalPin.pinPort, FinalPin.pinNumber) == GPIO_PIN_SET;
 }
 
-static const char* InitText = "1n1t";
+static const char* InitText = "1n1t-";
 static const char* WinText = "F1n1sh";
-static Color c = ColorUndefined;
+static Color c;
 
 void HandlePegStateMachine()
 {

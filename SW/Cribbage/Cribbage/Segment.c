@@ -288,10 +288,10 @@ static inline void FillBuffer(SegmentVal v, Color col, PaddedColor* a, PaddedCol
 			SetDark(a);
 			SetDark(b);
 			SetDark(c);
-			ColorToBuffer(col, d);
+			SetDark(d);
 			ColorToBuffer(col, e);
 			ColorToBuffer(col, f);
-			ColorToBuffer(col, g);
+			ColorToBuffer(col, g); // Drop
 			break;
 		}
 	case Display_Y:

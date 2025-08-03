@@ -1,6 +1,7 @@
 #include "Display.h"
 #include <stdbool.h>
 #include "stm32g4xx_hal.h"
+#include <math.h>
 
 #define BUFFER_SIZE 8
 static Color systemColor = { 0 };
@@ -44,13 +45,12 @@ void SetSystemText(Color c, char* dat, uint8_t len) {
 // Current red delta (R), current green Delta (G), total red points (R), total green points (G).
 // These should alternate through every 5s. Peg will provide immediate - i.e. delta between the two pegs
 // for the respective player.
-// Data rotates through on a 500ms. So an 8 character message, will take 4s.
 // User data as of now is defined as battery voltage. Dash replaces the decimal.
 
 // This state machine is only responsible for managing user vs system Display, and timing of displaying
 // strings. Peg Handler will manage how to display.
 
-static const uint32_t UpdateRate_ms = 500;
+static const uint32_t UpdateRate_ms = 750;
 static uint32_t lastUpdated = 0;
 void RunDisplayStateMachine()
 {
@@ -66,6 +66,7 @@ void RunDisplayStateMachine()
 		v1 = UserBuffer[bufferPtr + 1]; 
 		// For user data, we do not wrap. Display once and revert back to system.
 		if (doIncrement) {
+			lastUpdated = currentTime;
 			if (bufferPtr == userLen - 1) {
 				IsUserActive = false;
 				bufferPtr = 0;
@@ -75,16 +76,18 @@ void RunDisplayStateMachine()
 		}
 	} else {
 		desiredColor = systemColor;
-		if (bufferPtr == userLen - 1) {
-			v0 = SystemBuffer[userLen - 1];
+		if (bufferPtr == sysLen - 1) {
+			v0 = SystemBuffer[sysLen - 1];
 			v1 = SystemBuffer[0];
 		} else {
 			v0 = SystemBuffer[bufferPtr];
-			v1 = UserBuffer[bufferPtr + 1]; 
+			v1 = SystemBuffer[bufferPtr + 1]; 
 		}
 		if (doIncrement) {
-			bufferPtr = ((bufferPtr + 1) % BUFFER_SIZE);
+			lastUpdated = currentTime;
+			bufferPtr = ((bufferPtr + 1) % sysLen);
 		}
 	}
+	
 	SetDisplay(v0, desiredColor, v1, desiredColor);
 }

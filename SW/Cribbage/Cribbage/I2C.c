@@ -15,7 +15,7 @@ static void InitializeI2CPins()
 	init.Speed = i2cPinSpeed;
 	init.Mode = i2cPinMode;
 	init.Pull = i2cPinPull;
-	init.Alternate = GPIO_AF2_I2C3; // TODO determine AF
+	init.Alternate = GPIO_AF4_I2C1;
 	init.Pin = I2C_SDA.pinNumber;
 	HAL_GPIO_Init(I2C_SDA.pinPort, &init);
 	init.Pin = I2C_SCL.pinNumber;
@@ -24,6 +24,11 @@ static void InitializeI2CPins()
 
 void InitializeI2C()
 {
+	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
+	RCC_PeriphCLKInitTypeDef PeriphClkInit = { 0 };
+	PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_I2C1;
+	PeriphClkInit.I2c1ClockSelection = RCC_I2C1CLKSOURCE_PCLK1;
+	HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit);
 	__HAL_RCC_I2C1_CLK_ENABLE();
 	I2C_InitTypeDef init;
 	init.Timing = 0x0000DDDE;
@@ -37,6 +42,9 @@ void InitializeI2C()
 	hi2c.Instance = I2C1;
 	hi2c.Init = init;
 	HAL_I2C_Init(&hi2c);
+	InitializeI2CPins();
+	HAL_I2CEx_ConfigAnalogFilter(&hi2c, I2C_ANALOGFILTER_ENABLE);
+	HAL_I2CEx_ConfigDigitalFilter(&hi2c, 0);
 }
 
 HAL_StatusTypeDef I2CWrite(uint16_t addr, uint8_t* dat, uint8_t length)
@@ -59,4 +67,17 @@ HAL_StatusTypeDef I2CReadRegisters(uint16_t i2CAddress, uint8_t* writeDat, uint8
 	
 	err = HAL_I2C_Master_Receive(&hi2c, i2CAddress, readDat, readLength, I2CTimeout_ms);
 	return err;
+}
+
+HAL_StatusTypeDef I2CReadMemory(uint8_t deviceAddr,uint8_t memoryAddr, uint8_t memorySizeBytes, uint8_t* buffer, uint8_t countToRead)
+{
+	HAL_StatusTypeDef err = HAL_I2C_Mem_Read(&hi2c,
+		deviceAddr,
+		memoryAddr,
+		memorySizeBytes,
+		buffer,
+		countToRead,
+		I2CTimeout_ms
+	);
+	return err;	
 }

@@ -7,10 +7,9 @@ static HAL_StatusTypeDef WriteI2C(uint8_t addr, uint8_t* data, uint8_t length)
 	return I2CWrite(addr, data, length);
 }
 
-static HAL_StatusTypeDef ReadI2C()
+static HAL_StatusTypeDef ReadI2C(uint8_t addr, uint8_t* data, uint8_t len)
 {
-	TCAError err = Error_Okay;
-	return err;
+	return I2CRead(addr, data, len);
 }
 
 static TCAError WriteRegister(uint8_t addr, TCACommandByte cmd, uint8_t data)
@@ -21,6 +20,25 @@ static TCAError WriteRegister(uint8_t addr, TCACommandByte cmd, uint8_t data)
 	{
 		return Error_Fail;
 	}
+	return Error_Okay;
+}
+
+static TCAError ReadRegister(uint8_t deviceAddress, uint8_t memoryAddress, uint8_t* ret)
+{
+	uint8_t returnByte = 0;	
+	HAL_StatusTypeDef err = I2CReadMemory(
+		deviceAddress,
+		memoryAddress,
+		1,
+		&returnByte,
+		1
+	);
+	if (err != HAL_OK)
+	{
+		
+		return Error_Fail;
+	}
+	*ret = returnByte;
 	return Error_Okay;
 }
 
@@ -99,6 +117,8 @@ TCAError writePin(TCA9555* dev, TCA9555Pins pin, bool writeValHigh)
 TCAError readBank(TCA9555* dev, TCABank bank, uint8_t* retVal)
 {
 	TCAError err = Error_Okay;
+	// TODO may need to modify the returnValue here.
+	ReadRegister(dev->addr, (uint8_t)bank, retVal);
 	return err;
 }
 
