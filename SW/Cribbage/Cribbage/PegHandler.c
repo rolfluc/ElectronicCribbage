@@ -170,7 +170,7 @@ void HandlePegStateMachine()
 			if (RedBuffer.Start0 == false && RedBuffer.Start1 == false) {
 
 			} else if ((RedBuffer.Start0 == true || RedBuffer.Start1 == true) && RedBuffer.data > 0) {
-				redDelta = CTZ(RedBuffer.DataSize);
+				redDelta = CTZ(RedBuffer.data);
 				// TODO for testing. Do more.
 			} else if (GreenBuffer.End == true) {
 				currentState = EndGame;
@@ -193,7 +193,7 @@ void HandlePegStateMachine()
 					}
 				}
 			} else if ((GreenBuffer.Start0 == true || GreenBuffer.Start1 == true) && GreenBuffer.data > 0) {
-				greenDelta = CTZ(RedBuffer.DataSize);
+				greenDelta = CTZ(RedBuffer.data);
 				// TODO migrate above code to function to use for green. Likely accept generic input.
 			}
 		}

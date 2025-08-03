@@ -52,7 +52,6 @@ static inline void FillBuffer(SegmentVal v, Color col, PaddedColor* a, PaddedCol
 {
 	switch (v)
 	{
-	case Display_O:
 	case Display_0:
 		{
 			ColorToBuffer(col, a);
@@ -108,7 +107,6 @@ static inline void FillBuffer(SegmentVal v, Color col, PaddedColor* a, PaddedCol
 			ColorToBuffer(col, g);
 			break;
 		}
-	case Display_S:
 	case Display_5:
 		{
 			ColorToBuffer(col, a);
@@ -333,7 +331,7 @@ static inline void FillBuffer(SegmentVal v, Color col, PaddedColor* a, PaddedCol
 }
 
 SegmentVal GetSegmentForChar(char val) {
-	switch(val):
+	switch(val)
 	{
 	case '0':
 		return Display_0;
@@ -409,7 +407,7 @@ SegmentVal GetSegmentForChar(char val) {
 
 char GetCharFromSegmentVal(SegmentVal val)
 {
-	switch(val):
+	switch(val)
 	{
 	case Display_0:
 		return '0';

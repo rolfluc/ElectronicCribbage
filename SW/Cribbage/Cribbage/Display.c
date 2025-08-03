@@ -1,4 +1,6 @@
 #include "Display.h"
+#include <stdbool.h>
+#include "stm32g4xx_hal.h"
 
 #define BUFFER_SIZE 8
 static Color systemColor = { 0 };
@@ -20,19 +22,20 @@ static uint8_t ConvertStringToBuffer(SegmentVal* buffer, char* dat, uint8_t len)
 	for (uint8_t i = 0; i < len; i++) {
 		buffer[i] = GetSegmentForChar(dat[i]);
 	}
+	return convertedLength;
 }
 
 void SetUserText(Color c, char* dat, uint8_t len) {
 	userColor = c;
 	IsUserActive = true;
-	userLen = ConvertStringToBuffer(c,&UserBuffer[0], dat, len);
+	userLen = ConvertStringToBuffer(&UserBuffer[0], dat, len);
 }
 
 void SetSystemText(Color c, char* dat, uint8_t len) {
 	systemColor = c;
 	// TODO compare if the same. If the same do nothing.
 	// TODO if compared results are different, reset to zero bufferPtr
-	sysLen = ConvertStringToBuffer(c,&SystemBuffer[0], dat, len);
+	sysLen = ConvertStringToBuffer(&SystemBuffer[0], dat, len);
 }
 
 // Thought process on this state machine. First, if user is active, run through user data
