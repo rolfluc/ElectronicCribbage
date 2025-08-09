@@ -82,7 +82,9 @@ int main(void)
 	InitHB();
 	InitPowerSense();
 	InitSPI();
+	InitPegs();
 	InitExpanders();
+	
 	//InitADC();
 	
 	for (;;)

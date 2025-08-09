@@ -85,7 +85,7 @@ void InitPegs()
 	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
 	GPIO_InitStruct.Pin = Start_00.pinNumber;
 	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Pull = GPIO_PULLUP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 
 	HAL_GPIO_Init(Start_00.pinPort, &GPIO_InitStruct);
@@ -116,15 +116,15 @@ void UpdateBankInfo()
 	LastGreenBuffer = GreenBuffer;
 	LastRedBuffer = RedBuffer;
 	GreenBuffer.data = leftBank;
-	GreenBuffer.Start0 = HAL_GPIO_ReadPin(Start_00.pinPort, Start_00.pinNumber) == GPIO_PIN_SET;
-	GreenBuffer.Start1 = HAL_GPIO_ReadPin(Start_01.pinPort, Start_01.pinNumber) == GPIO_PIN_SET;
+	GreenBuffer.Start0 = HAL_GPIO_ReadPin(Start_00.pinPort, Start_00.pinNumber) == GPIO_PIN_RESET;
+	GreenBuffer.Start1 = HAL_GPIO_ReadPin(Start_01.pinPort, Start_01.pinNumber) == GPIO_PIN_RESET;
 	// TODO check this logic.  Rainbow "Game Over" scenario. Green vs red cannot be explicitly determined 
 	// for win scenario.
 	GreenBuffer.End = HAL_GPIO_ReadPin(FinalPin.pinPort, FinalPin.pinNumber) == GPIO_PIN_SET;
 	
 	RedBuffer.data = rightBank;
-	RedBuffer.Start0 = HAL_GPIO_ReadPin(Start_10.pinPort, Start_10.pinNumber) == GPIO_PIN_SET;
-	RedBuffer.Start1 = HAL_GPIO_ReadPin(Start_11.pinPort, Start_11.pinNumber) == GPIO_PIN_SET;
+	RedBuffer.Start0 = HAL_GPIO_ReadPin(Start_10.pinPort, Start_10.pinNumber) == GPIO_PIN_RESET;
+	RedBuffer.Start1 = HAL_GPIO_ReadPin(Start_11.pinPort, Start_11.pinNumber) == GPIO_PIN_RESET;
 	// RedBuffer.End = HAL_GPIO_ReadPin(FinalPin.pinPort, FinalPin.pinNumber) == GPIO_PIN_SET;
 }
 
