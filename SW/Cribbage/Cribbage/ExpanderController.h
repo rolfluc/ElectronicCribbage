@@ -1,7 +1,7 @@
 #pragma once
 #include "TCA9555.h"
 
-#define NUMBER_EXPANDERS 1 // TODO for faster testing
+#define NUMBER_EXPANDERS 6 
 void InitExpanders();
 uint32_t GetBankReadings(uint8_t TCADevice);
 void StartBankReadings();

@@ -107,8 +107,8 @@ void UpdateBankInfo()
 	{
 		// then shifts into the right position.
 		uint32_t bankInfo = GetBankReadings(i);
-		uint16_t left = bankInfo & 0x000003ff;
-		uint16_t right = bankInfo >> 16;
+		uint64_t left = bankInfo & 0x000003ff;
+		uint64_t right = (bankInfo >> 16) & 0x000003ff;
 		leftBank |= left << (i * 10);
 		rightBank |= right << (i * 10);
 	}
