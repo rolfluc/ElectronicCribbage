@@ -25,7 +25,6 @@ typedef enum
 	Display_P,
 	Display_r,
 	Display_Y,
-	Display_t,
 	Display_underscore,
 	Display_dash,
 	Display_Nothing,

@@ -3,6 +3,7 @@
 #include "stm32g4xx_hal.h"
 #include "PinDefs.h"
 #include "Display.h"
+#include <string.h>
 
 #define BUFFER_LEN NUMBER_EXPANDERS * 2 
 #define TOTAL_LENGTH 60
@@ -127,7 +128,7 @@ void UpdateBankInfo()
 	// RedBuffer.End = HAL_GPIO_ReadPin(FinalPin.pinPort, FinalPin.pinNumber) == GPIO_PIN_SET;
 }
 
-static const char* InitText = "1n1t-";
+static const char* InitText = "ceased";
 static const char* WinText = "F1n1sh";
 static Color c;
 
@@ -139,7 +140,7 @@ void HandlePegStateMachine()
 		case WaitingForInitCondition:
 		{
 			c = ColorBlue;
-			SetSystemText(c,(char*)InitText, sizeof(InitText));
+			SetSystemText(c, (char*)InitText, strlen(InitText));
 			if (RedBuffer.Start0 == true && RedBuffer.Start1 == true &&
 				GreenBuffer.Start0 == true && GreenBuffer.Start1 == true)
 			{
@@ -209,5 +210,5 @@ void HandlePegStateMachine()
 			break;	
 		}
 	}
-	// RunDisplayStateMachine();
+	RunDisplayStateMachine();
 }

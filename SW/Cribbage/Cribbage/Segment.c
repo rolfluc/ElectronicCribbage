@@ -283,17 +283,6 @@ static inline void FillBuffer(SegmentVal v, Color col, PaddedColor* a, PaddedCol
 			ColorToBuffer(col, g);
 			break;
 		}
-	case Display_t:
-		{
-			SetDark(a);
-			SetDark(b);
-			SetDark(c);
-			SetDark(d);
-			ColorToBuffer(col, e);
-			ColorToBuffer(col, f);
-			ColorToBuffer(col, g); // Drop
-			break;
-		}
 	case Display_Y:
 		{
 			SetDark(a);
@@ -395,8 +384,6 @@ SegmentVal GetSegmentForChar(char val) {
 	case 'y':
 		return Display_Y;
 	case 'T': // intentional fallthrough
-	case 't':
-		return Display_t;
 	case '_':
 		return Display_underscore;
 	case '-': // Intentional fallthrough.  Unknown characters become dashes
@@ -455,8 +442,6 @@ char GetCharFromSegmentVal(SegmentVal val)
 		return 'r';
 	case Display_Y:
 		return 'y';
-	case Display_t:
-		return 't';
 	case Display_underscore:
 		return '_';
 	case Display_dash:
