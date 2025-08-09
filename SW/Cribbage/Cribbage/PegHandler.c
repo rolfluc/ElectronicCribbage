@@ -105,13 +105,12 @@ void UpdateBankInfo()
 	uint64_t rightBank = 0;
 	for (uint8_t i = 0; i < NUMBER_EXPANDERS; i++)
 	{
-		// Takes the <xxxLLLLLxxxRRRRR>, drops them into their own left/right,
 		// then shifts into the right position.
-		uint16_t bankInfo = GetBankReadings(i);
-		uint8_t left = bankInfo & 0x00ff;
-		uint8_t right = bankInfo >> 8;
-		leftBank |= left << (i * 5);
-		rightBank |= right << (i * 5);
+		uint32_t bankInfo = GetBankReadings(i);
+		uint16_t left = bankInfo & 0x000003ff;
+		uint16_t right = bankInfo >> 16;
+		leftBank |= left << (i * 10);
+		rightBank |= right << (i * 10);
 	}
 	LastGreenBuffer = GreenBuffer;
 	LastRedBuffer = RedBuffer;
@@ -210,5 +209,5 @@ void HandlePegStateMachine()
 			break;	
 		}
 	}
-	RunDisplayStateMachine();
+	// RunDisplayStateMachine();
 }

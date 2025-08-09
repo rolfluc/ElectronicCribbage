@@ -1,11 +1,11 @@
 #pragma once
 #include "TCA9555.h"
 
-#define NUMBER_EXPANDERS 6
+#define NUMBER_EXPANDERS 1 // TODO for faster testing
 void InitExpanders();
-uint16_t GetBankReadings(uint8_t TCADevice);
+uint32_t GetBankReadings(uint8_t TCADevice);
 void StartBankReadings();
 void SetUse3v2(uint8_t TCADevice, bool doUse);
 void InitOutputVoltages();
-void SetB0s(bool turnOn);
-void SetB1s(bool turnOn);
+void SetB0s();
+void SetB1s();

@@ -97,27 +97,9 @@ TCAError readPin(TCA9555* dev, TCA9555Pins pin, bool* retVal)
 	return err;
 }
 
-TCAError writePin(TCA9555* dev, TCA9555Pins pin, bool writeValHigh)
-{
-	TCAError err = Error_Okay;
-	TCACommandByte cmd = pin < TCAPin_10 ? OutputPort0 : OutputPort1;
-	if (writeValHigh)
-	{
-		dev->shadowRegisters[cmd] |=  PinToOffset(pin);
-	}
-	else
-	{
-		dev->shadowRegisters[cmd]  &= ~PinToOffset(pin);
-	}
-	
-	err = WriteRegister(dev->addr, cmd, dev->shadowRegisters[cmd]);
-	return err;
-}
-
 TCAError readBank(TCA9555* dev, TCABank bank, uint8_t* retVal)
 {
 	TCAError err = Error_Okay;
-	// TODO may need to modify the returnValue here.
 	ReadRegister(dev->addr, (uint8_t)bank, retVal);
 	return err;
 }
@@ -126,25 +108,7 @@ TCAError writeBank(TCA9555* dev, TCABank bank, uint8_t writeVal)
 {
 	TCAError err = Error_Okay;
 	TCACommandByte reg = (bank == Bank_0) ? OutputPort0 : OutputPort1;
-	dev->shadowRegisters[reg] = writeVal;
-	err = WriteRegister(dev->addr, reg, dev->shadowRegisters[reg]);
-	return err;
-}
-
-TCAError configPin(TCA9555* dev, TCA9555Pins pin, TCAPinConfig config)
-{
-	TCAError err = Error_Okay;
-	TCACommandByte cmd = pin < TCAPin_10 ? ConfigPort0 : ConfigPort1;
-	if (config == Config_Input)
-	{
-		dev->shadowRegisters[cmd] |=  PinToOffset(pin);
-	}
-	else
-	{
-		dev->shadowRegisters[cmd]  &= ~PinToOffset(pin);
-	}
-	
-	err = WriteRegister(dev->addr, cmd, dev->shadowRegisters[cmd]);
+	err = WriteRegister(dev->addr, reg, writeVal);
 	return err;
 }
 
@@ -152,7 +116,6 @@ TCAError configPort(TCA9555* dev, TCABank bank, uint8_t config)
 {
 	TCAError err = Error_Okay;
 	TCACommandByte reg = (bank == Bank_0) ? ConfigPort0 : ConfigPort1;
-	dev->shadowRegisters[(uint8_t)reg] = config;
-	err = WriteRegister(dev->addr, reg, dev->shadowRegisters[(uint8_t)reg]);
+	err = WriteRegister(dev->addr, reg, config);
 	return err;
 }
