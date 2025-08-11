@@ -44,18 +44,24 @@ static inline bool DidLoop(uint8_t firstPos, uint8_t secondPos)
 // Count Trailing Zeros
 static inline uint8_t CTZ(uint64_t val)
 {
+	if (val == 0) {
+		return 0;
+	}
 	uint8_t retVal = TOTAL_LENGTH;
-	while ((val & (1 >> retVal)) == 0)
+	while ((val & (1 << retVal)) == 0)
 	{
 		retVal--;
 	}
 	
-	return retVal;
+	return retVal + 1;
 }
 
 // Count leading zeros.
 static inline uint8_t CLZ(uint64_t val)
 {
+	if (val == 0) {
+		return 0;
+	}
 	uint8_t retVal = 0;
 	while ((val & (1 >> retVal)) == 0)
 	{
@@ -132,8 +138,19 @@ static const char* InitText = "ceased";
 static const char* WinText = "F1n1sh";
 static Color c;
 
+static void FillNumberBuffer(char* buffer, uint8_t num) {
+	if (num < 10) {
+		buffer[0] = '0';
+		buffer[1] = num + '0';
+	} else {
+		buffer[0] = (num / 10) + '0';
+		buffer[1] = (num % 10) + '0';
+	}
+}
+
 void HandlePegStateMachine()
 {
+	char numberBuffer[2] = "";
 	switch (currentState)
 	{
 		// Waiting for init, is waiting for the pegs to be in the starting holes.
@@ -171,7 +188,9 @@ void HandlePegStateMachine()
 
 			} else if ((RedBuffer.Start0 == true || RedBuffer.Start1 == true) && RedBuffer.data > 0) {
 				redDelta = CTZ(RedBuffer.data);
-				// TODO for testing. Do more.
+				c = ColorRed;
+				FillNumberBuffer(numberBuffer, redDelta);
+				SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
 			} else if (GreenBuffer.End == true) {
 				currentState = EndGame;
 				// Migrated, rerun. Warning recursive.
@@ -193,8 +212,10 @@ void HandlePegStateMachine()
 					}
 				}
 			} else if ((GreenBuffer.Start0 == true || GreenBuffer.Start1 == true) && GreenBuffer.data > 0) {
-				greenDelta = CTZ(RedBuffer.data);
-				// TODO migrate above code to function to use for green. Likely accept generic input.
+				greenDelta = CTZ(GreenBuffer.data);
+				c = ColorGreen;
+				FillNumberBuffer(numberBuffer, greenDelta);
+				SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
 			}
 		}
 		break;

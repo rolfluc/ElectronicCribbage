@@ -1,12 +1,14 @@
 #include "Display.h"
 #include <stdbool.h>
 #include "stm32g4xx_hal.h"
+#include <string.h>
 #include <math.h>
 
 #define BUFFER_SIZE 8
 static Color systemColor = { 0 };
 static uint8_t sysLen = 0;
 static SegmentVal SystemBuffer[BUFFER_SIZE];
+
 static Color userColor = { 0 };
 static uint8_t userLen = 0;
 static SegmentVal UserBuffer[BUFFER_SIZE];
@@ -32,11 +34,29 @@ void SetUserText(Color c, char* dat, uint8_t len) {
 	userLen = ConvertStringToBuffer(&UserBuffer[0], dat, len);
 }
 
+static inline bool AreBuffersTheSame(SegmentVal* currentBuffer, SegmentVal* newBuffer, uint8_t newBufferLen) {
+	for (uint8_t i = 0; i < newBufferLen; i++) {
+		if (currentBuffer[i] != newBuffer[i]) {
+			return false;
+		}
+	}
+	return true;
+}
+
 void SetSystemText(Color c, char* dat, uint8_t len) {
-	systemColor = c;
+	SegmentVal tmpBuffer[BUFFER_SIZE];
+	uint8_t tmpLen = 0;
 	// TODO compare if the same. If the same do nothing.
 	// TODO if compared results are different, reset to zero bufferPtr
-	sysLen = ConvertStringToBuffer(&SystemBuffer[0], dat, len);
+	tmpLen = ConvertStringToBuffer(&tmpBuffer[0], dat, len);
+	// If the two buffers differ, make some changes.
+	if (!AreBuffersTheSame(&SystemBuffer[0], &tmpBuffer[0], tmpLen)) {
+		sysLen = tmpLen;
+		memcpy(&SystemBuffer[0], &tmpBuffer[0], sysLen * sizeof(tmpBuffer[0]));
+		systemColor = c;
+		bufferPtr = 0;
+	}
+	// If they are the same, change nothing.
 }
 
 // Thought process on this state machine. First, if user is active, run through user data
@@ -76,17 +96,28 @@ void RunDisplayStateMachine()
 		}
 	} else {
 		desiredColor = systemColor;
-		if (bufferPtr == sysLen - 1) {
-			v0 = SystemBuffer[sysLen - 1];
-			v1 = SystemBuffer[0];
-		} else {
+		// Most of the time, it's just numeric.
+		if (sysLen == 2)
+		{
 			v0 = SystemBuffer[bufferPtr];
 			v1 = SystemBuffer[bufferPtr + 1]; 
 		}
-		if (doIncrement) {
-			lastUpdated = currentTime;
-			bufferPtr = ((bufferPtr + 1) % sysLen);
+		else
+		{
+			if (bufferPtr == sysLen - 1) {
+				v0 = SystemBuffer[sysLen - 1];
+				v1 = SystemBuffer[0];
+			}
+			else {
+				v0 = SystemBuffer[bufferPtr];
+				v1 = SystemBuffer[bufferPtr + 1]; 
+			}
+			if (doIncrement) {
+				lastUpdated = currentTime;
+				bufferPtr = ((bufferPtr + 1) % sysLen);
+			}
 		}
+		
 	}
 	
 	SetDisplay(v0, desiredColor, v1, desiredColor);
