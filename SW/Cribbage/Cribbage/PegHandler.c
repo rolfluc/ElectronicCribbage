@@ -153,6 +153,47 @@ void HandlePegStateMachine()
 	char numberBuffer[2] = "";
 	switch (currentState)
 	{
+		case Running:
+		{
+			uint8_t greenDelta = 0;
+			uint8_t redDelta = 0;
+			// Two conditions here. Comparing two pegs in field, or peg in field against start peg.
+			if (RedBuffer.Start0 == false && RedBuffer.Start1 == false) {
+				uint8_t trailing = CTZ(RedBuffer.data);
+				uint8_t leading = CLZ(RedBuffer.data);
+				// If these two equal length - 1, means only 1 peg inserted. Set to invalid value
+				if (trailing + leading == TOTAL_LENGTH - 1) {
+					redDelta = 0xff;
+				}
+				else {
+					// Example measurement. If trailing zeros is 10, we have a peg at 11.
+					// If leading zeros is 30, we have a peg at 29. In this scenario, we want to subtract
+					// we want to subtract trailing zeros from leading zeros to get the valid result.
+					redDelta = leading - trailing;
+					if (redDelta > maxCribbageHand) {
+
+					}
+				}
+			}
+			else if ((RedBuffer.Start0 == true || RedBuffer.Start1 == true) && RedBuffer.data > 0) {
+				redDelta = CTZ(RedBuffer.data);
+				c = ColorRed;
+				FillNumberBuffer(numberBuffer, redDelta);
+				SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
+			}
+			else if ((GreenBuffer.Start0 == true || GreenBuffer.Start1 == true) && GreenBuffer.data > 0) {
+				greenDelta = CTZ(GreenBuffer.data);
+				c = ColorGreen;
+				FillNumberBuffer(numberBuffer, greenDelta);
+				SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
+			}
+			else if (GreenBuffer.End == true) {
+				currentState = EndGame;
+				// Migrated, rerun. Warning recursive.
+				HandlePegStateMachine();
+			}
+		}
+		break;
 		// Waiting for init, is waiting for the pegs to be in the starting holes.
 		case WaitingForInitCondition:
 		{
@@ -177,53 +218,12 @@ void HandlePegStateMachine()
 			}
 			break;
 		}
-			
-		// Running, is running but not looped yet. i.e. first pass of the 60 points. i.e. 1->60 pts
-		case Running:
-		{
-			uint8_t greenDelta = 0;
-			uint8_t redDelta = 0;
-			// Two conditions here. Comparing two pegs in field, or peg in field against start peg.
-			if (RedBuffer.Start0 == false && RedBuffer.Start1 == false) {
-
-			} else if ((RedBuffer.Start0 == true || RedBuffer.Start1 == true) && RedBuffer.data > 0) {
-				redDelta = CTZ(RedBuffer.data);
-				c = ColorRed;
-				FillNumberBuffer(numberBuffer, redDelta);
-				SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
-			} else if (GreenBuffer.End == true) {
-				currentState = EndGame;
-				// Migrated, rerun. Warning recursive.
-				HandlePegStateMachine();
-			}
-			if (RedBuffer.Start0 == false && RedBuffer.Start1 == false) {
-				uint8_t trailing = CTZ(RedBuffer.data);
-				uint8_t leading = CLZ(RedBuffer.data);
-				// If these two equal length - 1, means only 1 peg inserted. Set to invalid value
-				if (trailing + leading == TOTAL_LENGTH - 1) {
-					redDelta = 0xff;
-				} else {
-					// Example measurement. If trailing zeros is 10, we have a peg at 11.
-					// If leading zeros is 30, we have a peg at 29. In this scenario, we want to subtract
-					// we want to subtract trailing zeros from leading zeros to get the valid result.
-					redDelta = leading - trailing;
-					if (redDelta > maxCribbageHand) {
-
-					}
-				}
-			} else if ((GreenBuffer.Start0 == true || GreenBuffer.Start1 == true) && GreenBuffer.data > 0) {
-				greenDelta = CTZ(GreenBuffer.data);
-				c = ColorGreen;
-				FillNumberBuffer(numberBuffer, greenDelta);
-				SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
-			}
-		}
-		break;
 		// End-game, is when a peg is in the final hole. 
 		case EndGame:
 		{
 			c = ColorWhite;
-			SetSystemText(c,(char*)InitText, sizeof(InitText));
+			SetSystemText(c, (char*)WinText, strlen(WinText));
+			break;
 		}
 		default:
 		{
