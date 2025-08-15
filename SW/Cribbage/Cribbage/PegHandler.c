@@ -11,9 +11,12 @@
 typedef enum 
 {
 	WaitingForInitCondition = 0,
-	Initialized             = 1,
-	Running                 = 2,
-	EndGame                 = 3,
+	Initialized,
+	GreenStarted,
+	RedStarted,
+	BothStarted,
+	Running,
+	EndGame,
 }PegStateMachine;
 
 typedef struct
@@ -24,17 +27,20 @@ typedef struct
 	bool End;
 }PegData;
 
+static const uint32_t updateRate_ms = 3000;
 static const uint8_t maxCribbageHand = 29;
+static const char* InitText = "ceased";
+static const char* WinText = "F1n1sh";
+static Color c;
+static uint32_t lastTransitionTime_ms = 0; 
+static bool lastDisplayedRed = false;
 
-static bool redLooped = false;
 static PegData RedBuffer = { 0 };
 static PegData LastRedBuffer = { 0 };
-static uint8_t redPoints = 0;
-static bool greenLooped = false;
 static PegData GreenBuffer = { 0 };
 static PegData LastGreenBuffer = { 0 };
-static uint8_t greenPoints = 0;
 static PegStateMachine currentState = WaitingForInitCondition;
+
 
 static inline bool DidLoop(uint8_t firstPos, uint8_t secondPos)
 {
@@ -71,19 +77,36 @@ static inline uint8_t CLZ(uint64_t val)
 	return retVal;
 }
 
-typedef struct 
-{
-	uint8_t first;
-	uint8_t second;
-}PegPositions;
+// Thought process:
+// 000000000000000000000000000000000000000000000000000000000000
+// is clearly, nothing detected.
+// 000000000000000000000000000000000000000000000000000000000001
+// Has one peg, in the first position.
+// 000000000000000000000000000000000000000000000000000000000010
+// has one peg, in 2nd position, leading to 2 points.
+// 000000000000000000000000000000000000000000000000000000000011
+// Has 2 pega, one in the 2nd, and 1 in the first, leading to 1 pt.
+// This math can be performed by CTZ() - which would return 1, 
+// and CLZ would return 58. 60 - 58 - 1 = 1
+// 000000000000000000000000000000000000000000000000000000010010
+// has a peg in points position 2, and a peg in points position 5. 
+// Actual points is 3. CTZ() will return 2, CLZ() will return 55
+// 60 - 55 - 2 = 3
+// 010000000000000000000000000000000000000000000000000000000010
+// Has pega in position 2 and position 58. This is clearly a loop.
+// CTZ() will return 2. CLZ() will return 1. 
+// 60 - 1 - 2 = 57.  Technically, the last one is "in front" of the first.
+// So if the delta is > Max Hand Size, you take the above and take 60-res. 
 
-
-static inline PegPositions getPegPositions(uint64_t buffer)
-{
-	PegPositions pos = { 0, 0 };
-	pos.first = CLZ(buffer);
-	pos.second = CTZ(buffer);
-	return pos;
+static inline uint8_t getDelta(uint64_t bufferData) {
+	uint8_t ctz = CTZ(bufferData);
+	uint8_t clz = CLZ(bufferData);
+	// TODO maybe double check as to whether if CTZ + CLZ = total length?
+	uint8_t delta = TOTAL_LENGTH - clz - ctz;
+	if (delta > maxCribbageHand) {
+		delta = TOTAL_LENGTH - delta;
+	}
+	return delta;
 }
 
 void InitPegs()
@@ -134,10 +157,6 @@ void UpdateBankInfo()
 	// RedBuffer.End = HAL_GPIO_ReadPin(FinalPin.pinPort, FinalPin.pinNumber) == GPIO_PIN_SET;
 }
 
-static const char* InitText = "ceased";
-static const char* WinText = "F1n1sh";
-static Color c;
-
 static void FillNumberBuffer(char* buffer, uint8_t num) {
 	if (num < 10) {
 		buffer[0] = '0';
@@ -155,43 +174,11 @@ void HandlePegStateMachine()
 	{
 		case Running:
 		{
-			uint8_t greenDelta = 0;
-			uint8_t redDelta = 0;
-			// Two conditions here. Comparing two pegs in field, or peg in field against start peg.
-			if (RedBuffer.Start0 == false && RedBuffer.Start1 == false) {
-				uint8_t trailing = CTZ(RedBuffer.data);
-				uint8_t leading = CLZ(RedBuffer.data);
-				// If these two equal length - 1, means only 1 peg inserted. Set to invalid value
-				if (trailing + leading == TOTAL_LENGTH - 1) {
-					redDelta = 0xff;
-				}
-				else {
-					// Example measurement. If trailing zeros is 10, we have a peg at 11.
-					// If leading zeros is 30, we have a peg at 29. In this scenario, we want to subtract
-					// we want to subtract trailing zeros from leading zeros to get the valid result.
-					redDelta = leading - trailing;
-					if (redDelta > maxCribbageHand) {
-
-					}
-				}
-			}
-			else if ((RedBuffer.Start0 == true || RedBuffer.Start1 == true) && RedBuffer.data > 0) {
-				redDelta = CTZ(RedBuffer.data);
-				c = ColorRed;
-				FillNumberBuffer(numberBuffer, redDelta);
-				SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
-			}
-			else if ((GreenBuffer.Start0 == true || GreenBuffer.Start1 == true) && GreenBuffer.data > 0) {
-				greenDelta = CTZ(GreenBuffer.data);
-				c = ColorGreen;
-				FillNumberBuffer(numberBuffer, greenDelta);
-				SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
-			}
-			else if (GreenBuffer.End == true) {
-				currentState = EndGame;
-				// Migrated, rerun. Warning recursive.
-				HandlePegStateMachine();
-			}
+			// TODO check if either buffer has changed, and that there are two pegs in field.
+			// If either player does not have two pegs, do not display them.
+			// If one changed, and has both in field, display it immediately.
+			// If neither changed, alternate between showing their Current point totals,
+			// and their current delta.
 		}
 		break;
 		// Waiting for init, is waiting for the pegs to be in the starting holes.
@@ -211,13 +198,96 @@ void HandlePegStateMachine()
 		// Initialized, is when the pegs are in the holes, but none have been detected into any of the expander boards.
 		case Initialized:
 		{
-			if (GreenBuffer.data > 0 || RedBuffer.data > 0) {
-				currentState = Running;
+			if (GreenBuffer.data > 0 && RedBuffer.data == 0) {
+				currentState = GreenStarted;
+				// State transitioned, rerun. 
+				HandlePegStateMachine(); // Warning Recursion.
+			}
+			if (RedBuffer.data > 0 && GreenBuffer.data == 0) {
+				currentState = RedStarted;
+				// State transitioned, rerun. 
+				HandlePegStateMachine(); // Warning Recursion.
+			}
+			if (RedBuffer.data > 0 && GreenBuffer.data > 0) {
+				currentState = BothStarted;
+				// State transitioned, rerun. 
+				HandlePegStateMachine(); // Warning Recursion.
+			} 
+			break;
+		}
+		case GreenStarted:
+		{
+			uint8_t greenDelta = 0;
+			c = ColorGreen;
+			FillNumberBuffer(numberBuffer, greenDelta);
+			SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
+
+			if (RedBuffer.data > 0) {
+				currentState = BothStarted;
 				// State transitioned, rerun. 
 				HandlePegStateMachine(); // Warning Recursion.
 			}
 			break;
 		}
+		case RedStarted:
+		{
+			uint8_t redDelta = 0;
+			c = ColorRed;
+			FillNumberBuffer(numberBuffer, redDelta);
+			SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
+
+			if (GreenBuffer.data > 0) {
+				currentState = BothStarted;
+				// State transitioned, rerun. 
+				HandlePegStateMachine(); // Warning Recursion.
+			}
+			break;
+		}
+		case BothStarted:
+		{
+			if (GreenBuffer.Start0 == false && GreenBuffer.Start1 == false && 
+				RedBuffer.Start0 == false && RedBuffer.Start1 == false) {
+				currentState = Running;
+				// State transition, rerun.
+				HandlePegStateMachine();
+			} else {
+				// TODO below does not handle star tpositions properly.
+
+				// First, check if either have changed. This will show the change faster
+				// If neither Red nor Green have changed, then revert to the following.
+				if (RedBuffer.data != LastRedBuffer.data) {
+					c = ColorRed;
+					uint8_t redDelta = getDelta(RedBuffer.data);
+					FillNumberBuffer(numberBuffer, redDelta);
+					SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
+					lastDisplayedRed = true;
+				} else if (GreenBuffer.data != LastGreenBuffer.data) {
+					c = ColorGreen;
+					uint8_t greenDelta = getDelta(GreenBuffer.data);
+					FillNumberBuffer(numberBuffer, greenDelta);
+					SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
+					lastDisplayedRed = false;
+				} else {
+					// If we have not started on both, rotate between the two's positions.
+					uint32_t currentTime = HAL_GetTick();
+					if (currentTime > lastTransitionTime_ms + updateRate_ms) {
+						uint8_t displayBufferDat = 0;
+						lastTransitionTime_ms = currentState;
+						if (lastDisplayedRed) {
+							c = ColorGreen;	
+							displayBufferDat = getDelta(GreenBuffer.data);
+						} else {
+							c = ColorRed;
+							displayBufferDat = getDelta(RedBuffer.data);
+						}
+						FillNumberBuffer(numberBuffer, displayBufferDat);
+						SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
+						lastDisplayedRed = !lastDisplayedRed;
+					}	
+				}
+			}
+			break;
+		} 
 		// End-game, is when a peg is in the final hole. 
 		case EndGame:
 		{
