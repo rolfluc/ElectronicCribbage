@@ -101,7 +101,11 @@ static inline uint8_t CLZ(uint64_t val)
 static inline uint8_t getDelta(uint64_t bufferData) {
 	uint8_t ctz = CTZ(bufferData);
 	uint8_t clz = CLZ(bufferData);
-	// TODO maybe double check as to whether if CTZ + CLZ = total length?
+	// Check as to whether if CTZ + CLZ = total length.
+	// In this case, return 0.
+	if (ctz + clz == TOTAL_LENGTH) {
+		return 0;
+	}
 	uint8_t delta = TOTAL_LENGTH - clz - ctz;
 	if (delta > maxCribbageHand) {
 		delta = TOTAL_LENGTH - delta;
@@ -174,11 +178,52 @@ void HandlePegStateMachine()
 	{
 		case Running:
 		{
-			// TODO check if either buffer has changed, and that there are two pegs in field.
-			// If either player does not have two pegs, do not display them.
-			// If one changed, and has both in field, display it immediately.
-			// If neither changed, alternate between showing their Current point totals,
-			// and their current delta.
+			if (!GreenBuffer.End) {
+				// Check if either buffer has changed, and that there are two pegs in field.
+				// If either player does not have two pegs, do not display them.
+				// If one changed, and has both in field, display it immediately.
+				// If neither changed, alternate between showing their Current point totals,
+				// and their current delta.
+				uint8_t redDelta = getDelta(RedBuffer.data);
+				uint8_t greenDelta = getDelta(GreenBuffer.data);
+				if (RedBuffer.data != LastRedBuffer.data && redDelta > 0) {
+					c = ColorRed;	
+					FillNumberBuffer(numberBuffer, greenDelta);
+					SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
+					lastDisplayedRed = true;
+				} else if (GreenBuffer.data != LastGreenBuffer.data && greenDelta > 0) {
+					c = ColorGreen;	
+					FillNumberBuffer(numberBuffer, greenDelta);
+					SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
+					lastDisplayedRed = false;
+				} else {
+					// Alternate the display state machine.
+					uint32_t currentTime = HAL_GetTick();
+					if (currentTime > lastTransitionTime_ms + updateRate_ms) {
+						uint8_t displayBufferDat = 0;
+						lastTransitionTime_ms = currentState;
+						if (lastDisplayedRed) {
+							c = ColorGreen;	
+							displayBufferDat = greenDelta;
+							if (displayBufferDat == 0) {
+								// TODO maybe don't show?
+							}
+						} else {
+							c = ColorRed;
+							displayBufferDat = redDelta;
+							if (displayBufferDat == 0) {
+								// TODO maybe don't show?
+							}
+						}
+						FillNumberBuffer(numberBuffer, displayBufferDat);
+						SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
+						lastDisplayedRed = !lastDisplayedRed;
+				}
+			} else {
+				// End game found. Transition and move on.
+				currentState = EndGame;
+				HandlePegStateMachine(); // Warning recursion.
+			}
 		}
 		break;
 		// Waiting for init, is waiting for the pegs to be in the starting holes.
@@ -251,22 +296,24 @@ void HandlePegStateMachine()
 				// State transition, rerun.
 				HandlePegStateMachine();
 			} else {
-				// TODO below does not handle star tpositions properly.
-
 				// First, check if either have changed. This will show the change faster
 				// If neither Red nor Green have changed, then revert to the following.
 				if (RedBuffer.data != LastRedBuffer.data) {
 					c = ColorRed;
 					uint8_t redDelta = getDelta(RedBuffer.data);
-					FillNumberBuffer(numberBuffer, redDelta);
-					SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
-					lastDisplayedRed = true;
+					if (redDelta > 0) {
+						FillNumberBuffer(numberBuffer, redDelta);
+						SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
+						lastDisplayedRed = true;	
+					}
 				} else if (GreenBuffer.data != LastGreenBuffer.data) {
 					c = ColorGreen;
 					uint8_t greenDelta = getDelta(GreenBuffer.data);
-					FillNumberBuffer(numberBuffer, greenDelta);
-					SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
-					lastDisplayedRed = false;
+					if (greenDelta > 0) {
+						FillNumberBuffer(numberBuffer, greenDelta);
+						SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
+						lastDisplayedRed = false;	
+					}
 				} else {
 					// If we have not started on both, rotate between the two's positions.
 					uint32_t currentTime = HAL_GetTick();
@@ -276,9 +323,15 @@ void HandlePegStateMachine()
 						if (lastDisplayedRed) {
 							c = ColorGreen;	
 							displayBufferDat = getDelta(GreenBuffer.data);
+							if (displayBufferDat == 0) {
+								displayBufferDat = CTZ(GreenBuffer.data);
+							}
 						} else {
 							c = ColorRed;
 							displayBufferDat = getDelta(RedBuffer.data);
+							if (displayBufferDat == 0) {
+								displayBufferDat = CTZ(RedBuffer.data);
+							}
 						}
 						FillNumberBuffer(numberBuffer, displayBufferDat);
 						SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
