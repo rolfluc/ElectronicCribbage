@@ -178,6 +178,7 @@ void HandlePegStateMachine()
 	{
 		case Running:
 		{
+			uint32_t currentTime = HAL_GetTick();
 			if (!GreenBuffer.End) {
 				// Check if either buffer has changed, and that there are two pegs in field.
 				// If either player does not have two pegs, do not display them.
@@ -191,28 +192,29 @@ void HandlePegStateMachine()
 					FillNumberBuffer(numberBuffer, greenDelta);
 					SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
 					lastDisplayedRed = true;
+					lastTransitionTime_ms = currentTime;
 				} else if (GreenBuffer.data != LastGreenBuffer.data && greenDelta > 0) {
 					c = ColorGreen;	
 					FillNumberBuffer(numberBuffer, greenDelta);
 					SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
 					lastDisplayedRed = false;
+					lastTransitionTime_ms = currentTime;
 				} else {
 					// Alternate the display state machine.
-					uint32_t currentTime = HAL_GetTick();
 					if (currentTime > lastTransitionTime_ms + updateRate_ms) {
 						uint8_t displayBufferDat = 0;
 						lastTransitionTime_ms = currentState;
 						if (lastDisplayedRed) {
-							c = ColorGreen;	
-							displayBufferDat = greenDelta;
-							if (displayBufferDat == 0) {
-								// TODO maybe don't show?
+							// Only show if the delta is non zero.
+							if (greenDelta != 0 ) {
+								c = ColorGreen;	
+								displayBufferDat = greenDelta;
 							}
 						} else {
-							c = ColorRed;
-							displayBufferDat = redDelta;
-							if (displayBufferDat == 0) {
-								// TODO maybe don't show?
+							// Only show if the delta is non zero.
+							if (redDelta == 0) {
+								c = ColorRed;
+								displayBufferDat = redDelta;
 							}
 						}
 						FillNumberBuffer(numberBuffer, displayBufferDat);
@@ -243,21 +245,19 @@ void HandlePegStateMachine()
 		// Initialized, is when the pegs are in the holes, but none have been detected into any of the expander boards.
 		case Initialized:
 		{
-			if (GreenBuffer.data > 0 && RedBuffer.data == 0) {
-				currentState = GreenStarted;
-				// State transitioned, rerun. 
-				HandlePegStateMachine(); // Warning Recursion.
-			}
-			if (RedBuffer.data > 0 && GreenBuffer.data == 0) {
-				currentState = RedStarted;
-				// State transitioned, rerun. 
-				HandlePegStateMachine(); // Warning Recursion.
-			}
 			if (RedBuffer.data > 0 && GreenBuffer.data > 0) {
 				currentState = BothStarted;
 				// State transitioned, rerun. 
 				HandlePegStateMachine(); // Warning Recursion.
-			} 
+			} else if (GreenBuffer.data > 0 && RedBuffer.data == 0) {
+				currentState = GreenStarted;
+				// State transitioned, rerun. 
+				HandlePegStateMachine(); // Warning Recursion.
+			} else if (RedBuffer.data > 0 && GreenBuffer.data == 0) {
+				currentState = RedStarted;
+				// State transitioned, rerun. 
+				HandlePegStateMachine(); // Warning Recursion.
+			}
 			break;
 		}
 		case GreenStarted:
@@ -290,11 +290,14 @@ void HandlePegStateMachine()
 		}
 		case BothStarted:
 		{
+			uint32_t currentTime = HAL_GetTick();
+			// If all the pegs have cleared from their start positions...
 			if (GreenBuffer.Start0 == false && GreenBuffer.Start1 == false && 
 				RedBuffer.Start0 == false && RedBuffer.Start1 == false) {
 				currentState = Running;
 				// State transition, rerun.
 				HandlePegStateMachine();
+			// If The pegs have not all cleared, rotate between showing their positions.
 			} else {
 				// First, check if either have changed. This will show the change faster
 				// If neither Red nor Green have changed, then revert to the following.
@@ -316,10 +319,9 @@ void HandlePegStateMachine()
 					}
 				} else {
 					// If we have not started on both, rotate between the two's positions.
-					uint32_t currentTime = HAL_GetTick();
 					if (currentTime > lastTransitionTime_ms + updateRate_ms) {
 						uint8_t displayBufferDat = 0;
-						lastTransitionTime_ms = currentState;
+						lastTransitionTime_ms = currentTime;
 						if (lastDisplayedRed) {
 							c = ColorGreen;	
 							displayBufferDat = getDelta(GreenBuffer.data);
