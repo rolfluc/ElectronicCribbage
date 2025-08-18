@@ -1,0 +1,18 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "a897797a-55a1-4cee-9ff0-9cf8270d23c6")
+	(paper "A4")
+	(lib_symbols)
+	(text "Early Thought Process:\nUse TOF for Two different lanes."
+		(exclude_from_sim no)
+		(at 142.24 48.768 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "808d057a-67b6-428b-8a92-d5dffbb8f49e")
+	)
+)

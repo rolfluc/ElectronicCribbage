@@ -1,7 +1,7 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "dfe0084c-a900-4f47-8966-915ebf3a8e75")
 	(paper "A4")
 	(lib_symbols
@@ -86,6 +86,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 	)
 	(wire
@@ -290,7 +291,6 @@
 	)
 	(label "SDA"
 		(at 30.988 66.548 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -301,7 +301,6 @@
 	)
 	(label "SDA"
 		(at 32.258 111.252 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -312,7 +311,6 @@
 	)
 	(label "SCL"
 		(at 32.258 113.284 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -323,7 +321,6 @@
 	)
 	(label "SCL"
 		(at 32.512 90.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -334,7 +331,6 @@
 	)
 	(label "SDA"
 		(at 31.496 45.212 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -345,7 +341,6 @@
 	)
 	(label "SCL"
 		(at 31.496 48.006 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -356,7 +351,6 @@
 	)
 	(label "SDA"
 		(at 32.512 87.884 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -367,7 +361,6 @@
 	)
 	(label "SDA"
 		(at 31.75 18.796 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -378,7 +371,6 @@
 	)
 	(label "SCL"
 		(at 69.596 79.248 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -389,7 +381,6 @@
 	)
 	(label "SCL"
 		(at 31.75 22.098 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -400,7 +391,6 @@
 	)
 	(label "SCL"
 		(at 33.274 135.636 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -411,7 +401,6 @@
 	)
 	(label "SCL"
 		(at 30.988 69.596 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -422,7 +411,6 @@
 	)
 	(label "SDA"
 		(at 33.274 133.35 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -433,7 +421,6 @@
 	)
 	(label "SDA"
 		(at 69.596 76.454 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -637,6 +624,10 @@
 	(sheet
 		(at 69.596 73.914)
 		(size 25.654 48.26)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -666,123 +657,123 @@
 		)
 		(pin "SDA" input
 			(at 69.596 76.454 180)
+			(uuid "2cd28775-81d3-4726-991b-6ab564df452f")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "2cd28775-81d3-4726-991b-6ab564df452f")
 		)
 		(pin "SCL" input
 			(at 69.596 79.248 180)
+			(uuid "25b019eb-eb44-4e61-a3e7-cab39e3559b9")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "25b019eb-eb44-4e61-a3e7-cab39e3559b9")
 		)
 		(pin "VBAT_ADC" input
 			(at 95.25 115.57 0)
+			(uuid "635c8f45-79a5-463c-a0b2-58de67e5e306")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "635c8f45-79a5-463c-a0b2-58de67e5e306")
 		)
 		(pin "Start_11" input
 			(at 95.25 85.09 0)
+			(uuid "0a58ea9e-a611-453b-a82d-574913d9cf80")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "0a58ea9e-a611-453b-a82d-574913d9cf80")
 		)
 		(pin "Start_10" input
 			(at 95.25 82.55 0)
+			(uuid "81a08b56-5dd9-44bb-bbfb-77640fc78daa")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "81a08b56-5dd9-44bb-bbfb-77640fc78daa")
 		)
 		(pin "Start_00" input
 			(at 95.25 77.47 0)
+			(uuid "148d2e79-9142-4698-9504-7c0fb4289212")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "148d2e79-9142-4698-9504-7c0fb4289212")
 		)
 		(pin "Start_01" input
 			(at 95.25 80.01 0)
+			(uuid "6e33a411-f112-4812-9beb-49a7a7d3f480")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "6e33a411-f112-4812-9beb-49a7a7d3f480")
 		)
 		(pin "End" input
 			(at 95.25 87.63 0)
+			(uuid "3cba205a-01e5-4ba2-bdf7-da07a3dd2edf")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "3cba205a-01e5-4ba2-bdf7-da07a3dd2edf")
 		)
 		(pin "DISPLAY_DOUT" input
 			(at 95.25 118.11 0)
+			(uuid "3c453910-0460-432e-9568-a90a3c554f67")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "3c453910-0460-432e-9568-a90a3c554f67")
 		)
 		(pin "BAT_GATE" input
 			(at 95.25 110.49 0)
+			(uuid "75a241e8-009b-4353-8b93-e4a16b91e74e")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "75a241e8-009b-4353-8b93-e4a16b91e74e")
 		)
 		(pin "BUTTON_EN" input
 			(at 95.25 107.95 0)
+			(uuid "86219262-a1f4-43b3-a9ed-b7481e521b87")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "86219262-a1f4-43b3-a9ed-b7481e521b87")
 		)
 		(pin "DISPLAY_COUT" input
 			(at 95.25 120.65 0)
+			(uuid "4ac26839-09a6-44cd-9112-4992068b8d3b")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "4ac26839-09a6-44cd-9112-4992068b8d3b")
 		)
 		(instances
 			(project "MainBoard"
@@ -795,6 +786,10 @@
 	(sheet
 		(at 15.494 17.018)
 		(size 16.256 17.018)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -824,23 +819,23 @@
 		)
 		(pin "SCL" input
 			(at 31.75 22.098 0)
+			(uuid "6e09feec-04c9-49b2-befb-0695be330c9e")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "6e09feec-04c9-49b2-befb-0695be330c9e")
 		)
 		(pin "SDA" input
 			(at 31.75 18.796 0)
+			(uuid "6e0b1ba8-773f-4522-bd04-9e6ed523449c")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "6e0b1ba8-773f-4522-bd04-9e6ed523449c")
 		)
 		(instances
 			(project "MainBoard"
@@ -853,6 +848,10 @@
 	(sheet
 		(at 125.73 76.2)
 		(size 16.51 22.86)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -882,53 +881,53 @@
 		)
 		(pin "Start_00" input
 			(at 125.73 77.47 180)
+			(uuid "46195919-e61a-44ad-8535-da6e5f22dbc1")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "46195919-e61a-44ad-8535-da6e5f22dbc1")
 		)
 		(pin "Start_01" input
 			(at 125.73 80.01 180)
+			(uuid "cf504d6c-871d-4e93-9eab-007551056a1c")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "cf504d6c-871d-4e93-9eab-007551056a1c")
 		)
 		(pin "Start_10" input
 			(at 125.73 82.55 180)
+			(uuid "48e6630f-e76c-404a-81c5-c96567f49d7a")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "48e6630f-e76c-404a-81c5-c96567f49d7a")
 		)
 		(pin "Start_11" input
 			(at 125.73 85.09 180)
+			(uuid "943f2723-a280-4ddd-9f2e-50f967adfa4d")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "943f2723-a280-4ddd-9f2e-50f967adfa4d")
 		)
 		(pin "End" input
 			(at 125.73 87.63 180)
+			(uuid "c9a988a9-6aeb-4647-8203-926ee6005494")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "c9a988a9-6aeb-4647-8203-926ee6005494")
 		)
 		(instances
 			(project "MainBoard"
@@ -941,6 +940,10 @@
 	(sheet
 		(at 15.24 63.754)
 		(size 15.748 16.764)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -970,23 +973,23 @@
 		)
 		(pin "SCL" input
 			(at 30.988 69.596 0)
+			(uuid "48038a2b-a42f-402b-8936-af41731897d2")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "48038a2b-a42f-402b-8936-af41731897d2")
 		)
 		(pin "SDA" input
 			(at 30.988 66.548 0)
+			(uuid "a2dc688c-2a1d-4f65-b31f-90910bce59c9")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "a2dc688c-2a1d-4f65-b31f-90910bce59c9")
 		)
 		(instances
 			(project "MainBoard"
@@ -999,6 +1002,10 @@
 	(sheet
 		(at 14.986 41.402)
 		(size 16.51 16.51)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -1028,23 +1035,23 @@
 		)
 		(pin "SCL" input
 			(at 31.496 48.006 0)
+			(uuid "d15e69ef-070b-4fdf-bd20-9942f87c8d19")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "d15e69ef-070b-4fdf-bd20-9942f87c8d19")
 		)
 		(pin "SDA" input
 			(at 31.496 45.212 0)
+			(uuid "b324d263-4689-4084-a7e6-c54cecaf02fb")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "b324d263-4689-4084-a7e6-c54cecaf02fb")
 		)
 		(instances
 			(project "MainBoard"
@@ -1057,6 +1064,10 @@
 	(sheet
 		(at 73.152 129.286)
 		(size 22.098 26.924)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -1086,23 +1097,23 @@
 		)
 		(pin "DISPLAY_DIN" input
 			(at 95.25 137.16 0)
+			(uuid "c25fbcb6-6d07-4b54-9dd7-274cc16e8239")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "c25fbcb6-6d07-4b54-9dd7-274cc16e8239")
 		)
 		(pin "DISPLAY_CIN" input
 			(at 95.25 132.08 0)
+			(uuid "ddbeaf5b-e091-4ff0-aee7-f0bdbecccdc9")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "ddbeaf5b-e091-4ff0-aee7-f0bdbecccdc9")
 		)
 		(instances
 			(project "MainBoard"
@@ -1115,6 +1126,10 @@
 	(sheet
 		(at 15.494 131.318)
 		(size 17.78 16.764)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -1144,23 +1159,23 @@
 		)
 		(pin "SDA" input
 			(at 33.274 133.35 0)
+			(uuid "0a41ec6b-fb33-48cb-8a18-503d36276470")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "0a41ec6b-fb33-48cb-8a18-503d36276470")
 		)
 		(pin "SCL" input
 			(at 33.274 135.636 0)
+			(uuid "41b31c62-cdec-492e-bb73-760de3cd5b02")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "41b31c62-cdec-492e-bb73-760de3cd5b02")
 		)
 		(instances
 			(project "MainBoard"
@@ -1173,6 +1188,10 @@
 	(sheet
 		(at 15.494 109.22)
 		(size 16.764 17.018)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -1202,23 +1221,23 @@
 		)
 		(pin "SCL" input
 			(at 32.258 113.284 0)
+			(uuid "d4206c02-b0b8-4bdb-b0c7-e01ad8d8ce11")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "d4206c02-b0b8-4bdb-b0c7-e01ad8d8ce11")
 		)
 		(pin "SDA" input
 			(at 32.258 111.252 0)
+			(uuid "1a6aca61-05f7-4152-94ef-dac4add0aaac")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "1a6aca61-05f7-4152-94ef-dac4add0aaac")
 		)
 		(instances
 			(project "MainBoard"
@@ -1231,6 +1250,10 @@
 	(sheet
 		(at 70.866 161.798)
 		(size 23.114 20.32)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -1260,33 +1283,33 @@
 		)
 		(pin "VBAT_ADC" input
 			(at 93.98 163.83 0)
+			(uuid "9921e590-f671-48f9-a716-8896a8e6c9c5")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "9921e590-f671-48f9-a716-8896a8e6c9c5")
 		)
 		(pin "BUTTON_EN" input
 			(at 93.98 171.45 0)
+			(uuid "e125cb58-1f29-4dc2-9bad-0283dedb1bc2")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "e125cb58-1f29-4dc2-9bad-0283dedb1bc2")
 		)
 		(pin "BAT_GATE" input
 			(at 93.98 168.91 0)
+			(uuid "f33fc5d5-a79f-42dc-90bf-847b30dd4652")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "f33fc5d5-a79f-42dc-90bf-847b30dd4652")
 		)
 		(instances
 			(project "MainBoard"
@@ -1299,6 +1322,10 @@
 	(sheet
 		(at 14.986 86.36)
 		(size 17.526 17.78)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -1328,23 +1355,23 @@
 		)
 		(pin "SCL" input
 			(at 32.512 90.17 0)
+			(uuid "b391ea5d-46bc-4b78-80c0-5629330fe6eb")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "b391ea5d-46bc-4b78-80c0-5629330fe6eb")
 		)
 		(pin "SDA" input
 			(at 32.512 87.884 0)
+			(uuid "c0fd4601-f50b-477f-b8be-433dca800a55")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "c0fd4601-f50b-477f-b8be-433dca800a55")
 		)
 		(instances
 			(project "MainBoard"
@@ -1359,4 +1386,5 @@
 			(page "1")
 		)
 	)
+	(embedded_fonts no)
 )
