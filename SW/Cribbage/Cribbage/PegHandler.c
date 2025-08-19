@@ -27,7 +27,7 @@ typedef struct
 	bool End;
 }PegData;
 
-static const uint32_t updateRate_ms = 3000;
+static const uint32_t updateRate_ms = 2000;
 static const uint8_t maxCribbageHand = 29;
 static const char* InitText = "ceased";
 static const char* WinText = "F1n1sh";
@@ -53,12 +53,11 @@ static inline uint8_t CTZ(uint64_t val)
 	if (val == 0) {
 		return 0;
 	}
-	uint8_t retVal = TOTAL_LENGTH;
+	uint8_t retVal = 0;
 	while ((val & (1 << retVal)) == 0)
 	{
-		retVal--;
+		retVal++;
 	}
-	
 	return retVal + 1;
 }
 
@@ -68,13 +67,12 @@ static inline uint8_t CLZ(uint64_t val)
 	if (val == 0) {
 		return 0;
 	}
-	uint8_t retVal = 0;
-	while ((val & (1 >> retVal)) == 0)
+	uint8_t retVal = TOTAL_LENGTH;
+	while ((val & (1 << retVal)) == 0)
 	{
-		retVal++;
+		retVal--;
 	}
-	
-	return retVal;
+	return TOTAL_LENGTH - retVal - 1;
 }
 
 // Thought process:
@@ -193,26 +191,29 @@ void HandlePegStateMachine()
 					SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
 					lastDisplayedRed = true;
 					lastTransitionTime_ms = currentTime;
-				} else if (GreenBuffer.data != LastGreenBuffer.data && greenDelta > 0) {
+				}
+				else if (GreenBuffer.data != LastGreenBuffer.data && greenDelta > 0) {
 					c = ColorGreen;	
 					FillNumberBuffer(numberBuffer, greenDelta);
 					SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
 					lastDisplayedRed = false;
 					lastTransitionTime_ms = currentTime;
-				} else {
+				}
+				else {
 					// Alternate the display state machine.
 					if (currentTime > lastTransitionTime_ms + updateRate_ms) {
 						uint8_t displayBufferDat = 0;
 						lastTransitionTime_ms = currentState;
 						if (lastDisplayedRed) {
 							// Only show if the delta is non zero.
-							if (greenDelta != 0 ) {
+							if (greenDelta != 0) {
 								c = ColorGreen;	
 								displayBufferDat = greenDelta;
 							}
-						} else {
+						}
+						else {
 							// Only show if the delta is non zero.
-							if (redDelta == 0) {
+							if (redDelta != 0) {
 								c = ColorRed;
 								displayBufferDat = redDelta;
 							}
@@ -220,6 +221,7 @@ void HandlePegStateMachine()
 						FillNumberBuffer(numberBuffer, displayBufferDat);
 						SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
 						lastDisplayedRed = !lastDisplayedRed;
+					}
 				}
 			} else {
 				// End game found. Transition and move on.
@@ -262,7 +264,7 @@ void HandlePegStateMachine()
 		}
 		case GreenStarted:
 		{
-			uint8_t greenDelta = 0;
+			uint8_t greenDelta = CTZ(GreenBuffer.data); //getDelta(GreenBuffer.data);
 			c = ColorGreen;
 			FillNumberBuffer(numberBuffer, greenDelta);
 			SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
@@ -276,7 +278,7 @@ void HandlePegStateMachine()
 		}
 		case RedStarted:
 		{
-			uint8_t redDelta = 0;
+			uint8_t redDelta = CTZ(RedBuffer.data);
 			c = ColorRed;
 			FillNumberBuffer(numberBuffer, redDelta);
 			SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
@@ -301,7 +303,7 @@ void HandlePegStateMachine()
 			} else {
 				// First, check if either have changed. This will show the change faster
 				// If neither Red nor Green have changed, then revert to the following.
-				if (RedBuffer.data != LastRedBuffer.data) {
+				if (RedBuffer.data != LastRedBuffer.data && RedBuffer.data > 0) {
 					c = ColorRed;
 					uint8_t redDelta = getDelta(RedBuffer.data);
 					if (redDelta > 0) {
@@ -309,7 +311,7 @@ void HandlePegStateMachine()
 						SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
 						lastDisplayedRed = true;	
 					}
-				} else if (GreenBuffer.data != LastGreenBuffer.data) {
+				} else if (GreenBuffer.data != LastGreenBuffer.data && GreenBuffer.data > 0) {
 					c = ColorGreen;
 					uint8_t greenDelta = getDelta(GreenBuffer.data);
 					if (greenDelta > 0) {
