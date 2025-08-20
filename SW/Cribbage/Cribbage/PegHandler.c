@@ -267,7 +267,7 @@ void HandlePegStateMachine()
 			uint8_t greenDelta = CTZ(GreenBuffer.data); //getDelta(GreenBuffer.data);
 			c = ColorGreen;
 			FillNumberBuffer(numberBuffer, greenDelta);
-			SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
+			SetSystemText(c, (char*)numberBuffer, 2);//strlen(numberBuffer));
 
 			if (RedBuffer.data > 0) {
 				currentState = BothStarted;
@@ -281,7 +281,7 @@ void HandlePegStateMachine()
 			uint8_t redDelta = CTZ(RedBuffer.data);
 			c = ColorRed;
 			FillNumberBuffer(numberBuffer, redDelta);
-			SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
+			SetSystemText(c, (char*)numberBuffer, 2);//strlen(numberBuffer));
 
 			if (GreenBuffer.data > 0) {
 				currentState = BothStarted;
@@ -306,19 +306,24 @@ void HandlePegStateMachine()
 				if (RedBuffer.data != LastRedBuffer.data && RedBuffer.data > 0) {
 					c = ColorRed;
 					uint8_t redDelta = getDelta(RedBuffer.data);
-					if (redDelta > 0) {
-						FillNumberBuffer(numberBuffer, redDelta);
-						SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
-						lastDisplayedRed = true;	
+					lastTransitionTime_ms = currentTime;
+					if (redDelta == 0) {
+						redDelta = CTZ(RedBuffer.data);
 					}
+					FillNumberBuffer(numberBuffer, redDelta);
+					SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
+					lastDisplayedRed = true;	
 				} else if (GreenBuffer.data != LastGreenBuffer.data && GreenBuffer.data > 0) {
 					c = ColorGreen;
 					uint8_t greenDelta = getDelta(GreenBuffer.data);
-					if (greenDelta > 0) {
-						FillNumberBuffer(numberBuffer, greenDelta);
-						SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
-						lastDisplayedRed = false;	
+					lastTransitionTime_ms = currentTime;
+					if (greenDelta == 0)
+					{
+						greenDelta = CTZ(GreenBuffer.data);
 					}
+					FillNumberBuffer(numberBuffer, greenDelta);
+					SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
+					lastDisplayedRed = false;	
 				} else {
 					// If we have not started on both, rotate between the two's positions.
 					if (currentTime > lastTransitionTime_ms + updateRate_ms) {

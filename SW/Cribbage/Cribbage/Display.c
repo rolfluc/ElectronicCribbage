@@ -50,7 +50,7 @@ void SetSystemText(Color c, char* dat, uint8_t len) {
 	// TODO if compared results are different, reset to zero bufferPtr
 	tmpLen = ConvertStringToBuffer(&tmpBuffer[0], dat, len);
 	// If the two buffers differ, make some changes.
-	if (!AreBuffersTheSame(&SystemBuffer[0], &tmpBuffer[0], tmpLen)) {
+	if (!AreBuffersTheSame(&SystemBuffer[0], &tmpBuffer[0], tmpLen) || !areColorsTheSame(c,systemColor)) {
 		sysLen = tmpLen;
 		memcpy(&SystemBuffer[0], &tmpBuffer[0], sysLen * sizeof(tmpBuffer[0]));
 		systemColor = c;

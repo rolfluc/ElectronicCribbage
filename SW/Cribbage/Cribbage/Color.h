@@ -1,5 +1,6 @@
 #pragma once
 #include <stdint.h>
+#include <stdbool.h>
 #define RGB
 #ifdef RGB
 #undef RGBW
@@ -15,6 +16,10 @@ typedef struct
 	uint8_t w;
 #endif
 }Color;
+
+static bool areColorsTheSame(Color c1, Color c2) {
+	return (c1.B == c2.B) && (c1.R == c2.R) && (c1.G == c2.G);
+}
 
 static const Color ColorRed = { .R = 0x7f, .G = 0, .B = 0 };
 static const Color ColorGreen = { .R = 0, .G = 0x7f, .B = 0 };
