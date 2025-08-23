@@ -5,3 +5,4 @@
 void UpdateBankInfo();
 void HandlePegStateMachine();
 void InitPegs();
+void ResetGame();

@@ -2,25 +2,21 @@
 #include "stm32g4xx_hal.h"
 #include "PinDefs.h"
 #include <stdbool.h>
+#include "PegHandler.h"
 #include "Display.h"
 
 static const uint32_t SHOW_BATTERY_TIMEOUT = 250;
 static const uint32_t RESET_GAME_TIME_MS = 5000;
 static uint32_t timeStart_ms = 0;
-static GPIO_PinState lastState = GPIO_PIN_SET;
+static GPIO_PinState lastState = GPIO_PIN_RESET;
 void HandleButtonPress()
 {
 	uint32_t currentTime = HAL_GetTick();
 	GPIO_PinState currentState = HAL_GPIO_ReadPin(ButtonSense.pinPort, ButtonSense.pinNumber);
 	if (lastState == GPIO_PIN_SET && currentState == GPIO_PIN_RESET)
 	{
-		// Show battery timeout
-		if (currentTime > timeStart_ms + SHOW_BATTERY_TIMEOUT && currentTime < timeStart_ms + SHOW_BATTERY_TIMEOUT) {
-			__ASM("BKPT 255");
-			// TODO trigger an ADC readout in this ISR, which triggers ADC ISR, then displays the voltage via user Display.
-		// Reset game timeout
-		} else if (currentTime > timeStart_ms + RESET_GAME_TIME_MS) {
-			__ASM("BKPT 255");
+		if (currentTime > timeStart_ms + RESET_GAME_TIME_MS) {
+			ResetGame();
 		}
 	}
 	if (lastState != currentState)
@@ -32,6 +28,7 @@ void HandleButtonPress()
 
 void EXTI4_IRQHandler(void)
 {
+	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_4);
 	HandleButtonPress();
 }
 

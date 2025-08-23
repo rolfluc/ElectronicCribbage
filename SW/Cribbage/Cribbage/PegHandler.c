@@ -41,7 +41,7 @@ static PegData RedBuffer = { 0 };
 static PegData LastRedBuffer = { 0 };
 static PegData GreenBuffer = { 0 };
 static PegData LastGreenBuffer = { 0 };
-static PegStateMachine currentState = Running; // WaitingForInitCondition
+static PegStateMachine currentState = EndGame; // WaitingForInitCondition
 
 
 static inline bool DidLoop(uint8_t firstPos, uint8_t secondPos)
@@ -114,6 +114,10 @@ static inline uint8_t getDelta(uint64_t bufferData) {
 	return delta;
 }
 
+void ResetGame() {
+	currentState = WaitingForInitCondition;
+}
+
 void InitPegs()
 {
 	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
@@ -132,6 +136,9 @@ void InitPegs()
 	
 	GPIO_InitStruct.Pin = Start_11.pinNumber;
 	HAL_GPIO_Init(Start_11.pinPort, &GPIO_InitStruct);
+	
+	GPIO_InitStruct.Pin = FinalPin.pinNumber;
+	HAL_GPIO_Init(FinalPin.pinPort, &GPIO_InitStruct);
 }
 
 void UpdateBankInfo()
@@ -152,14 +159,11 @@ void UpdateBankInfo()
 	GreenBuffer.data = leftBank;
 	GreenBuffer.Start0 = HAL_GPIO_ReadPin(Start_00.pinPort, Start_00.pinNumber) == GPIO_PIN_RESET;
 	GreenBuffer.Start1 = HAL_GPIO_ReadPin(Start_01.pinPort, Start_01.pinNumber) == GPIO_PIN_RESET;
-	// TODO check this logic.  Rainbow "Game Over" scenario. Green vs red cannot be explicitly determined 
-	// for win scenario.
-	GreenBuffer.End = HAL_GPIO_ReadPin(FinalPin.pinPort, FinalPin.pinNumber) == GPIO_PIN_SET;
+	GreenBuffer.End = HAL_GPIO_ReadPin(FinalPin.pinPort, FinalPin.pinNumber) == GPIO_PIN_RESET;
 	
 	RedBuffer.data = rightBank;
 	RedBuffer.Start0 = HAL_GPIO_ReadPin(Start_10.pinPort, Start_10.pinNumber) == GPIO_PIN_RESET;
 	RedBuffer.Start1 = HAL_GPIO_ReadPin(Start_11.pinPort, Start_11.pinNumber) == GPIO_PIN_RESET;
-	// RedBuffer.End = HAL_GPIO_ReadPin(FinalPin.pinPort, FinalPin.pinNumber) == GPIO_PIN_SET;
 }
 
 static void FillNumberBuffer(char* buffer, uint8_t num) {
