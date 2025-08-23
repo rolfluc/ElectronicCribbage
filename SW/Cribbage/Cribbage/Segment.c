@@ -38,7 +38,7 @@ Display displayBuffer;
 
 static inline void ColorToBuffer(Color c, PaddedColor* pc)
 {
-	const uint8_t dimValue = 0x07;
+	const uint8_t dimValue = 0x0E;
 	FillColor(pc, c, dimValue);
 }
 

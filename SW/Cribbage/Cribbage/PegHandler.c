@@ -31,7 +31,7 @@ static const uint64_t int64Zero = 0;
 static const uint64_t int64One = 1;
 static const uint32_t updateRate_ms = 2000;
 static const uint8_t maxCribbageHand = 29;
-static const char* InitText = "ceased";
+static const char* InitText = "clear";
 static const char* WinText = "F1n1sh";
 static Color c;
 static uint32_t lastTransitionTime_ms = 0; 
@@ -41,7 +41,7 @@ static PegData RedBuffer = { 0 };
 static PegData LastRedBuffer = { 0 };
 static PegData GreenBuffer = { 0 };
 static PegData LastGreenBuffer = { 0 };
-static PegStateMachine currentState = WaitingForInitCondition;
+static PegStateMachine currentState = Running;//WaitingForInitCondition;
 
 
 static inline bool DidLoop(uint8_t firstPos, uint8_t secondPos)
