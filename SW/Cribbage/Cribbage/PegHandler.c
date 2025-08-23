@@ -27,6 +27,8 @@ typedef struct
 	bool End;
 }PegData;
 
+static const uint64_t int64Zero = 0;
+static const uint64_t int64One = 1;
 static const uint32_t updateRate_ms = 2000;
 static const uint8_t maxCribbageHand = 29;
 static const char* InitText = "ceased";
@@ -39,7 +41,7 @@ static PegData RedBuffer = { 0 };
 static PegData LastRedBuffer = { 0 };
 static PegData GreenBuffer = { 0 };
 static PegData LastGreenBuffer = { 0 };
-static PegStateMachine currentState = WaitingForInitCondition;
+static PegStateMachine currentState = Running; // WaitingForInitCondition
 
 
 static inline bool DidLoop(uint8_t firstPos, uint8_t secondPos)
@@ -54,7 +56,7 @@ static inline uint8_t CTZ(uint64_t val)
 		return 0;
 	}
 	uint8_t retVal = 0;
-	while ((val & (1 << retVal)) == 0)
+	while ((val & (int64One << retVal)) == int64Zero)
 	{
 		retVal++;
 	}
@@ -68,7 +70,7 @@ static inline uint8_t CLZ(uint64_t val)
 		return 0;
 	}
 	uint8_t retVal = TOTAL_LENGTH;
-	while ((val & (1 << retVal)) == 0)
+	while ((val & (int64One << retVal)) == int64Zero)
 	{
 		retVal--;
 	}
@@ -97,6 +99,7 @@ static inline uint8_t CLZ(uint64_t val)
 // So if the delta is > Max Hand Size, you take the above and take 60-res. 
 
 static inline uint8_t getDelta(uint64_t bufferData) {
+	// Appears broken when counting across uint64_t boundary.
 	uint8_t ctz = CTZ(bufferData);
 	uint8_t clz = CLZ(bufferData);
 	// Check as to whether if CTZ + CLZ = total length.
@@ -203,18 +206,18 @@ void HandlePegStateMachine()
 					// Alternate the display state machine.
 					if (currentTime > lastTransitionTime_ms + updateRate_ms) {
 						uint8_t displayBufferDat = 0;
-						lastTransitionTime_ms = currentState;
+						lastTransitionTime_ms = currentTime;
 						if (lastDisplayedRed) {
+							c = ColorGreen;	
 							// Only show if the delta is non zero.
 							if (greenDelta != 0) {
-								c = ColorGreen;	
 								displayBufferDat = greenDelta;
 							}
 						}
 						else {
+							c = ColorRed;
 							// Only show if the delta is non zero.
 							if (redDelta != 0) {
-								c = ColorRed;
 								displayBufferDat = redDelta;
 							}
 						}
