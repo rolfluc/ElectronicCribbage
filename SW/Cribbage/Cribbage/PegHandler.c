@@ -41,7 +41,7 @@ static PegData RedBuffer = { 0 };
 static PegData LastRedBuffer = { 0 };
 static PegData GreenBuffer = { 0 };
 static PegData LastGreenBuffer = { 0 };
-static PegStateMachine currentState = EndGame; // WaitingForInitCondition
+static PegStateMachine currentState = WaitingForInitCondition;
 
 
 static inline bool DidLoop(uint8_t firstPos, uint8_t secondPos)
@@ -194,7 +194,7 @@ void HandlePegStateMachine()
 				uint8_t greenDelta = getDelta(GreenBuffer.data);
 				if (RedBuffer.data != LastRedBuffer.data && redDelta > 0) {
 					c = ColorRed;	
-					FillNumberBuffer(numberBuffer, greenDelta);
+					FillNumberBuffer(numberBuffer, redDelta);
 					SetSystemText(c, (char*)numberBuffer, strlen(numberBuffer));
 					lastDisplayedRed = true;
 					lastTransitionTime_ms = currentTime;
