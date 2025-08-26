@@ -41,7 +41,7 @@ static PegData RedBuffer = { 0 };
 static PegData LastRedBuffer = { 0 };
 static PegData GreenBuffer = { 0 };
 static PegData LastGreenBuffer = { 0 };
-static PegStateMachine currentState = Running;//WaitingForInitCondition;
+static PegStateMachine currentState = WaitingForInitCondition;
 
 
 static inline bool DidLoop(uint8_t firstPos, uint8_t secondPos)

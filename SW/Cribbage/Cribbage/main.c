@@ -75,6 +75,7 @@ void SystemClock_Config(void)
 
 int main(void)
 {
+	uint16_t adcVal = 0;
 	HAL_Init();
 	SystemClock_Config();
 	__HAL_RCC_GPIOA_CLK_ENABLE();
@@ -85,13 +86,14 @@ int main(void)
 	InitPegs();
 	InitExpanders();
 	
-	//InitADC();
+	InitADC();
 	
 	for (;;)
 	{
 		ToggleHB();
 		
 		HAL_Delay(100);
+		adcVal = GetADCCount();
 		// Start reading the banks.
 		StartBankReadings();
 		// Interpret the tca banks, and copy the results into the respective local buffers.
