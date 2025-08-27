@@ -99,6 +99,6 @@ int main(void)
 		// Interpret the tca banks, and copy the results into the respective local buffers.
 		UpdateBankInfo();
 		// Now, run the state machine 
-		HandlePegStateMachine();
+		HandlePegStateMachine(adcVal);
 	}
 }

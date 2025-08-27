@@ -5,7 +5,7 @@
 #include "PegHandler.h"
 #include "Display.h"
 
-static const uint32_t SHOW_BATTERY_TIMEOUT = 250;
+static const uint32_t SHOW_BATTERY_TIMEOUT = 125;
 static const uint32_t RESET_GAME_TIME_MS = 5000;
 static uint32_t timeStart_ms = 0;
 static GPIO_PinState lastState = GPIO_PIN_RESET;
@@ -15,8 +15,12 @@ void HandleButtonPress()
 	GPIO_PinState currentState = HAL_GPIO_ReadPin(ButtonSense.pinPort, ButtonSense.pinNumber);
 	if (lastState == GPIO_PIN_SET && currentState == GPIO_PIN_RESET)
 	{
-		if (currentTime > timeStart_ms + RESET_GAME_TIME_MS) {
+		if (currentTime > timeStart_ms + RESET_GAME_TIME_MS)
+		{
 			ResetGame();
+		}
+		else if (currentTime > timeStart_ms + SHOW_BATTERY_TIMEOUT) {
+			ShowVoltage();
 		}
 	}
 	if (lastState != currentState)

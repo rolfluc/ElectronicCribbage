@@ -176,8 +176,26 @@ static void FillNumberBuffer(char* buffer, uint8_t num) {
 	}
 }
 
-void HandlePegStateMachine()
+static inline uint8_t AdcToVolt(uint16_t adcVal) {
+	//2405 = 4.04 / 2
+	float tmpVal = (((adcVal * 2.0) / 4095.0) * 3.3) * 1.05; // Divider / 2 , 5% error
+	uint8_t retVal = (uint8_t)(tmpVal * 10);
+	return retVal;
+}
+
+uint16_t lastADC = 0;
+
+char userBuffer[2];
+void ShowVoltage()
 {
+	uint8_t num = AdcToVolt(lastADC);
+	FillNumberBuffer(userBuffer, num);
+	SetUserText(ColorRed, userBuffer,2);
+}
+
+void HandlePegStateMachine(uint16_t adcVal)
+{
+	lastADC = adcVal;
 	char numberBuffer[2] = "";
 	switch (currentState)
 	{
@@ -233,7 +251,7 @@ void HandlePegStateMachine()
 			} else {
 				// End game found. Transition and move on.
 				currentState = EndGame;
-				HandlePegStateMachine(); // Warning recursion.
+				HandlePegStateMachine(adcVal); // Warning recursion.
 			}
 		}
 		break;
@@ -247,7 +265,7 @@ void HandlePegStateMachine()
 			{
 				currentState = Initialized;
 				// State transitioned, rerun. 
-				HandlePegStateMachine(); // Warning Recursion.
+				HandlePegStateMachine(adcVal); // Warning Recursion.
 			}
 			break;
 		}
@@ -257,15 +275,15 @@ void HandlePegStateMachine()
 			if (RedBuffer.data > 0 && GreenBuffer.data > 0) {
 				currentState = BothStarted;
 				// State transitioned, rerun. 
-				HandlePegStateMachine(); // Warning Recursion.
+				HandlePegStateMachine(adcVal); // Warning Recursion.
 			} else if (GreenBuffer.data > 0 && RedBuffer.data == 0) {
 				currentState = GreenStarted;
 				// State transitioned, rerun. 
-				HandlePegStateMachine(); // Warning Recursion.
+				HandlePegStateMachine(adcVal); // Warning Recursion.
 			} else if (RedBuffer.data > 0 && GreenBuffer.data == 0) {
 				currentState = RedStarted;
 				// State transitioned, rerun. 
-				HandlePegStateMachine(); // Warning Recursion.
+				HandlePegStateMachine(adcVal); // Warning Recursion.
 			}
 			break;
 		}
@@ -279,7 +297,7 @@ void HandlePegStateMachine()
 			if (RedBuffer.data > 0) {
 				currentState = BothStarted;
 				// State transitioned, rerun. 
-				HandlePegStateMachine(); // Warning Recursion.
+				HandlePegStateMachine(adcVal); // Warning Recursion.
 			}
 			break;
 		}
@@ -293,7 +311,7 @@ void HandlePegStateMachine()
 			if (GreenBuffer.data > 0) {
 				currentState = BothStarted;
 				// State transitioned, rerun. 
-				HandlePegStateMachine(); // Warning Recursion.
+				HandlePegStateMachine(adcVal); // Warning Recursion.
 			}
 			break;
 		}
@@ -305,7 +323,7 @@ void HandlePegStateMachine()
 				RedBuffer.Start0 == false && RedBuffer.Start1 == false) {
 				currentState = Running;
 				// State transition, rerun.
-				HandlePegStateMachine();
+				HandlePegStateMachine(adcVal);
 			// If The pegs have not all cleared, rotate between showing their positions.
 			} else {
 				// First, check if either have changed. This will show the change faster

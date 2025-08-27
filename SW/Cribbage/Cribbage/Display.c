@@ -32,6 +32,7 @@ void SetUserText(Color c, char* dat, uint8_t len) {
 	userColor = c;
 	IsUserActive = true;
 	userLen = ConvertStringToBuffer(&UserBuffer[0], dat, len);
+	bufferPtr = 0;
 }
 
 static inline bool AreBuffersTheSame(SegmentVal* currentBuffer, SegmentVal* newBuffer, uint8_t newBufferLen) {
